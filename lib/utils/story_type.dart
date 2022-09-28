@@ -1,0 +1,4 @@
+enum StoryType {
+  myStory,
+  story,
+}
