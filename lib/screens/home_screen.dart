@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../widgets/post.dart';
+import '../widgets/stories.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -20,7 +23,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(),
+      body: const _Content(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
         items: const [
@@ -46,6 +49,24 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _Content extends StatelessWidget {
+  const _Content({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: 5,
+            itemBuilder: (ctx, i) => i == 0 ? const Stories() : const Post(),
+          ),
+        ),
+      ],
     );
   }
 }
