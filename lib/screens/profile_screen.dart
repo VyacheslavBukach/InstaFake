@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:insta_fake/screens/edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const routeName = '/profile';
@@ -74,7 +76,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                   onPrimary: Colors.black,
                   elevation: 0,
                   minimumSize: Size.fromHeight(30)),
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(EditProfileScreen.routeName);
+              },
               child: Text('Редактировать профиль'),
             ),
           ],

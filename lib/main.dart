@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:insta_fake/screens/main_screen.dart';
 
+import './screens/edit_profile_screen.dart';
+import './screens/home_screen.dart';
+import './screens/main_screen.dart';
+import './screens/profile_screen.dart';
 import './utils/app_theme.dart';
 import './utils/app_translation.dart';
 
@@ -22,11 +25,25 @@ class MyApp extends StatelessWidget {
       title: 'app_name'.tr,
       theme: AppTheme.lightTheme,
       home: const MainScreen(),
-      // initialRoute: HomeScreen.routeName,
-      // getPages: [
-      //   GetPage(name: HomeScreen.routeName, page: () => HomeScreen()),
-      //   GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen()),
-      // ],
+      initialRoute: MainScreen.routeName,
+      getPages: [
+        GetPage(
+          name: MainScreen.routeName,
+          page: () => const MainScreen(),
+        ),
+        GetPage(
+          name: HomeScreen.routeName,
+          page: () => const HomeScreen(),
+        ),
+        GetPage(
+          name: ProfileScreen.routeName,
+          page: () => const ProfileScreen(),
+        ),
+        GetPage(
+          name: EditProfileScreen.routeName,
+          page: () => const EditProfileScreen(),
+        ),
+      ],
     );
   }
 }
