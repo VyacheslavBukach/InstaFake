@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './story.dart';
-import '../utils/story_type.dart';
+import '../../utils/story_type.dart';
 
 class Stories extends StatelessWidget {
   const Stories({Key? key}) : super(key: key);

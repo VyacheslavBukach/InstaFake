@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import './screens/edit_profile_screen.dart';
-import './screens/home_screen.dart';
-import './screens/main_screen.dart';
-import './screens/profile_screen.dart';
+import './presentation/screens/edit_profile_screen.dart';
+import './presentation/screens/home_screen.dart';
+import './presentation/screens/main_screen.dart';
+import './presentation/screens/profile_screen.dart';
 import './utils/app_theme.dart';
 import './utils/app_translation.dart';
 

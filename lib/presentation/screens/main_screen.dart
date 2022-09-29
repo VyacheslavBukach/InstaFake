@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './home_screen.dart';
-import './profile_screen.dart';
+import 'profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   static const routeName = '/';

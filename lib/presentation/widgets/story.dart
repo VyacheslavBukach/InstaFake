@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/story_type.dart';
+import '../../utils/story_type.dart';
 
 class Story extends StatelessWidget {
   final StoryType type;
