@@ -4,11 +4,19 @@ import 'package:get/get.dart';
 import '../widgets/post.dart';
 import '../widgets/stories.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('app_name'.tr),
@@ -23,50 +31,19 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const _Content(),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_box_outlined),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_outline),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.circle_outlined),
-            label: '',
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: 5,
+              itemBuilder: (ctx, i) => i == 0 ? const Stories() : const Post(),
+            ),
           ),
         ],
       ),
     );
   }
-}
-
-class _Content extends StatelessWidget {
-  const _Content({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: 5,
-            itemBuilder: (ctx, i) => i == 0 ? const Stories() : const Post(),
-          ),
-        ),
-      ],
-    );
-  }
+  bool get wantKeepAlive => true;
 }
