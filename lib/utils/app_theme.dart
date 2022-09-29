@@ -16,7 +16,7 @@ class AppTheme {
       elevation: 0,
     ),
     colorScheme: const ColorScheme.light(
-      primary: Colors.green,
+      primary: Colors.blue,
       onPrimary: Colors.green,
       secondary: Colors.red,
     ),

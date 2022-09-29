@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:insta_fake/screens/edit_profile_screen.dart';
+
+import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const routeName = '/profile';

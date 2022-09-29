@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: EditProfileScreen.routeName,
           page: () => const EditProfileScreen(),
+          fullscreenDialog: true,
         ),
       ],
     );
