@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import './di/di.dart';
+import './domain/entities/user.dart';
 import './presentation/screens/main_screen.dart';
 import './utils/app_navigation.dart';
 import './utils/app_theme.dart';
@@ -9,7 +11,7 @@ import './utils/app_translation.dart';
 
 void main() async {
   await Hive.initFlutter();
-  await Hive.openBox('users');
+  await Hive.openBox<User>('users');
   runApp(const MyApp());
 }
 
@@ -27,6 +29,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       home: const MainScreen(),
       initialRoute: MainScreen.routeName,
+      initialBinding: MainBinding(),
       getPages: AppNavigation.pages,
     );
   }

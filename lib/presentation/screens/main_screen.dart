@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import './home_screen.dart';
 import 'profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -13,8 +12,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _pageIndex = 0;
-  final PageController _pageController = PageController();
+  int _pageIndex = 4;
+  late PageController _pageController;
 
   void _onPageChanged(int pageIndex) {
     setState(() {
@@ -24,16 +23,22 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   @override
+  void initState() {
+    _pageController = PageController(initialPage: _pageIndex);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
-        children: const [
-          HomeScreen(),
-          ProfileScreen(),
-          ProfileScreen(),
-          ProfileScreen(),
+        children: [
+          Container(),
+          Container(),
+          Container(),
+          Container(),
           ProfileScreen(),
         ],
       ),

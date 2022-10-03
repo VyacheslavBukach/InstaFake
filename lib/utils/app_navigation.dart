@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-import '../di/di.dart';
 import '../presentation/screens/edit_profile_screen.dart';
 import '../presentation/screens/home_screen.dart';
 import '../presentation/screens/main_screen.dart';
@@ -11,7 +10,6 @@ class AppNavigation {
     GetPage(
       name: MainScreen.routeName,
       page: () => const MainScreen(),
-      binding: MainBinding(),
     ),
     GetPage(
       name: HomeScreen.routeName,

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widgets/post.dart';
-import '../widgets/stories.dart';
+import '../../controllers/home_controller.dart';
+import '../widgets/news_feed.dart';
+import '../widgets/stories_feed.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -35,11 +36,12 @@ class _HomeScreenState extends State<HomeScreen>
       ),
       body: Column(
         children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (ctx, i) => i == 0 ? const Stories() : const Post(),
-            ),
+          GetBuilder<HomeController>(
+            init: HomeController(),
+            builder: (controller) => StoriesFeed(stories: controller.stories),
+          ),
+          GetBuilder<HomeController>(
+            builder: (controller) => NewsFeed(posts: controller.posts),
           ),
         ],
       ),
