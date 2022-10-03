@@ -1,11 +1,11 @@
 import 'package:hive/hive.dart';
 
-import '../../domain/entities/user.dart' as UserDto;
+import '../../domain/entities/user_entity.dart';
 import '../../domain/models/user.dart';
 import '../../domain/repositories/user_repository.dart';
 
 class HiveUserRepository implements UserRepository {
-  final Box<UserDto.User> box;
+  final Box<UserEntity> box;
 
   const HiveUserRepository({required this.box});
 

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import './di/di.dart';
-import './domain/entities/user.dart';
+import './domain/entities/user_entity.dart';
 import './presentation/screens/main_screen.dart';
 import './utils/app_navigation.dart';
 import './utils/app_theme.dart';
@@ -11,7 +11,7 @@ import './utils/app_translation.dart';
 
 void main() async {
   await Hive.initFlutter();
-  await Hive.openBox<User>('users');
+  await Hive.openBox<UserEntity>('users');
   runApp(const MyApp());
 }
 

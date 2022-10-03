@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:hive/hive.dart';
 
 @HiveType(typeId: 0)
-class User extends HiveObject {
+class UserEntity extends HiveObject {
   @HiveField(0)
   final String id;
 
@@ -31,7 +31,7 @@ class User extends HiveObject {
   @HiveField(8)
   final File avatar;
 
-  User(
+  UserEntity(
     this.id,
     this.posts,
     this.followers,
