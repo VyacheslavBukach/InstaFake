@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/profile_controller.dart';
 import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -18,17 +19,19 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
+    final controller = Get.put(ProfileController());
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nickname'),
+        title: Text(controller.user.value.userName),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.add_box_outlined),
+            icon: const Icon(Icons.add_box_outlined),
           ),
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
           ),
         ],
       ),
@@ -69,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               ],
             ),
             SizedBox(height: 16),
-            Text('Nickname'),
+            Text(controller.user.value.name),
             SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(

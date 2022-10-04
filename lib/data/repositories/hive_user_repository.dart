@@ -1,8 +1,8 @@
 import 'package:hive/hive.dart';
 
-import '../../domain/entities/user_entity.dart';
 import '../../domain/models/user.dart';
 import '../../domain/repositories/user_repository.dart';
+import '../entities/user_entity.dart';
 
 class HiveUserRepository implements UserRepository {
   final Box<UserEntity> box;
@@ -22,7 +22,7 @@ class HiveUserRepository implements UserRepository {
   }
 
   @override
-  Future<User> getUserById(String id) {
+  Future<User> getUserById(int id) {
     // TODO: implement getUserById
     throw UnimplementedError();
   }

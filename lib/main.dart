@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import './data/entities/user_entity.dart';
 import './di/di.dart';
-import './domain/entities/user_entity.dart';
 import './presentation/screens/main_screen.dart';
 import './utils/app_navigation.dart';
 import './utils/app_theme.dart';

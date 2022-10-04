@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/home_controller.dart';
+import '../controllers/home_controller.dart';
 import '../widgets/news_feed.dart';
 import '../widgets/stories_feed.dart';
 
