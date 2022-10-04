@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'profile_screen.dart';
+import './profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  static const routeName = '/';
-
   const MainScreen({Key? key}) : super(key: key);
 
   @override

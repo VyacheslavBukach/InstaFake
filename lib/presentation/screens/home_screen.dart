@@ -6,8 +6,6 @@ import '../widgets/news_feed.dart';
 import '../widgets/stories_feed.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const routeName = '/home';
-
   const HomeScreen({Key? key}) : super(key: key);
 
   @override

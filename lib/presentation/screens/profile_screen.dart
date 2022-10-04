@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../utils/app_navigation.dart';
 import '../controllers/profile_controller.dart';
-import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  static const routeName = '/profile';
-
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
@@ -81,7 +79,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   elevation: 0,
                   minimumSize: Size.fromHeight(30)),
               onPressed: () {
-                Get.toNamed(EditProfileScreen.routeName);
+                Get.toNamed(AppRoutes.editProfile);
               },
               child: Text('Редактировать профиль'),
             ),

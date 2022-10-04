@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import './data/entities/user_entity.dart';
-import './di/di.dart';
-import './presentation/screens/main_screen.dart';
 import './utils/app_navigation.dart';
 import './utils/app_theme.dart';
 import './utils/app_translation.dart';
@@ -27,10 +25,8 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'),
       title: 'app_name'.tr,
       theme: AppTheme.lightTheme,
-      home: const MainScreen(),
-      initialRoute: MainScreen.routeName,
-      initialBinding: MainBinding(),
-      getPages: AppNavigation.pages,
+      initialRoute: AppRoutes.main,
+      getPages: AppPages.pages,
     );
   }
 }

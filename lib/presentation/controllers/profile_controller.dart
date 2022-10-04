@@ -4,7 +4,8 @@ import '../../data/repositories/hive_user_repository.dart';
 import '../../domain/models/user.dart';
 
 class ProfileController extends GetxController {
-  var user = User().obs;
+  final _user = User().obs;
+  get user => _user.value;
 
   final _userRepository = Get.find<HiveUserRepository>();
 
