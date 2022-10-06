@@ -1,17 +1,19 @@
 import 'package:get/get.dart';
 
-import '../../data/repositories/hive_user_repository.dart';
 import '../../domain/models/user.dart';
+import '../../domain/repositories/user_repository.dart';
 
 class ProfileController extends GetxController {
-  final _user = User().obs;
-  get user => _user.value;
+  final UserRepository userRepository;
 
-  final _userRepository = Get.find<HiveUserRepository>();
+  ProfileController({required this.userRepository});
+
+  final user = User.empty().obs;
+  // User get user => _user.value;
 
   @override
   void onInit() async {
-    var userFromDb = await _userRepository.getUserById(0);
+    var userFromDb = await userRepository.getUserById(0);
     user(userFromDb); // Update user from DB
     super.onInit();
   }

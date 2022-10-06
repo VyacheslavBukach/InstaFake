@@ -13,11 +13,11 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen>
     with AutomaticKeepAliveClientMixin {
+  final controller = Get.find<ProfileController>();
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
-    final controller = Get.put(ProfileController());
 
     return Scaffold(
       appBar: AppBar(
@@ -45,43 +45,44 @@ class _ProfileScreenState extends State<ProfileScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                CircleAvatar(radius: 40),
+                const CircleAvatar(radius: 40),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('5'),
-                    Text('Публикации'),
+                    Text('${controller.user.value.posts}'),
+                    Text('posts'.tr),
                   ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('5'),
-                    Text('Подписчики'),
+                    Text('${controller.user.value.followers}'),
+                    Text('followers'.tr),
                   ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('5'),
-                    Text('Подписки'),
+                    Text('${controller.user.value.followings}'),
+                    Text('followings'.tr),
                   ],
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(controller.user.value.name),
-            SizedBox(height: 16),
+            Text(controller.user.value.bio),
+            const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                   primary: Colors.grey.shade200,
                   onPrimary: Colors.black,
                   elevation: 0,
-                  minimumSize: Size.fromHeight(30)),
+                  minimumSize: const Size.fromHeight(30)),
               onPressed: () {
                 Get.toNamed(AppRoutes.editProfile);
               },
-              child: Text('Редактировать профиль'),
+              child: Text('edit_profile'.tr),
             ),
           ],
         ),

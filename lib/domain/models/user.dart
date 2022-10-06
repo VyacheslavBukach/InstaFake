@@ -12,14 +12,27 @@ class User {
   final File? avatar;
 
   User({
-    this.id = '',
-    this.posts = 0,
-    this.followers = 0,
-    this.followings = 0,
-    this.name = '',
-    this.userName = '',
-    this.bio = '',
-    this.isChecked = false,
-    this.avatar,
+    required this.id,
+    required this.posts,
+    required this.followers,
+    required this.followings,
+    required this.name,
+    required this.userName,
+    required this.bio,
+    required this.isChecked,
+    required this.avatar,
   });
+
+  User.empty()
+      : this(
+          id: '',
+          posts: 5,
+          followers: 10,
+          followings: 15,
+          name: 'Name',
+          userName: 'Nickname',
+          bio: 'Bio',
+          isChecked: false,
+          avatar: null,
+        );
 }
