@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../utils/app_navigation.dart';
@@ -45,7 +46,15 @@ class _ProfileScreenState extends State<ProfileScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const CircleAvatar(radius: 40),
+                controller.user.value.avatar != null
+                    ? const CircleAvatar(
+                        radius: 40,
+                      )
+                    : SvgPicture.asset(
+                        'assets/empty_avatar.svg',
+                        height: 80,
+                        width: 80,
+                      ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
