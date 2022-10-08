@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:hive/hive.dart';
 
+part 'user_entity.g.dart';
+
 @HiveType(typeId: 0)
 class UserEntity extends HiveObject {
   @HiveField(0)
-  final String id;
+  final int id;
 
   @HiveField(1)
   final int posts;
@@ -20,7 +22,7 @@ class UserEntity extends HiveObject {
   final String name;
 
   @HiveField(5)
-  final String userName;
+  final String username;
 
   @HiveField(6)
   final String bio;
@@ -29,17 +31,17 @@ class UserEntity extends HiveObject {
   final bool isChecked;
 
   @HiveField(8)
-  final File avatar;
+  final File? avatar;
 
-  UserEntity(
-    this.id,
-    this.posts,
-    this.followers,
-    this.followings,
-    this.name,
-    this.userName,
-    this.bio,
-    this.isChecked,
-    this.avatar,
-  );
+  UserEntity({
+    required this.id,
+    required this.posts,
+    required this.followers,
+    required this.followings,
+    required this.name,
+    required this.username,
+    required this.bio,
+    required this.isChecked,
+    required this.avatar,
+  });
 }

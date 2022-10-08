@@ -19,7 +19,7 @@ class MainBinding implements Bindings {
       ),
       permanent: true,
     );
-    // Controller
+    // Bottom Navigation Controllers
     Get.lazyPut<ProfileController>(
       () => ProfileController(userRepository: Get.find<HiveUserRepository>()),
     );

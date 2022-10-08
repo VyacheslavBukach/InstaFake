@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
-class EditProfileScreen extends StatefulWidget {
+import '../controllers/edit_profile_controller.dart';
+
+class EditProfileScreen extends GetView<EditProfileController> {
   const EditProfileScreen({Key? key}) : super(key: key);
 
-  @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
-}
-
-class _EditProfileScreenState extends State<EditProfileScreen> {
-  bool _isCheckedProfile = false;
+  void saveAndClose() {
+    controller.saveProfile();
+    Get.back();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Редактировать профиль'),
+        title: Text('edit_profile'.tr),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.done),
+            onPressed: saveAndClose,
+            icon: const Icon(Icons.done),
           ),
         ],
       ),
@@ -27,54 +29,69 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              CircleAvatar(radius: 50),
+              controller.profileController.user().avatar != null
+                  ? const CircleAvatar(
+                      radius: 40,
+                    )
+                  : SvgPicture.asset(
+                      'assets/empty_avatar.svg',
+                      height: 100,
+                      width: 100,
+                    ),
               TextButton(
                 onPressed: () {},
-                child: Text('Изменить фото профиля'),
+                child: Text('change_profile_photo'.tr),
               ),
-              CheckboxListTile(
-                title: Text('Подтвержден'),
-                subtitle: Text('Устанавливает для профиля галочку'),
-                secondary: Icon(
-                  Icons.check_circle,
-                  color: Colors.blue,
-                ),
-                controlAffinity: ListTileControlAffinity.leading,
-                value: _isCheckedProfile,
-                onChanged: (isCheck) {
-                  setState(() {
-                    _isCheckedProfile = isCheck ?? false;
-                  });
-                },
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Имя',
+              Obx(
+                () => CheckboxListTile(
+                  title: Text('confirmed'.tr),
+                  subtitle: Text('confirmed_desc'.tr),
+                  secondary: Icon(
+                    Icons.check_circle,
+                    color:
+                        controller.isChecked.value ? Colors.blue : Colors.black,
+                  ),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: controller.isChecked.value,
+                  onChanged: (isCheck) {
+                    controller.changeCheckedStatus();
+                  },
                 ),
               ),
-              TextField(
+              TextFormField(
+                controller: controller.nameTextEditingController,
                 decoration: InputDecoration(
-                  labelText: 'Имя пользователя',
+                  labelText: 'name'.tr,
                 ),
               ),
-              TextField(
+              TextFormField(
+                controller: controller.userNameTextEditingController,
                 decoration: InputDecoration(
-                  labelText: 'Биография',
+                  labelText: 'username'.tr,
                 ),
               ),
-              TextField(
+              TextFormField(
+                controller: controller.bioTextEditingController,
                 decoration: InputDecoration(
-                  labelText: 'Публикации',
+                  labelText: 'bio'.tr,
                 ),
               ),
-              TextField(
+              TextFormField(
+                controller: controller.postsTextEditingController,
                 decoration: InputDecoration(
-                  labelText: 'Подписчики',
+                  labelText: 'posts'.tr,
                 ),
               ),
-              TextField(
+              TextFormField(
+                controller: controller.followersTextEditingController,
                 decoration: InputDecoration(
-                  labelText: 'Подписки',
+                  labelText: 'followers'.tr,
+                ),
+              ),
+              TextFormField(
+                controller: controller.followingsTextEditingController,
+                decoration: InputDecoration(
+                  labelText: 'followings'.tr,
                 ),
               ),
             ],

@@ -11,6 +11,18 @@ class UserMapper {
         isChecked: userEntity.isChecked,
         name: userEntity.name,
         posts: userEntity.posts,
-        userName: userEntity.userName,
+        username: userEntity.username,
+      );
+
+  UserEntity toUserEntity(User user) => UserEntity(
+        id: user.id,
+        posts: user.posts,
+        followers: user.followers,
+        followings: user.followings,
+        name: user.name,
+        username: user.username,
+        bio: user.bio,
+        isChecked: user.isChecked,
+        avatar: user.avatar,
       );
 }

@@ -22,7 +22,22 @@ class _ProfileScreenState extends State<ProfileScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(controller.user.value.userName),
+        title: Row(
+          children: [
+            Obx(
+              () => Text(controller.user().username),
+            ),
+            const SizedBox(width: 8),
+            Obx(
+              () => controller.user().isChecked
+                  ? const Icon(
+                      Icons.check_circle,
+                      color: Colors.blue,
+                    )
+                  : const SizedBox(),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             onPressed: () {},
@@ -46,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                controller.user.value.avatar != null
+                controller.user().avatar != null
                     ? const CircleAvatar(
                         radius: 40,
                       )
@@ -58,29 +73,39 @@ class _ProfileScreenState extends State<ProfileScreen>
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('${controller.user.value.posts}'),
+                    Obx(
+                      () => Text('${controller.user().posts}'),
+                    ),
                     Text('posts'.tr),
                   ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('${controller.user.value.followers}'),
+                    Obx(
+                      () => Text('${controller.user().followers}'),
+                    ),
                     Text('followers'.tr),
                   ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('${controller.user.value.followings}'),
+                    Obx(
+                      () => Text('${controller.user().followings}'),
+                    ),
                     Text('followings'.tr),
                   ],
                 ),
               ],
             ),
             const SizedBox(height: 16),
-            Text(controller.user.value.name),
-            Text(controller.user.value.bio),
+            Obx(
+              () => Text(controller.user().name),
+            ),
+            Obx(
+              () => Text(controller.user().bio),
+            ),
             const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(

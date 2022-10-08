@@ -9,11 +9,13 @@ class ProfileController extends GetxController {
   ProfileController({required this.userRepository});
 
   final user = User.empty().obs;
-  // User get user => _user.value;
+  final userId = 0.obs;
 
   @override
   void onInit() async {
-    var userFromDb = await userRepository.getUserById(0);
+    // If there is no id in args, we set user id to 0
+    userId.value = Get.arguments ?? 0;
+    var userFromDb = await userRepository.getUserById(userId.value);
     user(userFromDb); // Update user from DB
     super.onInit();
   }

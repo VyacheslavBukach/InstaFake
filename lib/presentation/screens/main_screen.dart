@@ -37,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
           Container(),
           Container(),
           Container(),
-          ProfileScreen(),
+          const ProfileScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -15,26 +15,22 @@ class HiveUserRepository implements UserRepository {
   });
 
   @override
-  Future<void> deleteUser(String id) async {
-    // TODO: implement deleteUser
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<User>> getAllUsers() async {
-    // TODO: implement getAllUsers
-    throw UnimplementedError();
-  }
-
-  @override
   Future<User> getUserById(int id) async {
-    var userEntity = box.get(id);
-    return userEntity != null ? userMapper.toUser(userEntity) : User.empty();
+    UserEntity? userEntity = box.get(id);
+    // check if user exists - return it, if no - create with id 0
+    if (userEntity == null) {
+      var newUser = User.empty();
+      var newUserEntity = userMapper.toUserEntity(newUser);
+      box.add(newUserEntity);
+      return newUser;
+    } else {
+      return userMapper.toUser(userEntity);
+    }
   }
 
   @override
-  Future<void> saveUser(String id) async {
-    // TODO: implement saveUser
-    throw UnimplementedError();
+  Future<void> saveUser(User user) async {
+    var userEntity = userMapper.toUserEntity(user);
+    box.putAt(user.id, userEntity);
   }
 }

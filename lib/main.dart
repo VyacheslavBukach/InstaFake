@@ -9,6 +9,7 @@ import './utils/app_translation.dart';
 
 void main() async {
   await Hive.initFlutter();
+  Hive.registerAdapter(UserEntityAdapter());
   await Hive.openBox<UserEntity>('users');
   runApp(const MyApp());
 }
