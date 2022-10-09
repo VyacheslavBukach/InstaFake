@@ -11,13 +11,16 @@ class EditProfileScreen extends GetView<EditProfileController> {
 
   void saveAndClose() {
     controller.saveProfile();
-    Get.back();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.close),
+          onPressed: controller.goToProfileWithoutSave,
+        ),
         title: Text('edit_profile'.tr),
         actions: [
           IconButton(

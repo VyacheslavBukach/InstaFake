@@ -17,6 +17,8 @@ class EditProfileController extends GetxController {
     required this.imagePicker,
   });
 
+  final Rx<File?> _previousAvatarPath = File('').obs;
+
   late TextEditingController nameTextEditingController;
   late TextEditingController userNameTextEditingController;
   late TextEditingController postsTextEditingController;
@@ -27,6 +29,12 @@ class EditProfileController extends GetxController {
   void changeCheckedStatus() {
     profileController.user().isChecked = !profileController.user().isChecked;
     profileController.user.refresh();
+  }
+
+  void goToProfileWithoutSave() {
+    profileController.user().avatar = _previousAvatarPath.value;
+    profileController.user.refresh();
+    Get.back();
   }
 
   void saveProfile() async {
@@ -45,6 +53,7 @@ class EditProfileController extends GetxController {
 
     profileController.userRepository.saveUser(updatedUser);
     profileController.user.refresh();
+    Get.back();
   }
 
   Future<void> pickImage() async {
@@ -88,8 +97,7 @@ class EditProfileController extends GetxController {
 
   @override
   void onInit() {
-    var currentUser = profileController.user.value;
-    // isChecked.value = currentUser.isChecked;
+    _previousAvatarPath.value = profileController.user().avatar;
     _initTextEditingControllers();
     super.onInit();
   }
