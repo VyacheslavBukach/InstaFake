@@ -39,24 +39,21 @@ class EditProfileScreen extends GetView<EditProfileController> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Obx(() {
-                  if (controller.profileController.user().avatar != null) {
-                    return CircleAvatar(
-                      radius: 40,
-                      backgroundImage: Image.file(
-                        controller.profileController.user().avatar ?? File(''),
-                        width: 40,
-                        height: 40,
-                      ).image,
-                    );
-                  } else {
-                    return SvgPicture.asset(
-                      'assets/empty_avatar.svg',
-                      height: 100,
-                      width: 100,
-                    );
-                  }
-                }),
+                Obx(
+                  () => controller.profileController.user().avatar != null
+                      ? CircleAvatar(
+                          radius: 50,
+                          backgroundImage: Image.file(
+                            controller.profileController.user().avatar ??
+                                File(''),
+                          ).image,
+                        )
+                      : SvgPicture.asset(
+                          'assets/empty_avatar.svg',
+                          height: 100,
+                          width: 100,
+                        ),
+                ),
                 TextButton(
                   onPressed: controller.pickImageFromGallery,
                   child: Text('change_profile_photo'.tr),

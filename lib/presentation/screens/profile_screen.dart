@@ -63,24 +63,20 @@ class _ProfileScreenState extends State<ProfileScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Obx(() {
-                  if (controller.user().avatar != null) {
-                    return CircleAvatar(
-                      radius: 40,
-                      backgroundImage: Image.file(
-                        controller.user().avatar ?? File(''),
-                        width: 80,
-                        height: 80,
-                      ).image,
-                    );
-                  } else {
-                    return SvgPicture.asset(
-                      'assets/empty_avatar.svg',
-                      height: 80,
-                      width: 80,
-                    );
-                  }
-                }),
+                Obx(
+                  () => controller.user().avatar != null
+                      ? CircleAvatar(
+                          radius: 40,
+                          backgroundImage: Image.file(
+                            controller.user().avatar ?? File(''),
+                          ).image,
+                        )
+                      : SvgPicture.asset(
+                          'assets/empty_avatar.svg',
+                          height: 80,
+                          width: 80,
+                        ),
+                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
