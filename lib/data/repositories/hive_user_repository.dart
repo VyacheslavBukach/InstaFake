@@ -31,6 +31,7 @@ class HiveUserRepository implements UserRepository {
   @override
   Future<void> saveUser(User user) async {
     var userEntity = userMapper.toUserEntity(user);
+    print('save user with index ${user.id} and avatar ${user.avatar}');
     box.putAt(user.id, userEntity);
   }
 }

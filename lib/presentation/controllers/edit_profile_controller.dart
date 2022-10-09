@@ -1,17 +1,21 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import './profile_controller.dart';
 import '../../domain/models/user.dart';
 
 class EditProfileController extends GetxController {
   final ProfileController profileController;
+  final ImagePicker imagePicker;
 
   EditProfileController({
     required this.profileController,
+    required this.imagePicker,
   });
-
-  final isChecked = false.obs;
 
   late TextEditingController nameTextEditingController;
   late TextEditingController userNameTextEditingController;
@@ -21,23 +25,44 @@ class EditProfileController extends GetxController {
   late TextEditingController followingsTextEditingController;
 
   void changeCheckedStatus() {
-    isChecked.value = !isChecked.value;
+    profileController.user().isChecked = !profileController.user().isChecked;
+    profileController.user.refresh();
   }
 
   void saveProfile() async {
     var updatedUser = User(
-      id: profileController.userId.value,
+      id: profileController.user().id,
       posts: int.parse(postsTextEditingController.text),
       followers: int.parse(followersTextEditingController.text),
       followings: int.parse(followingsTextEditingController.text),
       name: nameTextEditingController.text,
       username: userNameTextEditingController.text,
       bio: bioTextEditingController.text,
-      isChecked: isChecked.value,
-      avatar: null,
+      isChecked: profileController.user().isChecked,
+      avatar: profileController.user().avatar,
     );
     profileController.user.value = updatedUser;
+
     profileController.userRepository.saveUser(updatedUser);
+    profileController.user.refresh();
+  }
+
+  Future<void> pickImage() async {
+    try {
+      final imageFile =
+          await imagePicker.pickImage(source: ImageSource.gallery);
+
+      if (imageFile == null) {
+        return;
+      }
+
+      final imageTemporary = File(imageFile.path);
+
+      profileController.user().avatar = imageTemporary;
+      profileController.user.refresh();
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
   }
 
   void _initTextEditingControllers() {
@@ -64,7 +89,7 @@ class EditProfileController extends GetxController {
   @override
   void onInit() {
     var currentUser = profileController.user.value;
-    isChecked.value = currentUser.isChecked;
+    // isChecked.value = currentUser.isChecked;
     _initTextEditingControllers();
     super.onInit();
   }

@@ -17,6 +17,8 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   flutter_svg: ^1.1.5
+  image_picker: ^0.8.6
+#  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:

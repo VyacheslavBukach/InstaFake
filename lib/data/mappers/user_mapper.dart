@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import '../../domain/models/user.dart';
 import '../entities/user_entity.dart';
 
 class UserMapper {
   User toUser(UserEntity userEntity) => User(
         id: userEntity.id,
-        avatar: userEntity.avatar,
+        avatar: File(userEntity.avatarPath),
         bio: userEntity.bio,
         followers: userEntity.followers,
         followings: userEntity.followings,
@@ -23,6 +25,6 @@ class UserMapper {
         username: user.username,
         bio: user.bio,
         isChecked: user.isChecked,
-        avatar: user.avatar,
+        avatarPath: user.avatar?.path ?? '',
       );
 }

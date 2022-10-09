@@ -2,14 +2,14 @@ import 'dart:io';
 
 class User {
   final int id;
-  final int posts;
-  final int followers;
-  final int followings;
-  final String name;
-  final String username;
-  final String bio;
-  final bool isChecked;
-  final File? avatar;
+  int posts;
+  int followers;
+  int followings;
+  String name;
+  String username;
+  String bio;
+  bool isChecked;
+  File? avatar;
 
   User({
     required this.id,

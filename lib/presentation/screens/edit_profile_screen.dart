@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -29,17 +31,26 @@ class EditProfileScreen extends GetView<EditProfileController> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              controller.profileController.user().avatar != null
-                  ? const CircleAvatar(
-                      radius: 40,
-                    )
-                  : SvgPicture.asset(
-                      'assets/empty_avatar.svg',
-                      height: 100,
-                      width: 100,
-                    ),
+              Obx(() {
+                if (controller.profileController.user().avatar != null) {
+                  return CircleAvatar(
+                    radius: 40,
+                    backgroundImage: Image.file(
+                      controller.profileController.user().avatar ?? File(''),
+                      width: 40,
+                      height: 40,
+                    ).image,
+                  );
+                } else {
+                  return SvgPicture.asset(
+                    'assets/empty_avatar.svg',
+                    height: 100,
+                    width: 100,
+                  );
+                }
+              }),
               TextButton(
-                onPressed: () {},
+                onPressed: controller.pickImage,
                 child: Text('change_profile_photo'.tr),
               ),
               Obx(
@@ -48,12 +59,13 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   subtitle: Text('confirmed_desc'.tr),
                   secondary: Icon(
                     Icons.check_circle,
-                    color:
-                        controller.isChecked.value ? Colors.blue : Colors.black,
+                    color: controller.profileController.user().isChecked
+                        ? Colors.blue
+                        : Colors.black,
                   ),
                   controlAffinity: ListTileControlAffinity.leading,
-                  value: controller.isChecked.value,
-                  onChanged: (isCheck) {
+                  value: controller.profileController.user().isChecked,
+                  onChanged: (isChecked) {
                     controller.changeCheckedStatus();
                   },
                 ),

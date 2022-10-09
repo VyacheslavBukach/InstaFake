@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -61,15 +63,24 @@ class _ProfileScreenState extends State<ProfileScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                controller.user().avatar != null
-                    ? const CircleAvatar(
-                        radius: 40,
-                      )
-                    : SvgPicture.asset(
-                        'assets/empty_avatar.svg',
-                        height: 80,
+                Obx(() {
+                  if (controller.user().avatar != null) {
+                    return CircleAvatar(
+                      radius: 40,
+                      backgroundImage: Image.file(
+                        controller.user().avatar ?? File(''),
                         width: 80,
-                      ),
+                        height: 80,
+                      ).image,
+                    );
+                  } else {
+                    return SvgPicture.asset(
+                      'assets/empty_avatar.svg',
+                      height: 80,
+                      width: 80,
+                    );
+                  }
+                }),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -109,10 +120,11 @@ class _ProfileScreenState extends State<ProfileScreen>
             const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  primary: Colors.grey.shade200,
-                  onPrimary: Colors.black,
-                  elevation: 0,
-                  minimumSize: const Size.fromHeight(30)),
+                primary: Colors.grey.shade200,
+                onPrimary: Colors.black,
+                elevation: 0,
+                minimumSize: const Size.fromHeight(30),
+              ),
               onPressed: () {
                 Get.toNamed(AppRoutes.editProfile);
               },
