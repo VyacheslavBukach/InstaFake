@@ -6,7 +6,8 @@ import '../entities/user_entity.dart';
 class UserMapper {
   User toUser(UserEntity userEntity) => User(
         id: userEntity.id,
-        avatar: File(userEntity.avatarPath),
+        avatar:
+            userEntity.avatarPath == '' ? null : File(userEntity.avatarPath),
         bio: userEntity.bio,
         followers: userEntity.followers,
         followings: userEntity.followings,

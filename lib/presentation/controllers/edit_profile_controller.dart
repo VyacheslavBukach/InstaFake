@@ -17,7 +17,7 @@ class EditProfileController extends GetxController {
     required this.imagePicker,
   });
 
-  final Rx<File?> _previousAvatarPath = File('').obs;
+  final _previousAvatarPath = Rxn<File>();
 
   late TextEditingController nameTextEditingController;
   late TextEditingController userNameTextEditingController;
@@ -49,9 +49,8 @@ class EditProfileController extends GetxController {
       isChecked: profileController.user().isChecked,
       avatar: profileController.user().avatar,
     );
-    profileController.user.value = updatedUser;
-
     profileController.userRepository.saveUser(updatedUser);
+    profileController.user.value = updatedUser;
     profileController.user.refresh();
     Get.back();
   }
