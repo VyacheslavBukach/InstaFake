@@ -58,7 +58,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   }
                 }),
                 TextButton(
-                  onPressed: controller.pickImage,
+                  onPressed: controller.pickImageFromGallery,
                   child: Text('change_profile_photo'.tr),
                 ),
                 Obx(
