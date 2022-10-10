@@ -59,13 +59,12 @@ class EditProfileScreen extends GetView<EditProfileController> {
                 ),
                 Obx(
                   () => CheckboxListTile(
-                    title: Text('confirmed'.tr),
-                    subtitle: Text('confirmed_desc'.tr),
-                    secondary: Icon(
-                      Icons.check_circle,
-                      color: controller.isConfirmedProfile.value
-                          ? Colors.blue
-                          : Colors.black,
+                    title: Text('verified'.tr),
+                    subtitle: Text('verified_desc'.tr),
+                    secondary: SvgPicture.asset(
+                      'assets/verified_icon.svg',
+                      width: 32,
+                      height: 32,
                     ),
                     controlAffinity: ListTileControlAffinity.leading,
                     value: controller.isConfirmedProfile.value,

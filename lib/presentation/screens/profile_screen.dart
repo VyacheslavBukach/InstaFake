@@ -31,10 +31,11 @@ class _ProfileScreenState extends State<ProfileScreen>
             ),
             const SizedBox(width: 8),
             Obx(
-              () => controller.user().isChecked
-                  ? const Icon(
-                      Icons.check_circle,
-                      color: Colors.blue,
+              () => controller.user().isVerified
+                  ? SvgPicture.asset(
+                      'assets/verified_icon.svg',
+                      width: 16,
+                      height: 16,
                     )
                   : const SizedBox(),
             ),
@@ -51,12 +52,13 @@ class _ProfileScreenState extends State<ProfileScreen>
           ),
         ],
       ),
-      body: Padding(
+      body: Container(
         padding: const EdgeInsets.only(
           left: 16,
           right: 16,
           top: 16,
         ),
+        color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -11,7 +11,7 @@ class UserMapper {
         bio: userEntity.bio,
         followers: userEntity.followers,
         followings: userEntity.followings,
-        isChecked: userEntity.isChecked,
+        isVerified: userEntity.isVerified,
         name: userEntity.name,
         posts: userEntity.posts,
         username: userEntity.username,
@@ -25,7 +25,7 @@ class UserMapper {
         name: user.name,
         username: user.username,
         bio: user.bio,
-        isChecked: user.isChecked,
+        isVerified: user.isVerified,
         avatarPath: user.avatar?.path ?? '',
       );
 }

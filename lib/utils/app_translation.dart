@@ -13,8 +13,8 @@ class AppTranslation extends Translations {
           'name': 'Name',
           'username': 'Username',
           'bio': 'Bio',
-          'confirmed': 'Confirmed',
-          'confirmed_desc': 'Set account to confirmed',
+          'verified': 'Verified',
+          'verified_desc': 'Set account to verified',
         },
         'ru_RU': {
           'app_name': 'ИнстаФэйк',
@@ -26,8 +26,8 @@ class AppTranslation extends Translations {
           'name': 'Имя',
           'username': 'Имя пользователя',
           'bio': 'Био',
-          'confirmed': 'Подтвержден',
-          'confirmed_desc': 'Устанавливает аккаунт как подтвержденный',
+          'verified': 'Подтвержден',
+          'verified_desc': 'Устанавливает аккаунт как подтвержденный',
         }
       };
 }

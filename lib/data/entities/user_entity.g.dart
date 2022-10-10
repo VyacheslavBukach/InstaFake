@@ -24,7 +24,7 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       name: fields[4] as String,
       username: fields[5] as String,
       bio: fields[6] as String,
-      isChecked: fields[7] as bool,
+      isVerified: fields[7] as bool,
       avatarPath: fields[8] as String,
     );
   }
@@ -48,7 +48,7 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       ..writeByte(6)
       ..write(obj.bio)
       ..writeByte(7)
-      ..write(obj.isChecked)
+      ..write(obj.isVerified)
       ..writeByte(8)
       ..write(obj.avatarPath);
   }

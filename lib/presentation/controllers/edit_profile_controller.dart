@@ -44,7 +44,7 @@ class EditProfileController extends GetxController {
       name: nameTextEditingController.text,
       username: userNameTextEditingController.text,
       bio: bioTextEditingController.text,
-      isChecked: isConfirmedProfile.value,
+      isVerified: isConfirmedProfile.value,
       avatar: avatarPath.value,
     );
     profileController.userRepository.saveUser(updatedUser);
@@ -94,7 +94,7 @@ class EditProfileController extends GetxController {
   @override
   void onInit() {
     avatarPath.value = profileController.user().avatar;
-    isConfirmedProfile.value = profileController.user().isChecked;
+    isConfirmedProfile.value = profileController.user().isVerified;
     _initTextEditingControllers();
     super.onInit();
   }

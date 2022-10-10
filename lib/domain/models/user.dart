@@ -8,7 +8,7 @@ class User {
   String name;
   String username;
   String bio;
-  bool isChecked;
+  bool isVerified;
   File? avatar;
 
   User({
@@ -19,7 +19,7 @@ class User {
     required this.name,
     required this.username,
     required this.bio,
-    required this.isChecked,
+    required this.isVerified,
     required this.avatar,
   });
 
@@ -32,7 +32,7 @@ class User {
           name: 'Name',
           username: 'Username',
           bio: 'Bio',
-          isChecked: false,
+          isVerified: false,
           avatar: null,
         );
 }

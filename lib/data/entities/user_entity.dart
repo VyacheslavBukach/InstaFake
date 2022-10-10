@@ -26,7 +26,7 @@ class UserEntity extends HiveObject {
   final String bio;
 
   @HiveField(7)
-  final bool isChecked;
+  final bool isVerified;
 
   @HiveField(8)
   final String avatarPath;
@@ -39,7 +39,7 @@ class UserEntity extends HiveObject {
     required this.name,
     required this.username,
     required this.bio,
-    required this.isChecked,
+    required this.isVerified,
     required this.avatarPath,
   });
 }
