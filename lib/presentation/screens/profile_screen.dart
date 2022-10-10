@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:insta_fake/presentation/widgets/avatar_widget.dart';
 
 import '../../utils/app_navigation.dart';
 import '../controllers/profile_controller.dart';
@@ -65,18 +64,11 @@ class _ProfileScreenState extends State<ProfileScreen>
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Obx(
-                  () => controller.user().avatar != null
-                      ? CircleAvatar(
-                          radius: 40,
-                          backgroundImage: Image.file(
-                            controller.user().avatar ?? File(''),
-                          ).image,
-                        )
-                      : SvgPicture.asset(
-                          'assets/empty_avatar.svg',
-                          height: 80,
-                          width: 80,
-                        ),
+                  () => AvatarWidget(
+                    user: controller.user(),
+                    radius: 40,
+                    onTap: () {},
+                  ),
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
