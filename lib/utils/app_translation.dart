@@ -15,6 +15,7 @@ class AppTranslation extends Translations {
           'bio': 'Bio',
           'verified': 'Verified',
           'verified_desc': 'Set account to verified',
+          'delete_photo': 'Delete photo',
         },
         'ru_RU': {
           'app_name': 'ИнстаФэйк',
@@ -28,6 +29,7 @@ class AppTranslation extends Translations {
           'bio': 'Био',
           'verified': 'Подтвержден',
           'verified_desc': 'Устанавливает аккаунт как подтвержденный',
+          'delete_photo': 'Удалить фото',
         }
       };
 }

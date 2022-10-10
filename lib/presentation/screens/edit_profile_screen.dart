@@ -58,6 +58,14 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   child: Text('change_profile_photo'.tr),
                 ),
                 Obx(
+                  () => controller.avatarPath.value != null
+                      ? TextButton(
+                          onPressed: controller.deleteImage,
+                          child: Text('delete_photo'.tr),
+                        )
+                      : const SizedBox.shrink(),
+                ),
+                Obx(
                   () => CheckboxListTile(
                     title: Text('verified'.tr),
                     subtitle: Text('verified_desc'.tr),

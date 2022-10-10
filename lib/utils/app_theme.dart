@@ -20,6 +20,7 @@ class AppTheme {
       onPrimary: Colors.green,
       secondary: Colors.red,
     ),
+    scaffoldBackgroundColor: Colors.white,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       backgroundColor: Colors.white,

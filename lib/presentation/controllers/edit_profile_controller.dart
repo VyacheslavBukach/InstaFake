@@ -70,6 +70,10 @@ class EditProfileController extends GetxController {
     }
   }
 
+  void deleteImage() {
+    avatarPath.value = null;
+  }
+
   void _initTextEditingControllers() {
     nameTextEditingController = TextEditingController(
       text: profileController.user.value.name,
