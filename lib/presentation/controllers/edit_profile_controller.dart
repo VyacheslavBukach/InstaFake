@@ -17,7 +17,8 @@ class EditProfileController extends GetxController {
     required this.imagePicker,
   });
 
-  final _previousAvatarPath = Rxn<File>();
+  final avatarPath = Rxn<File>();
+  final isConfirmedProfile = false.obs;
 
   late TextEditingController nameTextEditingController;
   late TextEditingController userNameTextEditingController;
@@ -27,17 +28,14 @@ class EditProfileController extends GetxController {
   late TextEditingController followingsTextEditingController;
 
   void changeCheckedStatus() {
-    profileController.user().isChecked = !profileController.user().isChecked;
-    profileController.user.refresh();
+    isConfirmedProfile.value = !isConfirmedProfile.value;
   }
 
-  void goToProfileWithoutSave() {
-    profileController.user().avatar = _previousAvatarPath.value;
-    profileController.user.refresh();
+  void closeEditingProfile() {
     Get.back();
   }
 
-  void saveProfile() async {
+  void saveProfileAndBack() async {
     var updatedUser = User(
       id: profileController.user().id,
       posts: int.parse(postsTextEditingController.text),
@@ -46,8 +44,8 @@ class EditProfileController extends GetxController {
       name: nameTextEditingController.text,
       username: userNameTextEditingController.text,
       bio: bioTextEditingController.text,
-      isChecked: profileController.user().isChecked,
-      avatar: profileController.user().avatar,
+      isChecked: isConfirmedProfile.value,
+      avatar: avatarPath.value,
     );
     profileController.userRepository.saveUser(updatedUser);
     profileController.user.value = updatedUser;
@@ -66,8 +64,7 @@ class EditProfileController extends GetxController {
 
       final imageTemporary = File(imageFile.path);
 
-      profileController.user().avatar = imageTemporary;
-      profileController.user.refresh();
+      avatarPath.value = imageTemporary;
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
@@ -96,7 +93,8 @@ class EditProfileController extends GetxController {
 
   @override
   void onInit() {
-    _previousAvatarPath.value = profileController.user().avatar;
+    avatarPath.value = profileController.user().avatar;
+    isConfirmedProfile.value = profileController.user().isChecked;
     _initTextEditingControllers();
     super.onInit();
   }

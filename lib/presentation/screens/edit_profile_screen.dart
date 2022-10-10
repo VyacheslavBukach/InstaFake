@@ -10,21 +10,21 @@ class EditProfileScreen extends GetView<EditProfileController> {
   const EditProfileScreen({Key? key}) : super(key: key);
 
   void saveAndClose() {
-    controller.saveProfile();
+    controller.saveProfileAndBack();
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        controller.goToProfileWithoutSave();
+        controller.closeEditingProfile();
         return true;
       },
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.close),
-            onPressed: controller.goToProfileWithoutSave,
+            onPressed: controller.closeEditingProfile,
           ),
           title: Text('edit_profile'.tr),
           actions: [
@@ -40,12 +40,11 @@ class EditProfileScreen extends GetView<EditProfileController> {
             child: Column(
               children: [
                 Obx(
-                  () => controller.profileController.user().avatar != null
+                  () => controller.avatarPath.value != null
                       ? CircleAvatar(
                           radius: 50,
                           backgroundImage: Image.file(
-                            controller.profileController.user().avatar ??
-                                File(''),
+                            controller.avatarPath.value ?? File(''),
                           ).image,
                         )
                       : SvgPicture.asset(
@@ -64,12 +63,12 @@ class EditProfileScreen extends GetView<EditProfileController> {
                     subtitle: Text('confirmed_desc'.tr),
                     secondary: Icon(
                       Icons.check_circle,
-                      color: controller.profileController.user().isChecked
+                      color: controller.isConfirmedProfile.value
                           ? Colors.blue
                           : Colors.black,
                     ),
                     controlAffinity: ListTileControlAffinity.leading,
-                    value: controller.profileController.user().isChecked,
+                    value: controller.isConfirmedProfile.value,
                     onChanged: (isChecked) {
                       controller.changeCheckedStatus();
                     },
