@@ -46,6 +46,7 @@ class EditProfileController extends GetxController {
       bio: bioTextEditingController.text,
       isVerified: isConfirmedProfile.value,
       avatar: avatarPath.value,
+      storyList: profileController.user().storyList,
     );
     profileController.userRepository.saveUser(updatedUser);
     profileController.user.value = updatedUser;

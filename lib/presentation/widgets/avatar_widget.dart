@@ -43,7 +43,7 @@ class AvatarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: _gradientBorderDecoration, // TODO check stories
+      decoration: user.storyList.isEmpty ? null : _gradientBorderDecoration,
       height: radius * 2 + 10,
       width: radius * 2 + 10,
       child: Stack(

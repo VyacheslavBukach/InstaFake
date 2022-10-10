@@ -10,6 +10,7 @@ class User {
   String bio;
   bool isVerified;
   File? avatar;
+  List<String> storyList;
 
   User({
     required this.id,
@@ -21,6 +22,7 @@ class User {
     required this.bio,
     required this.isVerified,
     required this.avatar,
+    required this.storyList,
   });
 
   User.empty()
@@ -34,5 +36,6 @@ class User {
           bio: 'Bio',
           isVerified: false,
           avatar: null,
+          storyList: [],
         );
 }

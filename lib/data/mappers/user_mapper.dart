@@ -15,6 +15,7 @@ class UserMapper {
         name: userEntity.name,
         posts: userEntity.posts,
         username: userEntity.username,
+        storyList: userEntity.storyList,
       );
 
   UserEntity toUserEntity(User user) => UserEntity(
@@ -27,5 +28,6 @@ class UserMapper {
         bio: user.bio,
         isVerified: user.isVerified,
         avatarPath: user.avatar?.path ?? '',
+        storyList: user.storyList,
       );
 }

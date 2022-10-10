@@ -31,6 +31,9 @@ class UserEntity extends HiveObject {
   @HiveField(8)
   final String avatarPath;
 
+  @HiveField(9)
+  final List<String> storyList;
+
   UserEntity({
     required this.id,
     required this.posts,
@@ -41,5 +44,6 @@ class UserEntity extends HiveObject {
     required this.bio,
     required this.isVerified,
     required this.avatarPath,
+    required this.storyList,
   });
 }

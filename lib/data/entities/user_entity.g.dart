@@ -26,13 +26,14 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       bio: fields[6] as String,
       isVerified: fields[7] as bool,
       avatarPath: fields[8] as String,
+      storyList: (fields[9] as List).cast<String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, UserEntity obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       ..writeByte(7)
       ..write(obj.isVerified)
       ..writeByte(8)
-      ..write(obj.avatarPath);
+      ..write(obj.avatarPath)
+      ..writeByte(9)
+      ..write(obj.storyList);
   }
 
   @override
