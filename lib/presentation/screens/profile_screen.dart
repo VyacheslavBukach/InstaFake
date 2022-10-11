@@ -64,15 +64,18 @@ class _ProfileScreenState extends State<ProfileScreen>
                         ),
                       ),
                       const Divider(),
-                      ListTile(
-                        leading: const Icon(Icons.grid_4x4),
-                        title: Text('post'.tr),
-                        onTap: () {},
-                      ),
+                      // ListTile(
+                      //   leading: const Icon(Icons.grid_4x4),
+                      //   title: Text('post'.tr),
+                      //   onTap: () {},
+                      // ),
                       ListTile(
                         leading: const Icon(Icons.history),
                         title: Text('story'.tr),
-                        onTap: () {},
+                        onTap: () {
+                          Get.back(); // Close bottomsheet
+                          Get.toNamed(AppRoutes.storyEditor);
+                        },
                       ),
                     ],
                   ),

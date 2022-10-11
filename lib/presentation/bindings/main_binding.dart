@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../data/entities/user_entity.dart';
 import '../../data/mappers/user_mapper.dart';
@@ -10,6 +11,10 @@ import '../controllers/profile_controller.dart';
 class MainBinding extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut(
+      () => ImagePicker(),
+      fenix: true,
+    );
     // Mappers
     Get.put<UserMapper>(UserMapper());
     // Repositories

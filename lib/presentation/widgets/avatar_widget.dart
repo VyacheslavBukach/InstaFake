@@ -7,13 +7,13 @@ import '../../domain/models/user.dart';
 
 class AvatarWidget extends StatelessWidget {
   final User user;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final double radius;
 
   const AvatarWidget({
     Key? key,
     required this.user,
-    required this.onTap,
+    this.onTap,
     required this.radius,
   }) : super(key: key);
 

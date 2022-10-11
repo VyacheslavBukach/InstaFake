@@ -19,6 +19,7 @@ class AppTranslation extends Translations {
           'verified_desc': 'Set account to verified',
           'delete_photo': 'Delete photo',
           'create': 'Create',
+          'story_editor': 'Story editor',
         },
         'ru_RU': {
           'app_name': 'ИнстаФэйк',
@@ -36,6 +37,7 @@ class AppTranslation extends Translations {
           'verified_desc': 'Устанавливает аккаунт как подтвержденный',
           'delete_photo': 'Удалить фото',
           'create': 'Создать',
+          'story_editor': 'Редактор историй',
         }
       };
 }

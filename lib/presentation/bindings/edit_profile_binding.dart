@@ -7,10 +7,6 @@ import '../controllers/profile_controller.dart';
 class EditProfileBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(
-      () => ImagePicker(),
-      fenix: true,
-    );
     Get.lazyPut<EditProfileController>(
       () => EditProfileController(
         profileController: Get.find<ProfileController>(),
