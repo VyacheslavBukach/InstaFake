@@ -1,36 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import './profile_screen.dart';
+import '../controllers/main_controller.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends GetView<MainController> {
   const MainScreen({Key? key}) : super(key: key);
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int _pageIndex = 4;
-  late PageController _pageController;
-
-  void _onPageChanged(int pageIndex) {
-    setState(() {
-      _pageIndex = pageIndex;
-    });
-    _pageController.jumpToPage(pageIndex);
-  }
-
-  @override
-  void initState() {
-    _pageController = PageController(initialPage: _pageIndex);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        controller: _pageController,
+        controller: controller.pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
           Container(),
@@ -40,48 +24,66 @@ class _MainScreenState extends State<MainScreen> {
           const ProfileScreen(),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _pageIndex,
-        onTap: _onPageChanged,
-        items: [
-          BottomNavigationBarItem(
-            icon: _pageIndex == 0
-                ? const Icon(Icons.home)
-                : const Icon(Icons.home_outlined),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: _pageIndex == 1
-                ? const Icon(Icons.search)
-                : const Icon(Icons.search_outlined),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: _pageIndex == 2
-                ? const Icon(Icons.add_box)
-                : const Icon(Icons.add_box_outlined),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: _pageIndex == 3
-                ? const Icon(Icons.favorite)
-                : const Icon(Icons.favorite_outline),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: _pageIndex == 4
-                ? const Icon(Icons.circle)
-                : const Icon(Icons.circle_outlined),
-            label: '',
-          ),
-        ],
+      bottomNavigationBar: Obx(
+        () => BottomNavigationBar(
+          onTap: controller.goToPage,
+          items: [
+            BottomNavigationBarItem(
+              icon: controller.pageIndex.value == 0
+                  ? const Icon(Icons.home)
+                  : const Icon(Icons.home_outlined),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: controller.pageIndex.value == 1
+                  ? const Icon(Icons.search)
+                  : const Icon(Icons.search_outlined),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: controller.pageIndex.value == 2
+                  ? const Icon(Icons.add_box)
+                  : const Icon(Icons.add_box_outlined),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: controller.pageIndex.value == 3
+                  ? const Icon(Icons.favorite)
+                  : const Icon(Icons.favorite_outline),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              // TODO make it easier
+              icon: controller.profileController.user().avatar != null
+                  ? CircleAvatar(
+                      radius: 14,
+                      backgroundColor: controller.pageIndex.value == 4
+                          ? Colors.black
+                          : Colors.white,
+                      child: CircleAvatar(
+                        radius: 12,
+                        backgroundImage: FileImage(
+                          controller.profileController.user().avatar ??
+                              File(''),
+                        ),
+                      ),
+                    )
+                  : CircleAvatar(
+                      radius: 14,
+                      backgroundColor: controller.pageIndex.value == 4
+                          ? Colors.black
+                          : Colors.white,
+                      child: SvgPicture.asset(
+                        'assets/empty_avatar.svg',
+                        height: 24,
+                        width: 24,
+                      ),
+                    ),
+              label: '',
+            ),
+          ],
+        ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 }
