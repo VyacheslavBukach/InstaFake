@@ -42,7 +42,43 @@ class _ProfileScreenState extends State<ProfileScreen>
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.bottomSheet(
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                  ),
+                  child: Wrap(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Center(
+                          child: Text(
+                            'create'.tr,
+                            style: Theme.of(context).textTheme.headline5,
+                          ),
+                        ),
+                      ),
+                      const Divider(),
+                      ListTile(
+                        leading: const Icon(Icons.grid_4x4),
+                        title: Text('post'.tr),
+                        onTap: () {},
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.history),
+                        title: Text('story'.tr),
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
             icon: const Icon(Icons.add_box_outlined),
           ),
           IconButton(

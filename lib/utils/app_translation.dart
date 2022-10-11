@@ -6,6 +6,8 @@ class AppTranslation extends Translations {
         'en_US': {
           'app_name': 'InstaFake',
           'posts': 'Posts',
+          'post': 'Post',
+          'story': 'Story',
           'followers': 'Followers',
           'followings': 'Followings',
           'edit_profile': 'Edit profile',
@@ -16,10 +18,13 @@ class AppTranslation extends Translations {
           'verified': 'Verified',
           'verified_desc': 'Set account to verified',
           'delete_photo': 'Delete photo',
+          'create': 'Create',
         },
         'ru_RU': {
           'app_name': 'ИнстаФэйк',
           'posts': 'Публикации',
+          'post': 'Публикация',
+          'story': 'История',
           'followers': 'Подписчики',
           'followings': 'Подписки',
           'edit_profile': 'Редактировать профиль',
@@ -30,6 +35,7 @@ class AppTranslation extends Translations {
           'verified': 'Подтвержден',
           'verified_desc': 'Устанавливает аккаунт как подтвержденный',
           'delete_photo': 'Удалить фото',
+          'create': 'Создать',
         }
       };
 }
