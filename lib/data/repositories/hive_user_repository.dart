@@ -15,8 +15,8 @@ class HiveUserRepository implements UserRepository {
   });
 
   @override
-  Future<User> getUserById(int id) async {
-    UserEntity? userEntity = box.get(id);
+  Future<User> getUserById(int userId) async {
+    UserEntity? userEntity = box.get(userId);
     // check if user exists - return it, if no - create with id 0
     if (userEntity == null) {
       var newUser = User.empty();

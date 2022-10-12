@@ -50,7 +50,7 @@ class EditProfileController extends GetxController {
     );
     profileController.userRepository.saveUser(updatedUser);
     profileController.user.value = updatedUser;
-    profileController.user.refresh();
+    profileController.user.refresh(); // TODO
     Get.back();
   }
 
