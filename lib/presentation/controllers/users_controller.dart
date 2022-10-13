@@ -22,8 +22,8 @@ class UsersController extends GetxController {
 
   void saveUser(User user) async {
     _userRepository.saveUser(user);
-    users.refresh();
-    currentUser.refresh();
+    fetchUserById(0);
+    fetchUsers();
   }
 
   @override

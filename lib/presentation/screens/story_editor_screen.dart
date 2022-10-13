@@ -14,13 +14,6 @@ class StoryEditorScreen extends GetView<StoryEditorController> {
     return Scaffold(
       appBar: AppBar(
         title: Text('story_editor'.tr),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            controller.usersController.fetchUsers();
-            Get.back();
-          },
-        ),
       ),
       body: Obx(
         () => ListView.builder(
