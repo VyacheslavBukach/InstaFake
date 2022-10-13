@@ -20,6 +20,10 @@ class AppTranslation extends Translations {
           'delete_photo': 'Delete photo',
           'create': 'Create',
           'story_editor': 'Story editor',
+          'add_a_story': 'Add a story',
+          'camera': 'Camera',
+          'gallery': 'Gallery',
+          'choose_a_file': 'Choose a file',
         },
         'ru_RU': {
           'app_name': 'ИнстаФэйк',
@@ -38,6 +42,10 @@ class AppTranslation extends Translations {
           'delete_photo': 'Удалить фото',
           'create': 'Создать',
           'story_editor': 'Редактор историй',
+          'add_a_story': 'Добавить историю',
+          'camera': 'Камера',
+          'gallery': 'Галерея',
+          'choose_a_file': 'Выберите файл',
         }
       };
 }

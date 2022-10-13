@@ -36,10 +36,10 @@ class StoryEditorScreen extends GetView<StoryEditorController> {
             ),
             children: [
               ListTile(
-                title: const Center(child: Text('Add a story')),
+                title: Center(child: Text('add_a_story'.tr)),
                 onTap: () {
                   Get.defaultDialog(
-                    title: 'Choose',
+                    title: 'choose_a_file'.tr,
                     content: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -53,9 +53,9 @@ class StoryEditorScreen extends GetView<StoryEditorController> {
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Icon(Icons.camera),
-                                    Text('Camera'),
+                                  children: [
+                                    const Icon(Icons.folder),
+                                    Text('gallery'.tr),
                                   ],
                                 ),
                               ),
@@ -77,7 +77,7 @@ class StoryEditorScreen extends GetView<StoryEditorController> {
                         ),
                         title: Text('Today'),
                         trailing: IconButton(
-                          icon: Icon(Icons.delete),
+                          icon: const Icon(Icons.delete),
                           onPressed: () => controller.deleteStory(
                             controller.usersController.users()[listIndex],
                             storyPath,
