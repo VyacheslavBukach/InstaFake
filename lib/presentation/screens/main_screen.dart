@@ -5,10 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import './profile_screen.dart';
-import '../controllers/main_controller.dart';
+import '../controllers/navigation_controller.dart';
+import '../controllers/users_controller.dart';
 
-class MainScreen extends GetView<MainController> {
-  const MainScreen({Key? key}) : super(key: key);
+class MainScreen extends GetView<NavigationController> {
+  final usersController = Get.find<UsersController>();
+
+  MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +57,7 @@ class MainScreen extends GetView<MainController> {
             ),
             BottomNavigationBarItem(
               // TODO make it easier
-              icon: controller.profileController.user().avatar != null
+              icon: usersController.currentUser().avatar != null
                   ? CircleAvatar(
                       radius: 14,
                       backgroundColor: controller.pageIndex.value == 4
@@ -63,8 +66,7 @@ class MainScreen extends GetView<MainController> {
                       child: CircleAvatar(
                         radius: 12,
                         backgroundImage: FileImage(
-                          controller.profileController.user().avatar ??
-                              File(''),
+                          usersController.currentUser().avatar ?? File(''),
                         ),
                       ),
                     )

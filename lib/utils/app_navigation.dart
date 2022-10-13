@@ -21,7 +21,7 @@ class AppPages {
   static final pages = [
     GetPage(
       name: AppRoutes.main,
-      page: () => const MainScreen(),
+      page: () => MainScreen(),
       binding: MainBinding(),
     ),
     GetPage(
@@ -32,7 +32,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.storyEditor,
-      page: () => const StoryEditorScreen(),
+      page: () => StoryEditorScreen(),
       binding: StoryEditorBinding(),
     ),
   ];

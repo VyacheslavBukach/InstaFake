@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:insta_fake/presentation/widgets/avatar_widget.dart';
 
 import '../../utils/app_navigation.dart';
-import '../controllers/profile_controller.dart';
+import '../controllers/users_controller.dart';
+import '../widgets/avatar_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen>
     with AutomaticKeepAliveClientMixin {
-  final controller = Get.find<ProfileController>();
+  final usersController = Get.find<UsersController>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +26,11 @@ class _ProfileScreenState extends State<ProfileScreen>
         title: Row(
           children: [
             Obx(
-              () => Text(controller.user().username),
+              () => Text(usersController.currentUser().username),
             ),
             const SizedBox(width: 8),
             Obx(
-              () => controller.user().isVerified
+              () => usersController.currentUser().isVerified
                   ? SvgPicture.asset(
                       'assets/verified_icon.svg',
                       width: 16,
@@ -104,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               children: [
                 Obx(
                   () => AvatarWidget(
-                    user: controller.user(),
+                    user: usersController.currentUser(),
                     radius: 40,
                     onTap: () {},
                   ),
@@ -113,7 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Obx(
-                      () => Text('${controller.user().posts}'),
+                      () => Text('${usersController.currentUser().posts}'),
                     ),
                     Text('posts'.tr),
                   ],
@@ -122,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Obx(
-                      () => Text('${controller.user().followers}'),
+                      () => Text('${usersController.currentUser().followers}'),
                     ),
                     Text('followers'.tr),
                   ],
@@ -131,7 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Obx(
-                      () => Text('${controller.user().followings}'),
+                      () => Text('${usersController.currentUser().followings}'),
                     ),
                     Text('followings'.tr),
                   ],
@@ -140,10 +140,10 @@ class _ProfileScreenState extends State<ProfileScreen>
             ),
             const SizedBox(height: 16),
             Obx(
-              () => Text(controller.user().name),
+              () => Text(usersController.currentUser().name),
             ),
             Obx(
-              () => Text(controller.user().bio),
+              () => Text(usersController.currentUser().bio),
             ),
             const SizedBox(height: 16),
             ElevatedButton(

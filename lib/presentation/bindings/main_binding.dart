@@ -5,18 +5,24 @@ import 'package:image_picker/image_picker.dart';
 import '../../data/entities/user_entity.dart';
 import '../../data/mappers/user_mapper.dart';
 import '../../data/repositories/hive_user_repository.dart';
-import '../controllers/main_controller.dart';
-import '../controllers/profile_controller.dart';
+import '../controllers/navigation_controller.dart';
+import '../controllers/users_controller.dart';
 
 class MainBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(
+    Get.put<NavigationController>(
+      NavigationController(),
+    );
+
+    Get.lazyPut<ImagePicker>(
       () => ImagePicker(),
       fenix: true,
     );
+
     // Mappers
     Get.put<UserMapper>(UserMapper());
+
     // Repositories
     Get.put<HiveUserRepository>(
       HiveUserRepository(
@@ -25,14 +31,14 @@ class MainBinding extends Bindings {
       ),
       permanent: true,
     );
-    // Bottom Navigation Controllers
-    Get.put<ProfileController>(
-      ProfileController(
-        userRepository: Get.find<HiveUserRepository>(),
+
+    Get.put<UsersController>(
+      UsersController(
+        Get.find<HiveUserRepository>(),
       ),
+      permanent: true,
     );
-    Get.put<MainController>(
-      MainController(profileController: Get.find<ProfileController>()),
-    );
+
+    // Bottom Navigation Controllers
   }
 }

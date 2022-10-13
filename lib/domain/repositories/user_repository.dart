@@ -1,9 +1,9 @@
 import '../models/user.dart';
 
 abstract class UserRepository {
-  Future<User> getUserById(int userId);
+  Future<User> fetchUserById(int userId);
 
   Future<void> saveUser(User user);
 
-  Future<List<User>> getUsers(); // TODO fetch data
+  Future<List<User>> fetchUsers();
 }

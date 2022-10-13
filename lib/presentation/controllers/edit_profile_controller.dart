@@ -5,30 +5,27 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import './profile_controller.dart';
-import '../../domain/models/user.dart';
+import './users_controller.dart';
 
 class EditProfileController extends GetxController {
-  final ProfileController profileController;
+  final UsersController usersController;
   final ImagePicker imagePicker;
-
-  EditProfileController({
-    required this.profileController,
-    required this.imagePicker,
-  });
-
-  final avatarPath = Rxn<File>();
-  final isConfirmedProfile = false.obs;
-
   late TextEditingController nameTextEditingController;
   late TextEditingController userNameTextEditingController;
   late TextEditingController postsTextEditingController;
   late TextEditingController followersTextEditingController;
   late TextEditingController bioTextEditingController;
   late TextEditingController followingsTextEditingController;
+  final avatarPath = Rxn<File>();
+  final isConfirmedProfile = false.obs;
+
+  EditProfileController({
+    required this.usersController,
+    required this.imagePicker,
+  });
 
   void changeCheckedStatus() {
-    isConfirmedProfile.value = !isConfirmedProfile.value;
+    isConfirmedProfile(!isConfirmedProfile.value);
   }
 
   void closeEditingProfile() {
@@ -36,21 +33,17 @@ class EditProfileController extends GetxController {
   }
 
   void saveProfileAndBack() async {
-    var updatedUser = User(
-      id: profileController.user().id,
-      posts: int.parse(postsTextEditingController.text),
-      followers: int.parse(followersTextEditingController.text),
-      followings: int.parse(followingsTextEditingController.text),
-      name: nameTextEditingController.text,
-      username: userNameTextEditingController.text,
-      bio: bioTextEditingController.text,
-      isVerified: isConfirmedProfile.value,
-      avatar: avatarPath.value,
-      storyList: profileController.user().storyList,
-    );
-    profileController.userRepository.saveUser(updatedUser);
-    profileController.user.value = updatedUser;
-    profileController.user.refresh(); // TODO
+    var updatedUser = usersController.currentUser()
+      ..posts = int.parse(postsTextEditingController.text)
+      ..followers = int.parse(followersTextEditingController.text)
+      ..followings = int.parse(followingsTextEditingController.text)
+      ..name = nameTextEditingController.text
+      ..username = userNameTextEditingController.text
+      ..bio = bioTextEditingController.text
+      ..isVerified = isConfirmedProfile.value
+      ..avatar = avatarPath.value;
+
+    usersController.saveUser(updatedUser);
     Get.back();
   }
 
@@ -65,7 +58,7 @@ class EditProfileController extends GetxController {
 
       final imageTemporary = File(imageFile.path);
 
-      avatarPath.value = imageTemporary;
+      avatarPath(imageTemporary);
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
@@ -77,29 +70,29 @@ class EditProfileController extends GetxController {
 
   void _initTextEditingControllers() {
     nameTextEditingController = TextEditingController(
-      text: profileController.user.value.name,
+      text: usersController.currentUser().name,
     );
     userNameTextEditingController = TextEditingController(
-      text: profileController.user.value.username,
+      text: usersController.currentUser().username,
     );
     postsTextEditingController = TextEditingController(
-      text: profileController.user.value.posts.toString(),
+      text: usersController.currentUser().posts.toString(),
     );
     followersTextEditingController = TextEditingController(
-      text: profileController.user.value.followers.toString(),
+      text: usersController.currentUser().followers.toString(),
     );
     followingsTextEditingController = TextEditingController(
-      text: profileController.user.value.followings.toString(),
+      text: usersController.currentUser().followings.toString(),
     );
     bioTextEditingController = TextEditingController(
-      text: profileController.user.value.bio,
+      text: usersController.currentUser().bio,
     );
   }
 
   @override
   void onInit() {
-    avatarPath.value = profileController.user().avatar;
-    isConfirmedProfile.value = profileController.user().isVerified;
+    avatarPath(usersController.currentUser().avatar);
+    isConfirmedProfile(usersController.currentUser().isVerified);
     _initTextEditingControllers();
     super.onInit();
   }

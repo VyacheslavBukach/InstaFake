@@ -15,7 +15,7 @@ class HiveUserRepository implements UserRepository {
   });
 
   @override
-  Future<User> getUserById(int userId) async {
+  Future<User> fetchUserById(int userId) async {
     UserEntity? userEntity = box.get(userId);
     // check if user exists - return it, if no - create with id 0
     if (userEntity == null) {
@@ -35,7 +35,7 @@ class HiveUserRepository implements UserRepository {
   }
 
   @override
-  Future<List<User>> getUsers() async {
+  Future<List<User>> fetchUsers() async {
     return box.values.map((entity) => userMapper.toUser(entity)).toList();
   }
 }
