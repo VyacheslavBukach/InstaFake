@@ -42,32 +42,35 @@ class AvatarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: hasStory ? _gradientBorderDecoration : null,
-      height: radius * 2 + 10,
-      width: radius * 2 + 10,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            decoration: _whiteBorderDecoration,
-            child: Container(
-              // decoration: _greyBoxShadowDecoration,
-              child: avatar != null
-                  ? CircleAvatar(
-                      radius: radius,
-                      backgroundImage: FileImage(
-                        avatar ?? File(''),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: hasStory ? _gradientBorderDecoration : null,
+        height: radius * 2 + 10,
+        width: radius * 2 + 10,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              decoration: _whiteBorderDecoration,
+              child: Container(
+                // decoration: _greyBoxShadowDecoration,
+                child: avatar != null
+                    ? CircleAvatar(
+                        radius: radius,
+                        backgroundImage: FileImage(
+                          avatar ?? File(''),
+                        ),
+                      )
+                    : SvgPicture.asset(
+                        'assets/empty_avatar.svg',
+                        height: radius * 2,
+                        width: radius * 2,
                       ),
-                    )
-                  : SvgPicture.asset(
-                      'assets/empty_avatar.svg',
-                      height: radius * 2,
-                      width: radius * 2,
-                    ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

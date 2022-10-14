@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:insta_fake/presentation/screens/story_screen.dart';
 
 import '../../utils/app_navigation.dart';
 import '../controllers/users_controller.dart';
@@ -108,6 +109,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                     hasStory:
                         usersController.currentUser().storyList.isNotEmpty,
                     radius: 40,
+                    onTap: () {
+                      Get.to(StoryScreen(user: usersController.currentUser()));
+                    },
                   ),
                 ),
                 Column(
