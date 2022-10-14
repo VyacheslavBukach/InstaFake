@@ -32,7 +32,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.storyEditor,
-      page: () => StoryEditorScreen(),
+      page: () => const StoryEditorScreen(),
       binding: StoryEditorBinding(),
     ),
   ];

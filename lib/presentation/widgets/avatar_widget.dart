@@ -3,17 +3,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../domain/models/user.dart';
-
 class AvatarWidget extends StatelessWidget {
-  final User user;
+  final File? avatar;
   final VoidCallback? onTap;
   final double radius;
+  final bool hasStory;
 
   const AvatarWidget({
     Key? key,
-    required this.user,
     this.onTap,
+    required this.avatar,
+    required this.hasStory,
     required this.radius,
   }) : super(key: key);
 
@@ -43,7 +43,7 @@ class AvatarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: user.storyList.isEmpty ? null : _gradientBorderDecoration,
+      decoration: hasStory ? _gradientBorderDecoration : null,
       height: radius * 2 + 10,
       width: radius * 2 + 10,
       child: Stack(
@@ -53,11 +53,11 @@ class AvatarWidget extends StatelessWidget {
             decoration: _whiteBorderDecoration,
             child: Container(
               // decoration: _greyBoxShadowDecoration,
-              child: user.avatar != null
+              child: avatar != null
                   ? CircleAvatar(
                       radius: radius,
                       backgroundImage: FileImage(
-                        user.avatar ?? File(''),
+                        avatar ?? File(''),
                       ),
                     )
                   : SvgPicture.asset(

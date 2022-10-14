@@ -20,7 +20,11 @@ class StoryEditorScreen extends GetView<StoryEditorController> {
           itemCount: controller.usersController.users().length,
           itemBuilder: (ctx, listIndex) => ExpansionTile(
             leading: AvatarWidget(
-              user: controller.usersController.users()[listIndex],
+              avatar: controller.usersController.users()[listIndex].avatar,
+              hasStory: controller.usersController
+                  .users()[listIndex]
+                  .storyList
+                  .isNotEmpty,
               radius: 20,
             ),
             title: Text(controller.usersController.users()[listIndex].username),
@@ -68,7 +72,7 @@ class StoryEditorScreen extends GetView<StoryEditorController> {
                           radius: 20,
                           backgroundImage: FileImage(File(storyPath)),
                         ),
-                        title: Text('Today'),
+                        title: const Text('Today'),
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
                           onPressed: () => controller.deleteStory(

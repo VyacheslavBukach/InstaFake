@@ -1,10 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../controllers/edit_profile_controller.dart';
+import '../widgets/avatar_widget.dart';
 
 class EditProfileScreen extends GetView<EditProfileController> {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -40,18 +39,14 @@ class EditProfileScreen extends GetView<EditProfileController> {
             child: Column(
               children: [
                 Obx(
-                  () => controller.avatarPath.value != null
-                      ? CircleAvatar(
-                          radius: 50,
-                          backgroundImage: Image.file(
-                            controller.avatarPath.value ?? File(''),
-                          ).image,
-                        )
-                      : SvgPicture.asset(
-                          'assets/empty_avatar.svg',
-                          height: 100,
-                          width: 100,
-                        ),
+                  () => AvatarWidget(
+                    avatar: controller.avatarPath.value,
+                    hasStory: controller.usersController
+                        .currentUser()
+                        .storyList
+                        .isNotEmpty,
+                    radius: 50,
+                  ),
                 ),
                 TextButton(
                   onPressed: controller.pickImageFromGallery,

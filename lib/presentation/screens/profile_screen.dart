@@ -104,9 +104,10 @@ class _ProfileScreenState extends State<ProfileScreen>
               children: [
                 Obx(
                   () => AvatarWidget(
-                    user: usersController.currentUser(),
+                    avatar: usersController.currentUser().avatar,
+                    hasStory:
+                        usersController.currentUser().storyList.isNotEmpty,
                     radius: 40,
-                    onTap: () {},
                   ),
                 ),
                 Column(
