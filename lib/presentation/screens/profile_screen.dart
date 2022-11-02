@@ -110,7 +110,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                         usersController.currentUser().storyList.isNotEmpty,
                     radius: 40,
                     onTap: () {
-                      Get.to(StoryScreen(user: usersController.currentUser()));
+                      if (usersController.currentUser().storyList.isNotEmpty) {
+                        Get.to(
+                          StoryScreen(user: usersController.currentUser()),
+                        );
+                      }
                     },
                   ),
                 ),

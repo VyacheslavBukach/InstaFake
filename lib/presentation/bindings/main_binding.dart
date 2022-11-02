@@ -11,9 +11,7 @@ import '../controllers/users_controller.dart';
 class MainBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put<NavigationController>(
-      NavigationController(),
-    );
+    Get.put<NavigationController>(NavigationController());
 
     Get.lazyPut<ImagePicker>(
       () => ImagePicker(),
@@ -24,19 +22,14 @@ class MainBinding extends Bindings {
     Get.put<UserMapper>(UserMapper());
 
     // Repositories
-    Get.put<HiveUserRepository>(
-      HiveUserRepository(
-        box: Hive.box<UserEntity>('users'),
-        userMapper: Get.find<UserMapper>(),
-      ),
-      permanent: true,
-    );
+    Get.put<HiveUserRepository>(HiveUserRepository(
+      box: Hive.box<UserEntity>('users'),
+      userMapper: Get.find<UserMapper>(),
+    ));
 
+    // Controllers
     Get.put<UsersController>(
-      UsersController(
-        Get.find<HiveUserRepository>(),
-      ),
-      permanent: true,
+      UsersController(Get.find<HiveUserRepository>()),
     );
 
     // Bottom Navigation Controllers
