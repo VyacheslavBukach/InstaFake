@@ -7,7 +7,7 @@ import '../controllers/story_editor_controller.dart';
 import '../widgets/avatar_widget.dart';
 
 class StoryEditorScreen extends GetView<StoryEditorController> {
-  const StoryEditorScreen({super.key});
+  const StoryEditorScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

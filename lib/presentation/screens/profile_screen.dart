@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:insta_fake/presentation/screens/story_screen.dart';
 
+import './story_screen.dart';
 import '../../utils/app_navigation.dart';
 import '../controllers/users_controller.dart';
 import '../widgets/avatar_widget.dart';
+import '../widgets/profile_top_text.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       width: 16,
                       height: 16,
                     )
-                  : const SizedBox(),
+                  : const SizedBox.shrink(),
             ),
           ],
         ),
@@ -65,11 +66,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                         ),
                       ),
                       const Divider(),
-                      // ListTile(
-                      //   leading: const Icon(Icons.grid_4x4),
-                      //   title: Text('post'.tr),
-                      //   onTap: () {},
-                      // ),
                       ListTile(
                         leading: const Icon(Icons.history),
                         title: Text('story'.tr),
@@ -95,7 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         padding: const EdgeInsets.only(
           left: 16,
           right: 16,
-          top: 16,
+          top: 8,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,54 +114,53 @@ class _ProfileScreenState extends State<ProfileScreen>
                     },
                   ),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Obx(
-                      () => Text('${usersController.currentUser().posts}'),
-                    ),
-                    Text('posts'.tr),
-                  ],
+                Obx(
+                  () => ProfileTopText(
+                      title: 'posts',
+                      amount: usersController.currentUser().posts),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Obx(
-                      () => Text('${usersController.currentUser().followers}'),
-                    ),
-                    Text('followers'.tr),
-                  ],
+                Obx(
+                  () => ProfileTopText(
+                      title: 'followers',
+                      amount: usersController.currentUser().followers),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Obx(
-                      () => Text('${usersController.currentUser().followings}'),
-                    ),
-                    Text('followings'.tr),
-                  ],
+                Obx(
+                  () => ProfileTopText(
+                      title: 'followings',
+                      amount: usersController.currentUser().followings),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 4),
             Obx(
-              () => Text(usersController.currentUser().name),
+              () => Text(
+                usersController.currentUser().name,
+                style: const TextStyle(fontSize: 15),
+              ),
             ),
             Obx(
-              () => Text(usersController.currentUser().bio),
+              () => usersController.currentUser().bio.isNotEmpty
+                  ? Text(usersController.currentUser().bio)
+                  : const SizedBox.shrink(),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Colors.grey.shade200,
-                onPrimary: Colors.black,
+                backgroundColor: Colors.grey.shade200,
+                foregroundColor: Colors.black,
                 elevation: 0,
-                minimumSize: const Size.fromHeight(30),
+                minimumSize: const Size.fromHeight(32),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               onPressed: () {
                 Get.toNamed(AppRoutes.editProfile);
               },
-              child: Text('edit_profile'.tr),
+              child: Text(
+                'edit_profile'.tr,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             ),
           ],
         ),

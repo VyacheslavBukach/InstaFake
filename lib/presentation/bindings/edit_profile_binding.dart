@@ -9,8 +9,8 @@ class EditProfileBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<EditProfileController>(
       () => EditProfileController(
-        usersController: Get.find<UsersController>(),
-        imagePicker: Get.find<ImagePicker>(),
+        Get.find<UsersController>(),
+        Get.find<ImagePicker>(),
       ),
     );
   }

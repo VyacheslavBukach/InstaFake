@@ -56,31 +56,24 @@ class MainScreen extends GetView<NavigationController> {
               label: '',
             ),
             BottomNavigationBarItem(
-              // TODO make it easier
-              icon: usersController.currentUser().avatar != null
-                  ? CircleAvatar(
-                      radius: 14,
-                      backgroundColor: controller.pageIndex.value == 4
-                          ? Colors.black
-                          : Colors.white,
-                      child: CircleAvatar(
+              icon: CircleAvatar(
+                radius: 14,
+                backgroundColor: controller.pageIndex.value == 4
+                    ? Colors.black
+                    : Colors.white,
+                child: usersController.currentUser().avatar != null
+                    ? CircleAvatar(
                         radius: 12,
                         backgroundImage: FileImage(
                           usersController.currentUser().avatar ?? File(''),
                         ),
-                      ),
-                    )
-                  : CircleAvatar(
-                      radius: 14,
-                      backgroundColor: controller.pageIndex.value == 4
-                          ? Colors.black
-                          : Colors.white,
-                      child: SvgPicture.asset(
+                      )
+                    : SvgPicture.asset(
                         'assets/empty_avatar.svg',
                         height: 24,
                         width: 24,
                       ),
-                    ),
+              ),
               label: '',
             ),
           ],

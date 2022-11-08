@@ -41,10 +41,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                 Obx(
                   () => AvatarWidget(
                     avatar: controller.avatarPath.value,
-                    hasStory: controller.usersController
-                        .currentUser()
-                        .storyList
-                        .isNotEmpty,
+                    hasStory: controller.currentUserHasStory(),
                     radius: 50,
                   ),
                 ),

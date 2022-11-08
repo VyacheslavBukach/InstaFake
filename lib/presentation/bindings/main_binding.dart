@@ -22,10 +22,12 @@ class MainBinding extends Bindings {
     Get.put<UserMapper>(UserMapper());
 
     // Repositories
-    Get.put<HiveUserRepository>(HiveUserRepository(
-      box: Hive.box<UserEntity>('users'),
-      userMapper: Get.find<UserMapper>(),
-    ));
+    Get.put<HiveUserRepository>(
+      HiveUserRepository(
+        box: Hive.box<UserEntity>('users'),
+        userMapper: Get.find<UserMapper>(),
+      ),
+    );
 
     // Controllers
     Get.put<UsersController>(

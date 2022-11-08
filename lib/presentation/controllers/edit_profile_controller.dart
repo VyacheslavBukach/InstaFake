@@ -8,8 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import './users_controller.dart';
 
 class EditProfileController extends GetxController {
-  final UsersController usersController;
-  final ImagePicker imagePicker;
+  final UsersController _usersController;
+  final ImagePicker _imagePicker;
   late TextEditingController nameTextEditingController;
   late TextEditingController userNameTextEditingController;
   late TextEditingController postsTextEditingController;
@@ -19,10 +19,14 @@ class EditProfileController extends GetxController {
   final avatarPath = Rxn<File>();
   final isConfirmedProfile = false.obs;
 
-  EditProfileController({
-    required this.usersController,
-    required this.imagePicker,
-  });
+  EditProfileController(
+    this._usersController,
+    this._imagePicker,
+  );
+
+  bool currentUserHasStory() {
+    return _usersController.currentUser().storyList.isNotEmpty;
+  }
 
   void changeCheckedStatus() {
     isConfirmedProfile(!isConfirmedProfile.value);
@@ -33,7 +37,7 @@ class EditProfileController extends GetxController {
   }
 
   void saveProfileAndBack() async {
-    var updatedUser = usersController.currentUser()
+    var updatedUser = _usersController.currentUser()
       ..posts = int.parse(postsTextEditingController.text)
       ..followers = int.parse(followersTextEditingController.text)
       ..followings = int.parse(followingsTextEditingController.text)
@@ -43,14 +47,14 @@ class EditProfileController extends GetxController {
       ..isVerified = isConfirmedProfile.value
       ..avatar = avatarPath.value;
 
-    usersController.saveUser(updatedUser);
-    Get.back();
+    _usersController.saveUser(updatedUser);
+    closeEditingProfile();
   }
 
   Future<void> pickImageFromGallery() async {
     try {
       final imageFile =
-          await imagePicker.pickImage(source: ImageSource.gallery);
+          await _imagePicker.pickImage(source: ImageSource.gallery);
 
       if (imageFile == null) {
         return;
@@ -70,29 +74,29 @@ class EditProfileController extends GetxController {
 
   void _initTextEditingControllers() {
     nameTextEditingController = TextEditingController(
-      text: usersController.currentUser().name,
+      text: _usersController.currentUser().name,
     );
     userNameTextEditingController = TextEditingController(
-      text: usersController.currentUser().username,
+      text: _usersController.currentUser().username,
     );
     postsTextEditingController = TextEditingController(
-      text: usersController.currentUser().posts.toString(),
+      text: _usersController.currentUser().posts.toString(),
     );
     followersTextEditingController = TextEditingController(
-      text: usersController.currentUser().followers.toString(),
+      text: _usersController.currentUser().followers.toString(),
     );
     followingsTextEditingController = TextEditingController(
-      text: usersController.currentUser().followings.toString(),
+      text: _usersController.currentUser().followings.toString(),
     );
     bioTextEditingController = TextEditingController(
-      text: usersController.currentUser().bio,
+      text: _usersController.currentUser().bio,
     );
   }
 
   @override
   void onInit() {
-    avatarPath(usersController.currentUser().avatar);
-    isConfirmedProfile(usersController.currentUser().isVerified);
+    avatarPath(_usersController.currentUser().avatar);
+    isConfirmedProfile(_usersController.currentUser().isVerified);
     _initTextEditingControllers();
     super.onInit();
   }

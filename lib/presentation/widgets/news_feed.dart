@@ -6,9 +6,9 @@ class NewsFeed extends StatelessWidget {
   final List<Post> posts;
 
   const NewsFeed({
-    super.key,
+    Key? key,
     required this.posts,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
