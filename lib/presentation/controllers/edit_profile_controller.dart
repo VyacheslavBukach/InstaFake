@@ -32,11 +32,7 @@ class EditProfileController extends GetxController {
     isConfirmedProfile(!isConfirmedProfile.value);
   }
 
-  void closeEditingProfile() {
-    Get.back();
-  }
-
-  void saveProfileAndBack() async {
+  void saveProfile() async {
     var updatedUser = _usersController.currentUser()
       ..posts = int.parse(postsTextEditingController.text)
       ..followers = int.parse(followersTextEditingController.text)
@@ -48,7 +44,6 @@ class EditProfileController extends GetxController {
       ..avatar = avatarPath.value;
 
     _usersController.saveUser(updatedUser);
-    closeEditingProfile();
   }
 
   Future<void> pickImageFromGallery() async {

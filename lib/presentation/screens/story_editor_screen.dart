@@ -17,19 +17,16 @@ class StoryEditorScreen extends GetView<StoryEditorController> {
       ),
       body: Obx(
         () => ListView.builder(
-          itemCount: controller.usersController.users().length,
+          itemCount: controller.users().length,
           itemBuilder: (ctx, listIndex) => ExpansionTile(
             leading: AvatarWidget(
-              avatar: controller.usersController.users()[listIndex].avatar,
-              hasStory: controller.usersController
-                  .users()[listIndex]
-                  .storyList
-                  .isNotEmpty,
+              avatar: controller.users()[listIndex].avatar,
+              hasStory: controller.users()[listIndex].storyList.isNotEmpty,
               radius: 20,
             ),
-            title: Text(controller.usersController.users()[listIndex].username),
+            title: Text(controller.users()[listIndex].username),
             subtitle: Text(
-              '${controller.usersController.users()[listIndex].storyList.length} stories added',
+              '${controller.users()[listIndex].storyList.length} stories added',
             ),
             children: [
               ListTile(
@@ -45,9 +42,12 @@ class StoryEditorScreen extends GetView<StoryEditorController> {
                           child: ClipOval(
                             child: Material(
                               child: InkWell(
-                                onTap: () => controller.takePhotoFromGallery(
-                                  controller.usersController.users()[listIndex],
-                                ),
+                                onTap: () {
+                                  Get.back(); // Close dialog
+                                  controller.takePhotoFromGallery(
+                                    controller.users()[listIndex],
+                                  );
+                                },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -64,7 +64,7 @@ class StoryEditorScreen extends GetView<StoryEditorController> {
                   );
                 },
               ),
-              ...controller.usersController
+              ...controller
                   .users()[listIndex]
                   .storyList
                   .map((storyPath) => ListTile(
@@ -76,7 +76,7 @@ class StoryEditorScreen extends GetView<StoryEditorController> {
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
                           onPressed: () => controller.deleteStory(
-                            controller.usersController.users()[listIndex],
+                            controller.users()[listIndex],
                             storyPath,
                           ),
                         ),

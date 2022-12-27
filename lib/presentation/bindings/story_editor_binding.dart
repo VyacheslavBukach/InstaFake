@@ -7,10 +7,10 @@ import '../controllers/users_controller.dart';
 class StoryEditorBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(
+    Get.lazyPut<StoryEditorController>(
       () => StoryEditorController(
-        usersController: Get.find<UsersController>(),
-        imagePicker: Get.find<ImagePicker>(),
+        Get.find<UsersController>(),
+        Get.find<ImagePicker>(),
       ),
     );
   }

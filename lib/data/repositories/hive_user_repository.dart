@@ -6,36 +6,36 @@ import '../entities/user_entity.dart';
 import '../mappers/user_mapper.dart';
 
 class HiveUserRepository implements UserRepository {
-  final Box<UserEntity> box;
-  final UserMapper userMapper;
+  final Box<UserEntity> _box;
+  final UserMapper _userMapper;
 
-  const HiveUserRepository({
-    required this.box,
-    required this.userMapper,
-  });
+  HiveUserRepository(
+    this._box,
+    this._userMapper,
+  );
 
   @override
   Future<User> fetchUserById(int userId) async {
-    UserEntity? userEntity = box.get(userId);
+    UserEntity? userEntity = _box.get(userId);
     // check if user exists - return it, if no - create with id 0
     if (userEntity == null) {
       var newUser = User.empty();
-      var newUserEntity = userMapper.toUserEntity(newUser);
-      box.add(newUserEntity);
+      var newUserEntity = _userMapper.toUserEntity(newUser);
+      _box.add(newUserEntity);
       return newUser;
     } else {
-      return userMapper.toUser(userEntity);
+      return _userMapper.toUser(userEntity);
     }
   }
 
   @override
   Future<void> saveUser(User user) async {
-    var userEntity = userMapper.toUserEntity(user);
-    box.putAt(user.id, userEntity);
+    var userEntity = _userMapper.toUserEntity(user);
+    _box.putAt(user.id, userEntity);
   }
 
   @override
   Future<List<User>> fetchUsers() async {
-    return box.values.map((entity) => userMapper.toUser(entity)).toList();
+    return _box.values.map((entity) => _userMapper.toUser(entity)).toList();
   }
 }

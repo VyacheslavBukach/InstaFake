@@ -8,27 +8,26 @@ import '../widgets/avatar_widget.dart';
 class EditProfileScreen extends GetView<EditProfileController> {
   const EditProfileScreen({Key? key}) : super(key: key);
 
-  void saveAndClose() {
-    controller.saveProfileAndBack();
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        controller.closeEditingProfile();
+        Get.back();
         return true;
       },
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.close),
-            onPressed: controller.closeEditingProfile,
+            onPressed: Get.back,
           ),
           title: Text('edit_profile'.tr),
           actions: [
             IconButton(
-              onPressed: saveAndClose,
+              onPressed: () {
+                controller.saveProfile();
+                Get.back();
+              },
               icon: const Icon(Icons.done),
             ),
           ],

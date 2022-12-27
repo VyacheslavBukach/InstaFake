@@ -6,19 +6,25 @@ import './users_controller.dart';
 import '../../domain/models/user.dart';
 
 class StoryEditorController extends GetxController {
-  final UsersController usersController;
-  final ImagePicker imagePicker;
+  final UsersController _usersController;
+  final ImagePicker _imagePicker;
+  final users = <User>[].obs; // TODO another variable
 
-  StoryEditorController({
-    required this.usersController,
-    required this.imagePicker,
-  });
+  StoryEditorController(
+    this._usersController,
+    this._imagePicker,
+  );
+
+  @override
+  void onInit() {
+    users(_usersController.users);
+    super.onInit();
+  }
 
   Future<void> takePhotoFromGallery(User user) async {
-    Get.back(); // Close dialog
     try {
       final imageFile =
-          await imagePicker.pickImage(source: ImageSource.gallery);
+          await _imagePicker.pickImage(source: ImageSource.gallery);
 
       if (imageFile == null) {
         return;
@@ -26,7 +32,7 @@ class StoryEditorController extends GetxController {
 
       final imageTemporary = imageFile.path;
       var updatedUser = user..storyList.add(imageTemporary);
-      usersController.saveUser(updatedUser);
+      _usersController.saveUser(updatedUser);
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
@@ -35,6 +41,6 @@ class StoryEditorController extends GetxController {
   void deleteStory(User user, String storyPath) {
     var updatedUser = user
       ..storyList.removeWhere((element) => element == storyPath);
-    usersController.saveUser(updatedUser);
+    _usersController.saveUser(updatedUser);
   }
 }

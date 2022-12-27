@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../data/entities/user_entity.dart';
 import '../../data/mappers/user_mapper.dart';
 import '../../data/repositories/hive_user_repository.dart';
+import '../../domain/repositories/user_repository.dart';
 import '../controllers/navigation_controller.dart';
 import '../controllers/users_controller.dart';
 
@@ -22,16 +23,18 @@ class MainBinding extends Bindings {
     Get.put<UserMapper>(UserMapper());
 
     // Repositories
-    Get.put<HiveUserRepository>(
+    Get.put<UserRepository>(
       HiveUserRepository(
-        box: Hive.box<UserEntity>('users'),
-        userMapper: Get.find<UserMapper>(),
+        Hive.box<UserEntity>('users'),
+        Get.find<UserMapper>(),
       ),
     );
 
     // Controllers
     Get.put<UsersController>(
-      UsersController(Get.find<HiveUserRepository>()),
+      UsersController(
+        Get.find<UserRepository>(),
+      ),
     );
 
     // Bottom Navigation Controllers
