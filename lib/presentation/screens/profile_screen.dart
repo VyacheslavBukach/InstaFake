@@ -144,15 +144,16 @@ class _ProfileScreenState extends State<ProfileScreen>
                   : const SizedBox.shrink(),
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
+            TextButton(
+              style: TextButton.styleFrom(
                 backgroundColor: Colors.grey.shade200,
                 foregroundColor: Colors.black,
-                elevation: 0,
                 minimumSize: const Size.fromHeight(32),
+                elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
+                splashFactory: NoSplash.splashFactory,
               ),
               onPressed: () {
                 Get.toNamed(AppRoutes.editProfile);
