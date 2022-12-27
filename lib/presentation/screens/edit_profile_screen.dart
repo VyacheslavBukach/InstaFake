@@ -28,7 +28,10 @@ class EditProfileScreen extends GetView<EditProfileController> {
                 controller.saveProfile();
                 Get.back();
               },
-              icon: const Icon(Icons.done),
+              icon: const Icon(
+                Icons.done,
+                color: Colors.blue,
+              ),
             ),
           ],
         ),
