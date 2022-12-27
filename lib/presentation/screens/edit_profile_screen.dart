@@ -49,12 +49,19 @@ class EditProfileScreen extends GetView<EditProfileController> {
                 ),
                 TextButton(
                   onPressed: controller.pickImageFromGallery,
+                  style: ButtonStyle(
+                    overlayColor: MaterialStateProperty.all(Colors.transparent),
+                  ),
                   child: Text('change_profile_photo'.tr),
                 ),
                 Obx(
                   () => controller.avatarPath.value != null
                       ? TextButton(
                           onPressed: controller.deleteImage,
+                          style: ButtonStyle(
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                          ),
                           child: Text('delete_photo'.tr),
                         )
                       : const SizedBox.shrink(),
