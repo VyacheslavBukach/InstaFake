@@ -6,6 +6,7 @@ import './story_screen.dart';
 import '../../utils/app_navigation.dart';
 import '../controllers/users_controller.dart';
 import '../widgets/avatar_widget.dart';
+import '../widgets/modal_bottom_sheet.dart';
 import '../widgets/profile_top_text.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -46,51 +47,9 @@ class _ProfileScreenState extends State<ProfileScreen>
           IconButton(
             onPressed: () {
               Get.bottomSheet(
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                  ),
-                  child: Wrap(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Center(
-                          child: Text(
-                            'create'.tr,
-                            style: Theme.of(context).textTheme.headline5,
-                          ),
-                        ),
-                      ),
-                      const Divider(),
-                      ListTile(
-                        leading: const Icon(Icons.movie_filter_outlined),
-                        title: Text('reel'.tr),
-                        onTap: null,
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.grid_on),
-                        title: Text('post'.tr),
-                        onTap: null,
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.history),
-                        title: Text('story'.tr),
-                        onTap: () {
-                          Get.back(); // Close bottomsheet
-                          Get.toNamed(AppRoutes.storyEditor);
-                        },
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.online_prediction),
-                        title: Text('live'.tr),
-                        onTap: null,
-                      ),
-                    ],
-                  ),
+                ModalBottomSheet(
+                  title: 'create'.tr,
+                  tiles: _userTiles,
                 ),
               );
             },
@@ -99,23 +58,8 @@ class _ProfileScreenState extends State<ProfileScreen>
           IconButton(
             onPressed: () {
               Get.bottomSheet(
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                  ),
-                  child: Wrap(
-                    children: [
-                      ListTile(
-                        leading: const Icon(Icons.settings),
-                        title: Text('settings'.tr),
-                        onTap: null,
-                      ),
-                    ],
-                  ),
+                ModalBottomSheet(
+                  tiles: _menuTiles,
                 ),
               );
             },
@@ -208,3 +152,37 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   bool get wantKeepAlive => true;
 }
+
+final _userTiles = [
+  ListTile(
+    leading: const Icon(Icons.movie_filter_outlined),
+    title: Text('reel'.tr),
+    onTap: null,
+  ),
+  ListTile(
+    leading: const Icon(Icons.grid_on),
+    title: Text('post'.tr),
+    onTap: null,
+  ),
+  ListTile(
+    leading: const Icon(Icons.history),
+    title: Text('story'.tr),
+    onTap: () {
+      Get.back(); // Close bottomsheet
+      Get.toNamed(AppRoutes.storyEditor);
+    },
+  ),
+  ListTile(
+    leading: const Icon(Icons.online_prediction),
+    title: Text('live'.tr),
+    onTap: null,
+  ),
+];
+
+final _menuTiles = [
+  ListTile(
+    leading: const Icon(Icons.settings),
+    title: Text('settings'.tr),
+    onTap: null,
+  ),
+];
