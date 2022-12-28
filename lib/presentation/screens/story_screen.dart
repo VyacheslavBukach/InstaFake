@@ -62,6 +62,44 @@ class StoryScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              Positioned(
+                bottom: Get.mediaQuery.padding.top,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                  ),
+                  width: Get.mediaQuery.size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: Get.mediaQuery.size.width * 0.75,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Send message',
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 16,
+                            ),
+                            hintStyle: const TextStyle(
+                              color: Colors.white,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Colors.white,
+                              ),
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const Icon(Icons.favorite_outline),
+                      const Icon(Icons.send_outlined),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
           storyLength: (i) => user.storyList.length,

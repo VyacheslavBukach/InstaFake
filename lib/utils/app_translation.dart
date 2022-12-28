@@ -26,6 +26,7 @@ class AppTranslation extends Translations {
           'camera': 'Camera',
           'gallery': 'Gallery',
           'choose_a_file': 'Choose a file',
+          'send_message': 'Send message',
         },
         'ru_RU': {
           'app_name': 'ИнстаФэйк',
@@ -50,6 +51,7 @@ class AppTranslation extends Translations {
           'camera': 'Камера',
           'gallery': 'Галерея',
           'choose_a_file': 'Выберите файл',
+          'send_message': 'Отправить сообщение',
         }
       };
 }

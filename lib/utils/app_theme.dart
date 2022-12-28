@@ -32,5 +32,9 @@ class AppTheme {
       selectedIconTheme: IconThemeData(size: 30),
       unselectedIconTheme: IconThemeData(size: 30),
     ),
+    iconTheme: const IconThemeData(
+      color: Colors.white,
+      size: 30,
+    ),
   );
 }
