@@ -28,6 +28,7 @@ class AppTranslation extends Translations {
           'choose_a_file': 'Choose a file',
           'send_message': 'Send message',
           'settings': 'Settings',
+          'users': 'Users',
         },
         'ru_RU': {
           'app_name': 'ИнстаФэйк',
@@ -54,6 +55,7 @@ class AppTranslation extends Translations {
           'choose_a_file': 'Выберите файл',
           'send_message': 'Отправить сообщение',
           'settings': 'Настройки',
+          'users': 'Пользователи',
         }
       };
 }

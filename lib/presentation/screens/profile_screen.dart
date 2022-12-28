@@ -185,4 +185,9 @@ final _menuTiles = [
     title: Text('settings'.tr),
     onTap: null,
   ),
+  ListTile(
+    leading: const Icon(Icons.supervised_user_circle),
+    title: Text('users'.tr),
+    onTap: null,
+  ),
 ];
