@@ -67,12 +67,27 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ),
                       const Divider(),
                       ListTile(
+                        leading: const Icon(Icons.movie_filter_outlined),
+                        title: Text('reel'.tr),
+                        onTap: null,
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.grid_on),
+                        title: Text('post'.tr),
+                        onTap: null,
+                      ),
+                      ListTile(
                         leading: const Icon(Icons.history),
                         title: Text('story'.tr),
                         onTap: () {
                           Get.back(); // Close bottomsheet
                           Get.toNamed(AppRoutes.storyEditor);
                         },
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.online_prediction),
+                        title: Text('live'.tr),
+                        onTap: null,
                       ),
                     ],
                   ),
