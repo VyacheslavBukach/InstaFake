@@ -57,7 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   child: Wrap(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.only(top: 8),
                         child: Center(
                           child: Text(
                             'create'.tr,
@@ -97,7 +97,28 @@ class _ProfileScreenState extends State<ProfileScreen>
             icon: const Icon(Icons.add_box_outlined),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.bottomSheet(
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                  ),
+                  child: Wrap(
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.settings),
+                        title: Text('settings'.tr),
+                        onTap: null,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
             icon: const Icon(Icons.menu),
           ),
         ],
