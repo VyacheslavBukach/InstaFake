@@ -25,10 +25,7 @@ class MainScreen extends GetView<NavigationController> {
           const ProfileScreen(),
         ],
       ),
-      bottomNavigationBar: BottomBar(
-        navController: controller,
-        usersController: usersController,
-      ),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }

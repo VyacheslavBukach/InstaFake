@@ -6,6 +6,7 @@ import '../presentation/bindings/story_editor_binding.dart';
 import '../presentation/screens/edit_profile_screen.dart';
 import '../presentation/screens/main_screen.dart';
 import '../presentation/screens/story_editor_screen.dart';
+import '../presentation/screens/user_editor_screen.dart';
 
 class AppRoutes {
   AppRoutes._();
@@ -13,6 +14,7 @@ class AppRoutes {
   static const main = '/';
   static const editProfile = '/edit-profile';
   static const storyEditor = '/story-editor';
+  static const userEditor = '/user-editor';
 }
 
 class AppPages {
@@ -26,7 +28,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.editProfile,
-      page: () => const EditProfileScreen(),
+      page: () => EditProfileScreen(),
       binding: EditProfileBinding(),
       fullscreenDialog: true,
     ),
@@ -34,6 +36,10 @@ class AppPages {
       name: AppRoutes.storyEditor,
       page: () => const StoryEditorScreen(),
       binding: StoryEditorBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.userEditor,
+      page: () => const UserEditorScreen(),
     ),
   ];
 }

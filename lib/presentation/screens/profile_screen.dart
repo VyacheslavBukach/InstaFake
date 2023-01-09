@@ -19,6 +19,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen>
     with AutomaticKeepAliveClientMixin {
   final usersController = Get.find<UsersController>();
+  final int index = Get.arguments ?? 0;
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +30,11 @@ class _ProfileScreenState extends State<ProfileScreen>
         title: Row(
           children: [
             Obx(
-              () => Text(usersController.currentUser().username),
+              () => Text(usersController.users()[index].username),
             ),
             const SizedBox(width: 8),
             Obx(
-              () => usersController.currentUser().isVerified
+              () => usersController.users()[index].isVerified
                   ? SvgPicture.asset(
                       'assets/verified_icon.svg',
                       width: 16,
@@ -81,14 +82,14 @@ class _ProfileScreenState extends State<ProfileScreen>
               children: [
                 Obx(
                   () => AvatarWidget(
-                    avatar: usersController.currentUser().avatar,
+                    avatar: usersController.users()[index].avatar,
                     hasStory:
-                        usersController.currentUser().storyList.isNotEmpty,
+                        usersController.users()[index].storyList.isNotEmpty,
                     radius: 40,
                     onTap: () {
-                      if (usersController.currentUser().storyList.isNotEmpty) {
+                      if (usersController.users()[index].storyList.isNotEmpty) {
                         Get.to(
-                          StoryScreen(user: usersController.currentUser()),
+                          StoryScreen(user: usersController.users()[index]),
                         );
                       }
                     },
@@ -97,30 +98,30 @@ class _ProfileScreenState extends State<ProfileScreen>
                 Obx(
                   () => ProfileTopText(
                       title: 'posts',
-                      amount: usersController.currentUser().posts),
+                      amount: usersController.users()[index].posts),
                 ),
                 Obx(
                   () => ProfileTopText(
                       title: 'followers',
-                      amount: usersController.currentUser().followers),
+                      amount: usersController.users()[index].followers),
                 ),
                 Obx(
                   () => ProfileTopText(
                       title: 'followings',
-                      amount: usersController.currentUser().followings),
+                      amount: usersController.users()[index].followings),
                 ),
               ],
             ),
             const SizedBox(height: 4),
             Obx(
               () => Text(
-                usersController.currentUser().name,
+                usersController.users()[index].name,
                 style: const TextStyle(fontSize: 15),
               ),
             ),
             Obx(
-              () => usersController.currentUser().bio.isNotEmpty
-                  ? Text(usersController.currentUser().bio)
+              () => usersController.users()[index].bio.isNotEmpty
+                  ? Text(usersController.users()[index].bio)
                   : const SizedBox.shrink(),
             ),
             const SizedBox(height: 16),
@@ -136,7 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 splashFactory: NoSplash.splashFactory,
               ),
               onPressed: () {
-                Get.toNamed(AppRoutes.editProfile);
+                Get.toNamed(AppRoutes.editProfile, arguments: index);
               },
               child: Text(
                 'edit_profile'.tr,
@@ -188,6 +189,9 @@ final _menuTiles = [
   ListTile(
     leading: const Icon(Icons.supervised_user_circle),
     title: Text('users'.tr),
-    onTap: null,
+    onTap: () {
+      Get.back();
+      Get.toNamed(AppRoutes.userEditor);
+    },
   ),
 ];

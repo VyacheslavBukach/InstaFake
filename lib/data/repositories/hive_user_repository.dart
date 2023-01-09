@@ -15,9 +15,22 @@ class HiveUserRepository implements UserRepository {
   );
 
   @override
-  Future<User> fetchUserById(int userId) async {
-    UserEntity? userEntity = _box.get(userId);
+  Future<void> createMyProfile() async {
+    UserEntity? userEntity = _box.get(0);
     // check if user exists - return it, if no - create with id 0
+    if (userEntity == null) {
+      var newUser = User.empty();
+      var newUserEntity = _userMapper.toUserEntity(newUser);
+      _box.add(newUserEntity);
+    } else {
+      return;
+    }
+  }
+
+  @override
+  Future<User> fetchUserById(int userId) async {
+    // TODO
+    UserEntity? userEntity = _box.get(userId);
     if (userEntity == null) {
       var newUser = User.empty();
       var newUserEntity = _userMapper.toUserEntity(newUser);
@@ -35,7 +48,12 @@ class HiveUserRepository implements UserRepository {
   }
 
   @override
-  Future<List<User>> fetchUsers() async {
+  Future<List<User>> fetchAllUsers() async {
     return _box.values.map((entity) => _userMapper.toUser(entity)).toList();
+  }
+
+  @override
+  Future<void> deleteUserById(int userId) async {
+    _box.deleteAt(userId);
   }
 }

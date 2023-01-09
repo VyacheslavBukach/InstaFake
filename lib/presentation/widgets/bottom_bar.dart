@@ -8,14 +8,10 @@ import '../controllers/navigation_controller.dart';
 import '../controllers/users_controller.dart';
 
 class BottomBar extends StatelessWidget {
-  final NavigationController navController;
-  final UsersController usersController;
+  final NavigationController navController = Get.find();
+  final UsersController usersController = Get.find();
 
-  const BottomBar({
-    Key? key,
-    required this.navController,
-    required this.usersController,
-  }) : super(key: key);
+  BottomBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,24 +44,26 @@ class BottomBar extends StatelessWidget {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: CircleAvatar(
-              radius: 14,
-              backgroundColor: navController.pageIndex.value == 4
-                  ? Colors.black
-                  : Colors.white,
-              child: usersController.currentUser().avatar != null
-                  ? CircleAvatar(
-                      radius: 12,
-                      backgroundImage: FileImage(
-                        usersController.currentUser().avatar ?? File(''),
-                      ),
-                    )
-                  : SvgPicture.asset(
-                      'assets/empty_avatar.svg',
-                      height: 24,
-                      width: 24,
-                    ),
-            ),
+            icon: usersController.users().isEmpty
+                ? const CircularProgressIndicator()
+                : CircleAvatar(
+                    radius: 14,
+                    backgroundColor: navController.pageIndex.value == 4
+                        ? Colors.black
+                        : Colors.white,
+                    child: usersController.users()[0].avatar != null
+                        ? CircleAvatar(
+                            radius: 12,
+                            backgroundImage: FileImage(
+                              usersController.users()[0].avatar ?? File(''),
+                            ),
+                          )
+                        : SvgPicture.asset(
+                            'assets/empty_avatar.svg',
+                            height: 24,
+                            width: 24,
+                          ),
+                  ),
             label: '',
           ),
         ],
