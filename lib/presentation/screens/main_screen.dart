@@ -3,13 +3,10 @@ import 'package:get/get.dart';
 
 import './profile_screen.dart';
 import '../controllers/navigation_controller.dart';
-import '../controllers/users_controller.dart';
 import '../widgets/bottom_bar.dart';
 
 class MainScreen extends GetView<NavigationController> {
-  final usersController = Get.find<UsersController>();
-
-  MainScreen({Key? key}) : super(key: key);
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

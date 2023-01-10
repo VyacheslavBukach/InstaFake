@@ -18,8 +18,8 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen>
     with AutomaticKeepAliveClientMixin {
-  final usersController = Get.find<UsersController>();
-  final int index = Get.arguments ?? 0;
+  final _usersController = Get.find<UsersController>();
+  final int _index = Get.arguments ?? 0; // TODO maybe create profile controller
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +30,11 @@ class _ProfileScreenState extends State<ProfileScreen>
         title: Row(
           children: [
             Obx(
-              () => Text(usersController.users()[index].username),
+              () => Text(_usersController.users()[_index].username),
             ),
             const SizedBox(width: 8),
             Obx(
-              () => usersController.users()[index].isVerified
+              () => _usersController.users()[_index].isVerified
                   ? SvgPicture.asset(
                       'assets/verified_icon.svg',
                       width: 16,
@@ -82,14 +82,17 @@ class _ProfileScreenState extends State<ProfileScreen>
               children: [
                 Obx(
                   () => AvatarWidget(
-                    avatar: usersController.users()[index].avatar,
+                    avatar: _usersController.users()[_index].avatar,
                     hasStory:
-                        usersController.users()[index].storyList.isNotEmpty,
+                        _usersController.users()[_index].storyList.isNotEmpty,
                     radius: 40,
                     onTap: () {
-                      if (usersController.users()[index].storyList.isNotEmpty) {
+                      if (_usersController
+                          .users()[_index]
+                          .storyList
+                          .isNotEmpty) {
                         Get.to(
-                          StoryScreen(user: usersController.users()[index]),
+                          StoryScreen(user: _usersController.users()[_index]),
                         );
                       }
                     },
@@ -98,30 +101,30 @@ class _ProfileScreenState extends State<ProfileScreen>
                 Obx(
                   () => ProfileTopText(
                       title: 'posts',
-                      amount: usersController.users()[index].posts),
+                      amount: _usersController.users()[_index].posts),
                 ),
                 Obx(
                   () => ProfileTopText(
                       title: 'followers',
-                      amount: usersController.users()[index].followers),
+                      amount: _usersController.users()[_index].followers),
                 ),
                 Obx(
                   () => ProfileTopText(
                       title: 'followings',
-                      amount: usersController.users()[index].followings),
+                      amount: _usersController.users()[_index].followings),
                 ),
               ],
             ),
             const SizedBox(height: 4),
             Obx(
               () => Text(
-                usersController.users()[index].name,
+                _usersController.users()[_index].name,
                 style: const TextStyle(fontSize: 15),
               ),
             ),
             Obx(
-              () => usersController.users()[index].bio.isNotEmpty
-                  ? Text(usersController.users()[index].bio)
+              () => _usersController.users()[_index].bio.isNotEmpty
+                  ? Text(_usersController.users()[_index].bio)
                   : const SizedBox.shrink(),
             ),
             const SizedBox(height: 16),
@@ -137,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 splashFactory: NoSplash.splashFactory,
               ),
               onPressed: () {
-                Get.toNamed(AppRoutes.editProfile, arguments: index);
+                Get.toNamed(AppRoutes.editProfile, arguments: _index);
               },
               child: Text(
                 'edit_profile'.tr,

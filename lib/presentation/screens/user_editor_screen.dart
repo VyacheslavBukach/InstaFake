@@ -16,7 +16,7 @@ class UserEditorScreen extends GetView<UsersController> {
         actions: [
           IconButton(
             onPressed: () {
-              Get.toNamed(AppRoutes.editProfile, arguments: null);
+              Get.toNamed(AppRoutes.editProfile);
             },
             icon: const Icon(Icons.add_reaction_outlined),
           ),
@@ -26,6 +26,10 @@ class UserEditorScreen extends GetView<UsersController> {
         () => ListView.builder(
           itemCount: controller.users().length,
           itemBuilder: (ctx, listIndex) => ListTile(
+            onTap: () {
+              Get.toNamed(AppRoutes.editProfile,
+                  arguments: controller.users()[listIndex].id);
+            },
             leading: AvatarWidget(
               avatar: controller.users()[listIndex].avatar,
               hasStory: controller.users()[listIndex].storyList.isNotEmpty,
@@ -33,7 +37,7 @@ class UserEditorScreen extends GetView<UsersController> {
             ),
             title: Text(controller.users()[listIndex].username),
             subtitle: Text(
-              '${controller.users()[listIndex].storyList.length} stories added',
+              controller.users()[listIndex].name,
             ),
           ),
         ),

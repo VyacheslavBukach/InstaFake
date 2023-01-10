@@ -23,12 +23,12 @@ class AppPages {
   static final pages = [
     GetPage(
       name: AppRoutes.main,
-      page: () => MainScreen(),
+      page: () => const MainScreen(),
       binding: MainBinding(),
     ),
     GetPage(
       name: AppRoutes.editProfile,
-      page: () => EditProfileScreen(),
+      page: () => const EditProfileScreen(),
       binding: EditProfileBinding(),
       fullscreenDialog: true,
     ),

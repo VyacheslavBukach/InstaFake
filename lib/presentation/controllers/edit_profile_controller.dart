@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import './users_controller.dart';
+import '../../domain/models/user.dart';
 
 class EditProfileController extends GetxController {
   final UsersController _usersController;
@@ -18,7 +19,8 @@ class EditProfileController extends GetxController {
   late TextEditingController followingsTextEditingController;
   final avatarPath = Rxn<File>();
   final isConfirmedProfile = false.obs;
-  final int _index = Get.arguments ?? 0;
+  final int index = Get.arguments ?? -1;
+  late User _currentUser;
 
   EditProfileController(
     this._usersController,
@@ -26,7 +28,7 @@ class EditProfileController extends GetxController {
   );
 
   bool currentUserHasStory() {
-    return _usersController.users()[_index].storyList.isNotEmpty;
+    return _currentUser.storyList.isNotEmpty;
   }
 
   void changeCheckedStatus() {
@@ -34,7 +36,7 @@ class EditProfileController extends GetxController {
   }
 
   void saveProfile() async {
-    var updatedUser = _usersController.users()[_index]
+    var updatedUser = _currentUser
       ..posts = int.parse(postsTextEditingController.text)
       ..followers = int.parse(followersTextEditingController.text)
       ..followings = int.parse(followingsTextEditingController.text)
@@ -70,29 +72,31 @@ class EditProfileController extends GetxController {
 
   void _initTextEditingControllers() {
     nameTextEditingController = TextEditingController(
-      text: _usersController.users()[_index].name,
+      text: _currentUser.name,
     );
     userNameTextEditingController = TextEditingController(
-      text: _usersController.users()[_index].username,
+      text: _currentUser.username,
     );
     postsTextEditingController = TextEditingController(
-      text: _usersController.users()[_index].posts.toString(),
+      text: _currentUser.posts.toString(),
     );
     followersTextEditingController = TextEditingController(
-      text: _usersController.users()[_index].followers.toString(),
+      text: _currentUser.followers.toString(),
     );
     followingsTextEditingController = TextEditingController(
-      text: _usersController.users()[_index].followings.toString(),
+      text: _currentUser.followings.toString(),
     );
     bioTextEditingController = TextEditingController(
-      text: _usersController.users()[_index].bio,
+      text: _currentUser.bio,
     );
   }
 
   @override
   void onInit() {
-    avatarPath(_usersController.users()[_index].avatar);
-    isConfirmedProfile(_usersController.users()[_index].isVerified);
+    _currentUser =
+        (index == -1) ? User.empty() : _usersController.users()[index];
+    avatarPath(_currentUser.avatar);
+    isConfirmedProfile(_currentUser.isVerified);
     _initTextEditingControllers();
     super.onInit();
   }

@@ -21,7 +21,9 @@ class EditProfileScreen extends GetView<EditProfileController> {
             icon: const Icon(Icons.close),
             onPressed: Get.back,
           ),
-          title: Text('edit_profile'.tr),
+          title: controller.index == -1 //TODO create enum
+              ? Text('create_user'.tr)
+              : Text('edit_profile'.tr),
           actions: [
             IconButton(
               onPressed: () {
