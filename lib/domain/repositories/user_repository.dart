@@ -1,13 +1,15 @@
 import '../models/user.dart';
 
 abstract class UserRepository {
-  Future<void> createMyProfile();
+  Future<void> createAdminProfile();
 
-  Future<User> fetchUserById(int userId);
+  User createNewUserProfile();
+
+  Future<User> fetchUserByUuid(String uuid);
 
   Future<void> saveUser(User user);
 
-  Future<void> deleteUserById(int userId);
+  Future<void> deleteUserByUuid(String uuid);
 
   Future<List<User>> fetchAllUsers();
 }

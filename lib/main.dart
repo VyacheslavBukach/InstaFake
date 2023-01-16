@@ -6,10 +6,12 @@ import './data/entities/user_entity.dart';
 import './utils/app_navigation.dart';
 import './utils/app_theme.dart';
 import './utils/app_translation.dart';
+import './utils/user_type.dart';
 
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserEntityAdapter());
+  Hive.registerAdapter(UserTypeAdapter());
   await Hive.openBox<UserEntity>('users');
   runApp(const MyApp());
 }

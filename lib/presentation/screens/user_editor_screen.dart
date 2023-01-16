@@ -27,8 +27,10 @@ class UserEditorScreen extends GetView<UsersController> {
           itemCount: controller.users().length,
           itemBuilder: (ctx, listIndex) => ListTile(
             onTap: () {
-              Get.toNamed(AppRoutes.editProfile,
-                  arguments: controller.users()[listIndex].id);
+              Get.toNamed(
+                AppRoutes.editProfile,
+                arguments: controller.users()[listIndex].uuid,
+              );
             },
             leading: AvatarWidget(
               avatar: controller.users()[listIndex].avatar,

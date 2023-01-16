@@ -12,9 +12,9 @@ class NavigationController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
     ever(pageIndex, (_) => print('Page changed to ${pageIndex.value}'));
     pageController = PageController(initialPage: pageIndex.value);
-    super.onInit();
   }
 
   @override

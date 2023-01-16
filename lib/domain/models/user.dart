@@ -1,7 +1,10 @@
 import 'dart:io';
 
+import 'package:insta_fake/utils/user_type.dart';
+
 class User {
-  final int id;
+  final String uuid;
+  UserType userType;
   int posts;
   int followers;
   int followings;
@@ -13,7 +16,8 @@ class User {
   List<String> storyList;
 
   User({
-    required this.id,
+    required this.uuid,
+    required this.userType,
     required this.posts,
     required this.followers,
     required this.followings,
@@ -25,9 +29,25 @@ class User {
     required this.storyList,
   });
 
-  User.empty()
+  User.user({required String uuid})
       : this(
-          id: 0,
+          uuid: uuid,
+          userType: UserType.user,
+          posts: 5,
+          followers: 10,
+          followings: 15,
+          name: 'Name',
+          username: 'Username',
+          bio: 'Bio',
+          isVerified: false,
+          avatar: null,
+          storyList: [],
+        );
+
+  User.admin({required String uuid})
+      : this(
+          uuid: uuid,
+          userType: UserType.admin,
           posts: 5,
           followers: 10,
           followings: 15,

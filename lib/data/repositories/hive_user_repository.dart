@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../domain/models/user.dart';
 import '../../domain/repositories/user_repository.dart';
@@ -8,34 +9,43 @@ import '../mappers/user_mapper.dart';
 class HiveUserRepository implements UserRepository {
   final Box<UserEntity> _box;
   final UserMapper _userMapper;
+  final Uuid _uuid;
 
   HiveUserRepository(
     this._box,
     this._userMapper,
+    this._uuid,
   );
 
   @override
-  Future<void> createMyProfile() async {
-    UserEntity? userEntity = _box.get(0);
-    // check if user exists - return it, if no - create with id 0
-    if (userEntity == null) {
-      var newUser = User.empty();
-      var newUserEntity = _userMapper.toUserEntity(newUser);
-      _box.add(newUserEntity);
+  Future<void> createAdminProfile() async {
+    var isBoxEmpty = _box.isEmpty;
+    if (isBoxEmpty) {
+      var userUuid = _uuid.v4();
+      var newAdminProfile = User.admin(uuid: userUuid);
+      var newAdminEntity = _userMapper.toUserEntity(newAdminProfile);
+      await _box.put(userUuid, newAdminEntity);
+      print('create admin profile with uuid=$userUuid');
     } else {
-      return;
+      print('admin profile has been already created');
     }
   }
 
   @override
-  Future<User> fetchUserById(int userId) async {
-    // TODO
-    UserEntity? userEntity = _box.get(userId);
+  User createNewUserProfile() {
+    var userUuid = _uuid.v4();
+    print('return new user profile with uuid=$userUuid');
+
+    return User.user(uuid: userUuid);
+  }
+
+  @override
+  Future<User> fetchUserByUuid(String uuid) async {
+    UserEntity? userEntity = _box.get(uuid);
     if (userEntity == null) {
-      var newUser = User.empty();
-      var newUserEntity = _userMapper.toUserEntity(newUser);
-      _box.add(newUserEntity);
-      return newUser;
+      print('user with uuid $uuid does not exist. new user returned');
+
+      return createNewUserProfile();
     } else {
       return _userMapper.toUser(userEntity);
     }
@@ -44,7 +54,8 @@ class HiveUserRepository implements UserRepository {
   @override
   Future<void> saveUser(User user) async {
     var userEntity = _userMapper.toUserEntity(user);
-    _box.putAt(user.id, userEntity);
+    await _box.put(user.uuid, userEntity);
+    print('save user with uuid ${user.uuid}');
   }
 
   @override
@@ -53,7 +64,8 @@ class HiveUserRepository implements UserRepository {
   }
 
   @override
-  Future<void> deleteUserById(int userId) async {
-    _box.deleteAt(userId);
+  Future<void> deleteUserByUuid(String userUuid) async {
+    await _box.delete(userUuid);
+    print('delete user with uuid $userUuid');
   }
 }

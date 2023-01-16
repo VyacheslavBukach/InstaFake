@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import './story_screen.dart';
 import '../../utils/app_navigation.dart';
-import '../controllers/users_controller.dart';
+import '../controllers/profile_controller.dart';
 import '../widgets/avatar_widget.dart';
 import '../widgets/modal_bottom_sheet.dart';
 import '../widgets/profile_top_text.dart';
@@ -18,8 +18,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen>
     with AutomaticKeepAliveClientMixin {
-  final _usersController = Get.find<UsersController>();
-  final int _index = Get.arguments ?? 0; // TODO maybe create profile controller
+  final _profileController = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +29,11 @@ class _ProfileScreenState extends State<ProfileScreen>
         title: Row(
           children: [
             Obx(
-              () => Text(_usersController.users()[_index].username),
+              () => Text(_profileController.user().username),
             ),
             const SizedBox(width: 8),
             Obx(
-              () => _usersController.users()[_index].isVerified
+              () => _profileController.user().isVerified
                   ? SvgPicture.asset(
                       'assets/verified_icon.svg',
                       width: 16,
@@ -82,17 +81,13 @@ class _ProfileScreenState extends State<ProfileScreen>
               children: [
                 Obx(
                   () => AvatarWidget(
-                    avatar: _usersController.users()[_index].avatar,
-                    hasStory:
-                        _usersController.users()[_index].storyList.isNotEmpty,
+                    avatar: _profileController.user().avatar,
+                    hasStory: _profileController.user().storyList.isNotEmpty,
                     radius: 40,
                     onTap: () {
-                      if (_usersController
-                          .users()[_index]
-                          .storyList
-                          .isNotEmpty) {
+                      if (_profileController.user().storyList.isNotEmpty) {
                         Get.to(
-                          StoryScreen(user: _usersController.users()[_index]),
+                          StoryScreen(user: _profileController.user()),
                         );
                       }
                     },
@@ -100,31 +95,30 @@ class _ProfileScreenState extends State<ProfileScreen>
                 ),
                 Obx(
                   () => ProfileTopText(
-                      title: 'posts',
-                      amount: _usersController.users()[_index].posts),
+                      title: 'posts', amount: _profileController.user().posts),
                 ),
                 Obx(
                   () => ProfileTopText(
                       title: 'followers',
-                      amount: _usersController.users()[_index].followers),
+                      amount: _profileController.user().followers),
                 ),
                 Obx(
                   () => ProfileTopText(
                       title: 'followings',
-                      amount: _usersController.users()[_index].followings),
+                      amount: _profileController.user().followings),
                 ),
               ],
             ),
             const SizedBox(height: 4),
             Obx(
               () => Text(
-                _usersController.users()[_index].name,
+                _profileController.user().name,
                 style: const TextStyle(fontSize: 15),
               ),
             ),
             Obx(
-              () => _usersController.users()[_index].bio.isNotEmpty
-                  ? Text(_usersController.users()[_index].bio)
+              () => _profileController.user().bio.isNotEmpty
+                  ? Text(_profileController.user().bio)
                   : const SizedBox.shrink(),
             ),
             const SizedBox(height: 16),
@@ -140,7 +134,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                 splashFactory: NoSplash.splashFactory,
               ),
               onPressed: () {
-                Get.toNamed(AppRoutes.editProfile, arguments: _index);
+                Get.toNamed(
+                  AppRoutes.editProfile,
+                  arguments: _profileController.user().uuid,
+                );
               },
               child: Text(
                 'edit_profile'.tr,

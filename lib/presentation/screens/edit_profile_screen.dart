@@ -21,7 +21,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
             icon: const Icon(Icons.close),
             onPressed: Get.back,
           ),
-          title: controller.index == -1 //TODO create enum
+          title: controller.userUuid == null
               ? Text('create_user'.tr)
               : Text('edit_profile'.tr),
           actions: [
@@ -80,7 +80,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                     controlAffinity: ListTileControlAffinity.leading,
                     value: controller.isConfirmedProfile.value,
                     onChanged: (isChecked) {
-                      controller.changeCheckedStatus();
+                      controller.changeConfirmedStatus();
                     },
                   ),
                 ),

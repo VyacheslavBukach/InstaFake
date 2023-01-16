@@ -5,7 +5,7 @@ import '../entities/user_entity.dart';
 
 class UserMapper {
   User toUser(UserEntity userEntity) => User(
-        id: userEntity.id,
+        uuid: userEntity.uuid,
         avatar:
             userEntity.avatarPath == '' ? null : File(userEntity.avatarPath),
         bio: userEntity.bio,
@@ -16,10 +16,11 @@ class UserMapper {
         posts: userEntity.posts,
         username: userEntity.username,
         storyList: userEntity.storyList,
+        userType: userEntity.userType,
       );
 
   UserEntity toUserEntity(User user) => UserEntity(
-        id: user.id,
+        uuid: user.uuid,
         posts: user.posts,
         followers: user.followers,
         followings: user.followings,
@@ -29,5 +30,6 @@ class UserMapper {
         isVerified: user.isVerified,
         avatarPath: user.avatar?.path ?? '',
         storyList: user.storyList,
+        userType: user.userType,
       );
 }

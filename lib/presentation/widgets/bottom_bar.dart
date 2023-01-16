@@ -50,11 +50,11 @@ class BottomBar extends GetView<NavigationController> {
                     backgroundColor: controller.pageIndex.value == 4
                         ? Colors.black
                         : Colors.white,
-                    child: _usersController.users()[0].avatar != null
+                    child: _usersController.adminUser().avatar != null
                         ? CircleAvatar(
                             radius: 12,
                             backgroundImage: FileImage(
-                              _usersController.users()[0].avatar ?? File(''),
+                              _usersController.adminUser().avatar ?? File(''),
                             ),
                           )
                         : SvgPicture.asset(

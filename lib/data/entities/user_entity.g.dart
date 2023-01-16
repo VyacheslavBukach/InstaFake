@@ -17,7 +17,7 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return UserEntity(
-      id: fields[0] as int,
+      uuid: fields[0] as String,
       posts: fields[1] as int,
       followers: fields[2] as int,
       followings: fields[3] as int,
@@ -27,15 +27,16 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       isVerified: fields[7] as bool,
       avatarPath: fields[8] as String,
       storyList: (fields[9] as List).cast<String>(),
+      userType: fields[10] as UserType,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserEntity obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
-      ..write(obj.id)
+      ..write(obj.uuid)
       ..writeByte(1)
       ..write(obj.posts)
       ..writeByte(2)
@@ -53,7 +54,9 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       ..writeByte(8)
       ..write(obj.avatarPath)
       ..writeByte(9)
-      ..write(obj.storyList);
+      ..write(obj.storyList)
+      ..writeByte(10)
+      ..write(obj.userType);
   }
 
   @override

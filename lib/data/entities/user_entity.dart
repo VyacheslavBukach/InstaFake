@@ -1,11 +1,13 @@
 import 'package:hive/hive.dart';
 
+import '../../utils/user_type.dart';
+
 part 'user_entity.g.dart';
 
 @HiveType(typeId: 0)
 class UserEntity extends HiveObject {
   @HiveField(0)
-  final int id;
+  final String uuid;
 
   @HiveField(1)
   final int posts;
@@ -34,8 +36,11 @@ class UserEntity extends HiveObject {
   @HiveField(9)
   final List<String> storyList;
 
+  @HiveField(10)
+  final UserType userType;
+
   UserEntity({
-    required this.id,
+    required this.uuid,
     required this.posts,
     required this.followers,
     required this.followings,
@@ -45,5 +50,6 @@ class UserEntity extends HiveObject {
     required this.isVerified,
     required this.avatarPath,
     required this.storyList,
+    required this.userType,
   });
 }

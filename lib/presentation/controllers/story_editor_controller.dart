@@ -17,8 +17,8 @@ class StoryEditorController extends GetxController {
 
   @override
   void onInit() {
-    users(_usersController.users);
     super.onInit();
+    users(_usersController.users);
   }
 
   Future<void> takePhotoFromGallery(User user) async {
