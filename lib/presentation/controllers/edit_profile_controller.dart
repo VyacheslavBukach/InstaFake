@@ -11,18 +11,12 @@ import '../../domain/models/user.dart';
 class EditProfileController extends GetxController {
   final UsersController _usersController;
   final ImagePicker _imagePicker;
-  final TextEditingController nameTextEditingController =
-      TextEditingController(); // TODO
-  final TextEditingController userNameTextEditingController =
-      TextEditingController();
-  final TextEditingController postsTextEditingController =
-      TextEditingController();
-  final TextEditingController followersTextEditingController =
-      TextEditingController();
-  final TextEditingController bioTextEditingController =
-      TextEditingController();
-  final TextEditingController followingsTextEditingController =
-      TextEditingController();
+  late TextEditingController nameTextEditingController;
+  late TextEditingController userNameTextEditingController;
+  late TextEditingController postsTextEditingController;
+  late TextEditingController followersTextEditingController;
+  late TextEditingController bioTextEditingController;
+  late TextEditingController followingsTextEditingController;
   final avatarPath = Rxn<File>();
   final isConfirmedProfile = false.obs;
   final String? userUuid = Get.arguments;
@@ -89,19 +83,23 @@ class EditProfileController extends GetxController {
   }
 
   void _initTextEditingControllers() {
-    nameTextEditingController.text = edittedUser().name;
-    userNameTextEditingController.text = edittedUser().username;
-    postsTextEditingController.text = edittedUser().posts.toString();
-    followersTextEditingController.text = edittedUser().followers.toString();
-    followingsTextEditingController.text = edittedUser().followings.toString();
-    bioTextEditingController.text = edittedUser().bio;
+    nameTextEditingController = TextEditingController(text: edittedUser().name);
+    userNameTextEditingController =
+        TextEditingController(text: edittedUser().username);
+    postsTextEditingController =
+        TextEditingController(text: edittedUser().posts.toString());
+    followersTextEditingController =
+        TextEditingController(text: edittedUser().followers.toString());
+    followingsTextEditingController =
+        TextEditingController(text: edittedUser().followings.toString());
+    bioTextEditingController = TextEditingController(text: edittedUser().bio);
   }
 
   @override
   void onInit() async {
     super.onInit();
-    await _setUser();
     _initTextEditingControllers();
+    await _setUser();
     print('edit user with uuid = $userUuid');
     avatarPath(edittedUser().avatar);
     isConfirmedProfile(edittedUser().isVerified);
