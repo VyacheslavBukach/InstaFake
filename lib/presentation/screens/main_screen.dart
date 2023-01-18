@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:insta_fake/presentation/screens/home_screen.dart';
 
 import './profile_screen.dart';
 import '../controllers/navigation_controller.dart';
@@ -15,7 +16,7 @@ class MainScreen extends GetView<NavigationController> {
         controller: controller.pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          Container(),
+          const HomeScreen(),
           Container(),
           Container(),
           Container(),

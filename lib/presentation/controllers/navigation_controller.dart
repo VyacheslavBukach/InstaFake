@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NavigationController extends GetxController {
-  final pageIndex = 4.obs;
+  final pageIndex = 0.obs;
   late PageController pageController;
 
   void goToPage(int index) {
