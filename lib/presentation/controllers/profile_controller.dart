@@ -5,17 +5,21 @@ import '../../domain/models/user.dart';
 
 class ProfileController extends GetxController {
   final UsersController _usersController;
-  final user = User.user(uuid: 'emptyUserKey').obs;
-  String? _userUuid = Get.arguments;
+  late final Rx<User> user;
+  final String? _userUuid = Get.arguments;
 
   ProfileController(this._usersController);
 
   @override
-  void onInit() async {
+  void onInit() {
     super.onInit();
-    _userUuid ??= _usersController.adminUser().uuid;
-    var userWithUuid = await _usersController.fetchUserByUuid(_userUuid ?? '');
-    user(userWithUuid);
-    print('open profile with uuid=$_userUuid');
+    if (_userUuid == null) {
+      user = _usersController.adminUser;
+      print('open admin profile with uuid = ${user().uuid}');
+    } else {
+      _usersController.setCurrentUser(_userUuid ?? '');
+      user = _usersController.currentUser;
+      print('open user profile with uuid = ${user().uuid}');
+    }
   }
 }

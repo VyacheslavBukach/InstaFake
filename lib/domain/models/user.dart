@@ -52,9 +52,9 @@ class User {
           followers: 10,
           followings: 15,
           name: 'Name',
-          username: 'Username',
+          username: 'Admin',
           bio: 'Bio',
-          isVerified: false,
+          isVerified: true,
           avatar: null,
           storyList: [],
         );

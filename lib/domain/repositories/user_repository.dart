@@ -5,8 +5,6 @@ abstract class UserRepository {
 
   User createNewUserProfile();
 
-  Future<User> fetchUserByUuid(String uuid);
-
   Future<void> saveUser(User user);
 
   Future<void> deleteUserByUuid(String uuid);

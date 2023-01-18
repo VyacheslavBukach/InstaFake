@@ -11,44 +11,49 @@ import '../../domain/models/user.dart';
 class EditProfileController extends GetxController {
   final UsersController _usersController;
   final ImagePicker _imagePicker;
-  late TextEditingController nameTextEditingController;
-  late TextEditingController userNameTextEditingController;
-  late TextEditingController postsTextEditingController;
-  late TextEditingController followersTextEditingController;
-  late TextEditingController bioTextEditingController;
-  late TextEditingController followingsTextEditingController;
+  final TextEditingController nameTextEditingController =
+      TextEditingController();
+  final TextEditingController userNameTextEditingController =
+      TextEditingController();
+  final TextEditingController postsTextEditingController =
+      TextEditingController();
+  final TextEditingController followersTextEditingController =
+      TextEditingController();
+  final TextEditingController bioTextEditingController =
+      TextEditingController();
+  final TextEditingController followingsTextEditingController =
+      TextEditingController();
   final avatarPath = Rxn<File>();
   final isConfirmedProfile = false.obs;
+
   final String? userUuid = Get.arguments;
-  final edittedUser = User.user(uuid: 'emptyUserKey').obs;
+  User edittedUser = User.user(uuid: '');
 
   EditProfileController(
     this._usersController,
     this._imagePicker,
   );
 
-  Future<void> _setUser() async {
-    if (userUuid != null) {
-      var user = await _usersController.fetchUserByUuid(userUuid ?? '');
-      edittedUser(user);
+  void _setUser() {
+    if (userUuid == null) {
+      edittedUser = _usersController.createNewUserProfile();
+    } else {
+      _usersController.setCurrentUser(userUuid ?? '');
+      edittedUser = _usersController.currentUser();
     }
-  }
-
-  Future<User> f() async {
-    return await _usersController.fetchUserByUuid(userUuid ?? '');
+    print('edit user with uuid = ${edittedUser.uuid}');
   }
 
   bool currentUserHasStory() {
-    // TODO
-    return edittedUser().storyList.isNotEmpty;
+    return edittedUser.storyList.isNotEmpty;
   }
 
   void changeConfirmedStatus() {
     isConfirmedProfile(!isConfirmedProfile.value);
   }
 
-  void saveProfile() async {
-    var updatedUser = edittedUser()
+  void saveProfile() {
+    var updatedUser = edittedUser
       ..posts = int.parse(postsTextEditingController.text)
       ..followers = int.parse(followersTextEditingController.text)
       ..followings = int.parse(followingsTextEditingController.text)
@@ -83,26 +88,21 @@ class EditProfileController extends GetxController {
   }
 
   void _initTextEditingControllers() {
-    nameTextEditingController = TextEditingController(text: edittedUser().name);
-    userNameTextEditingController =
-        TextEditingController(text: edittedUser().username);
-    postsTextEditingController =
-        TextEditingController(text: edittedUser().posts.toString());
-    followersTextEditingController =
-        TextEditingController(text: edittedUser().followers.toString());
-    followingsTextEditingController =
-        TextEditingController(text: edittedUser().followings.toString());
-    bioTextEditingController = TextEditingController(text: edittedUser().bio);
+    nameTextEditingController.text = edittedUser.name;
+    userNameTextEditingController.text = edittedUser.username;
+    postsTextEditingController.text = edittedUser.posts.toString();
+    followersTextEditingController.text = edittedUser.followers.toString();
+    followingsTextEditingController.text = edittedUser.followings.toString();
+    bioTextEditingController.text = edittedUser.bio;
   }
 
   @override
-  void onInit() async {
+  void onInit() {
     super.onInit();
+    _setUser();
     _initTextEditingControllers();
-    await _setUser();
-    print('edit user with uuid = $userUuid');
-    avatarPath(edittedUser().avatar);
-    isConfirmedProfile(edittedUser().isVerified);
+    avatarPath(edittedUser.avatar);
+    isConfirmedProfile(edittedUser.isVerified);
   }
 
   @override

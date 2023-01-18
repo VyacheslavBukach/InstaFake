@@ -25,7 +25,7 @@ class HiveUserRepository implements UserRepository {
       var newAdminProfile = User.admin(uuid: userUuid);
       var newAdminEntity = _userMapper.toUserEntity(newAdminProfile);
       await _box.put(userUuid, newAdminEntity);
-      print('create admin profile with uuid=$userUuid');
+      print('create admin profile with uuid = $userUuid');
     } else {
       print('admin profile has been already created');
     }
@@ -34,28 +34,16 @@ class HiveUserRepository implements UserRepository {
   @override
   User createNewUserProfile() {
     var userUuid = _uuid.v4();
-    print('return new user profile with uuid=$userUuid');
+    print('return new user profile with uuid = $userUuid');
 
     return User.user(uuid: userUuid);
-  }
-
-  @override
-  Future<User> fetchUserByUuid(String uuid) async {
-    UserEntity? userEntity = _box.get(uuid);
-    if (userEntity == null) {
-      print('user with uuid $uuid does not exist. new user returned');
-
-      return createNewUserProfile();
-    } else {
-      return _userMapper.toUser(userEntity);
-    }
   }
 
   @override
   Future<void> saveUser(User user) async {
     var userEntity = _userMapper.toUserEntity(user);
     await _box.put(user.uuid, userEntity);
-    print('save user with uuid ${user.uuid}');
+    print('save user with uuid = ${user.uuid}');
   }
 
   @override
@@ -66,6 +54,6 @@ class HiveUserRepository implements UserRepository {
   @override
   Future<void> deleteUserByUuid(String userUuid) async {
     await _box.delete(userUuid);
-    print('delete user with uuid $userUuid');
+    print('delete user with uuid = $userUuid');
   }
 }

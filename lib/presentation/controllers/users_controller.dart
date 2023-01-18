@@ -7,7 +7,8 @@ import '../../domain/repositories/user_repository.dart';
 class UsersController extends GetxController with StateMixin {
   final UserRepository _userRepository;
   final users = <User>[].obs;
-  final adminUser = User.admin(uuid: 'emptyAdminKey').obs;
+  final adminUser = User.admin(uuid: '').obs;
+  final currentUser = User.user(uuid: '').obs;
 
   UsersController(this._userRepository);
 
@@ -20,17 +21,19 @@ class UsersController extends GetxController with StateMixin {
     adminUser(user);
   }
 
-  // User createNewUser() {
-  //   return _userRepository.createNewUserProfile();
-  // }
+  void setCurrentUser(String userUuid) {
+    var user = users().firstWhere((user) => user.uuid == userUuid);
+    currentUser(user);
+  }
+
+  User createNewUserProfile() {
+    return _userRepository.createNewUserProfile();
+  }
 
   Future<void> _fetchUsers() async {
     var usersFromDb = await _userRepository.fetchAllUsers();
     users.assignAll(usersFromDb);
-  }
-
-  Future<User> fetchUserByUuid(String uuid) async {
-    return await _userRepository.fetchUserByUuid(uuid);
+    _setAdmin();
   }
 
   Future<void> saveUser(User user) async {
@@ -43,6 +46,5 @@ class UsersController extends GetxController with StateMixin {
     super.onInit();
     await _createAdminProfile();
     await _fetchUsers();
-    _setAdmin();
   }
 }
