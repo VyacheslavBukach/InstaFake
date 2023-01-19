@@ -25,6 +25,7 @@ class EditProfileController extends GetxController {
       TextEditingController();
   final avatarPath = Rxn<File>();
   final isConfirmedProfile = false.obs;
+  final isProfileOnline = false.obs;
 
   final String? userUuid = Get.arguments;
   User edittedUser = User.user(uuid: '');
@@ -52,6 +53,10 @@ class EditProfileController extends GetxController {
     isConfirmedProfile(!isConfirmedProfile.value);
   }
 
+  void changeOnlineStatus() {
+    isProfileOnline(!isProfileOnline.value);
+  }
+
   void saveProfile() {
     var updatedUser = edittedUser
       ..posts = int.parse(postsTextEditingController.text)
@@ -61,7 +66,8 @@ class EditProfileController extends GetxController {
       ..username = userNameTextEditingController.text
       ..bio = bioTextEditingController.text
       ..isVerified = isConfirmedProfile.value
-      ..avatar = avatarPath.value;
+      ..avatar = avatarPath.value
+      ..isOnline = isProfileOnline.value;
 
     _usersController.saveUser(updatedUser);
   }
@@ -103,6 +109,7 @@ class EditProfileController extends GetxController {
     _initTextEditingControllers();
     avatarPath(edittedUser.avatar);
     isConfirmedProfile(edittedUser.isVerified);
+    isProfileOnline(edittedUser.isOnline);
   }
 
   @override

@@ -39,6 +39,9 @@ class UserEntity extends HiveObject {
   @HiveField(10)
   final UserType userType;
 
+  @HiveField(11)
+  final bool isOnline;
+
   UserEntity({
     required this.uuid,
     required this.posts,
@@ -51,5 +54,6 @@ class UserEntity extends HiveObject {
     required this.avatarPath,
     required this.storyList,
     required this.userType,
+    required this.isOnline,
   });
 }

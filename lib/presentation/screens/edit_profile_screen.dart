@@ -43,10 +43,27 @@ class EditProfileScreen extends GetView<EditProfileController> {
             child: Column(
               children: [
                 Obx(
-                  () => AvatarWidget(
-                    avatar: controller.avatarPath.value,
-                    hasStory: controller.currentUserHasStory(),
-                    radius: 50,
+                  () => Stack(
+                    children: [
+                      AvatarWidget(
+                        avatar: controller.avatarPath.value,
+                        hasStory: controller.currentUserHasStory(),
+                        radius: 50,
+                      ),
+                      Visibility(
+                        visible: controller.isProfileOnline(),
+                        child: Positioned(
+                          right: 10,
+                          bottom: 10,
+                          child: SvgPicture.asset(
+                            'assets/online_icon.svg',
+                            // color: Colors.red,
+                            // width: 32,
+                            // height: 32,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 TextButton(
@@ -81,6 +98,22 @@ class EditProfileScreen extends GetView<EditProfileController> {
                     value: controller.isConfirmedProfile.value,
                     onChanged: (isChecked) {
                       controller.changeConfirmedStatus();
+                    },
+                  ),
+                ),
+                Obx(
+                  () => CheckboxListTile(
+                    title: Text('active_now'.tr),
+                    subtitle: Text('active_desc'.tr),
+                    secondary: SvgPicture.asset(
+                      'assets/online_icon.svg',
+                      width: 32,
+                      height: 32,
+                    ),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: controller.isProfileOnline.value,
+                    onChanged: (isOnline) {
+                      controller.changeOnlineStatus();
                     },
                   ),
                 ),

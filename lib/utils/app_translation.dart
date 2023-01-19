@@ -30,6 +30,8 @@ class AppTranslation extends Translations {
           'send_message': 'Send message',
           'settings': 'Settings',
           'users': 'Users',
+          'active_now': 'Active now',
+          'active_desc': 'Change profile status to online',
         },
         'ru_RU': {
           'app_name': 'ИнстаФэйк',
@@ -58,6 +60,8 @@ class AppTranslation extends Translations {
           'send_message': 'Отправить сообщение',
           'settings': 'Настройки',
           'users': 'Пользователи',
+          'active_now': 'Активен сейчас',
+          'active_desc': 'Изменить статус профиля на онлайн',
         }
       };
 }

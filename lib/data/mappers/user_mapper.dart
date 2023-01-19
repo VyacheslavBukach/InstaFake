@@ -17,6 +17,7 @@ class UserMapper {
         username: userEntity.username,
         storyList: userEntity.storyList,
         userType: userEntity.userType,
+        isOnline: userEntity.isOnline,
       );
 
   UserEntity toUserEntity(User user) => UserEntity(
@@ -31,5 +32,6 @@ class UserMapper {
         avatarPath: user.avatar?.path ?? '',
         storyList: user.storyList,
         userType: user.userType,
+        isOnline: user.isOnline,
       );
 }

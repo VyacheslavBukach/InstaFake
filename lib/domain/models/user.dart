@@ -14,6 +14,7 @@ class User {
   bool isVerified;
   File? avatar;
   List<String> storyList;
+  bool isOnline;
 
   User({
     required this.uuid,
@@ -27,6 +28,7 @@ class User {
     required this.isVerified,
     required this.avatar,
     required this.storyList,
+    required this.isOnline,
   });
 
   User.user({required String uuid})
@@ -42,6 +44,7 @@ class User {
           isVerified: false,
           avatar: null,
           storyList: [],
+          isOnline: true,
         );
 
   User.admin({required String uuid})
@@ -57,5 +60,6 @@ class User {
           isVerified: true,
           avatar: null,
           storyList: [],
+          isOnline: true,
         );
 }
