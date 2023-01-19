@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:insta_fake/utils/app_navigation.dart';
 
 import '../widgets/news_feed.dart';
 import '../widgets/stories_feed.dart';
@@ -22,7 +23,9 @@ class _HomeScreenState extends State<HomeScreen>
         title: Text('app_name'.tr),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(AppRoutes.direct);
+            },
             icon: const Icon(Icons.send),
           ),
         ],
