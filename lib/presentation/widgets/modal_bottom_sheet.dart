@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ModalBottomSheet extends StatelessWidget {
   final String title;
@@ -30,7 +31,7 @@ class ModalBottomSheet extends StatelessWidget {
                       child: Center(
                         child: Text(
                           title,
-                          style: Theme.of(context).textTheme.headline5,
+                          style: Get.textTheme.headline5,
                         ),
                       ),
                     ),

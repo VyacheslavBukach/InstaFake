@@ -147,7 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               },
               child: Text(
                 'edit_profile'.tr,
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Get.textTheme.titleMedium,
               ),
             ),
           ],

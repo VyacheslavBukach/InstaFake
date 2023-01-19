@@ -18,11 +18,11 @@ class ProfileTopText extends StatelessWidget {
       children: [
         Text(
           '$amount',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Get.textTheme.titleLarge,
         ),
         Text(
           title.tr,
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: Get.textTheme.bodyMedium,
         ),
       ],
     );

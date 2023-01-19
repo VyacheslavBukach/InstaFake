@@ -63,7 +63,7 @@ class StoriesFeed extends GetView<StoriesFeedController> {
                   const SizedBox(height: 4),
                   Text(
                     controller.usersWithStories()[i].username,
-                    style: Theme.of(context).textTheme.labelMedium,
+                    style: Get.textTheme.labelMedium,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

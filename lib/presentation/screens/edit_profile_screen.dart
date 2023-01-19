@@ -32,7 +32,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
               },
               icon: Icon(
                 Icons.done,
-                color: Theme.of(context).colorScheme.primary,
+                color: Get.theme.colorScheme.primary,
               ),
             ),
           ],
