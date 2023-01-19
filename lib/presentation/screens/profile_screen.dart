@@ -28,8 +28,14 @@ class _ProfileScreenState extends State<ProfileScreen>
       appBar: AppBar(
         title: Row(
           children: [
-            Obx(
-              () => Text(_profileController.user().username),
+            Container(
+              constraints: BoxConstraints(maxWidth: Get.width * 0.6),
+              child: Obx(
+                () => Text(
+                  _profileController.user().username,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ),
             const SizedBox(width: 8),
             Obx(

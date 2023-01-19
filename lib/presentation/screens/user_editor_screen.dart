@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:insta_fake/utils/user_type.dart';
 
 import '../../utils/app_navigation.dart';
 import '../controllers/users_controller.dart';
@@ -41,6 +42,14 @@ class UserEditorScreen extends GetView<UsersController> {
             subtitle: Text(
               controller.users()[listIndex].name,
             ),
+            trailing: controller.users()[listIndex].userType == UserType.user
+                ? IconButton(
+                    onPressed: () {
+                      controller.deleteUser(controller.users()[listIndex].uuid);
+                    },
+                    icon: const Icon(Icons.delete),
+                  )
+                : null,
           ),
         ),
       ),

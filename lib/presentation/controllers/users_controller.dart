@@ -41,6 +41,11 @@ class UsersController extends GetxController with StateMixin {
     await _fetchUsers();
   }
 
+  Future<void> deleteUser(String userUuid) async {
+    await _userRepository.deleteUserByUuid(userUuid);
+    await _fetchUsers();
+  }
+
   @override
   void onInit() async {
     super.onInit();

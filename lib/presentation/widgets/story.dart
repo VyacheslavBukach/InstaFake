@@ -50,7 +50,7 @@ class Story extends StatelessWidget {
           ),
         ),
         Text(
-          'My story',
+          'Your story',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:insta_fake/presentation/controllers/stories_feed_controller.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../data/entities/user_entity.dart';
@@ -46,6 +47,10 @@ class MainBinding extends Bindings {
       () => ProfileController(
         Get.find<UsersController>(),
       ),
+    );
+
+    Get.lazyPut<StoriesFeedController>(
+      () => StoriesFeedController(),
     );
 
     // Bottom Navigation Controllers
