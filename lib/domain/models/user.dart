@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:insta_fake/utils/user_type.dart';
+import '../../utils/user_type.dart';
 
 class User {
   final String uuid;

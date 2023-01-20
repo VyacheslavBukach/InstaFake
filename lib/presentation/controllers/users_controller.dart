@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:insta_fake/utils/user_type.dart';
 
 import '../../domain/models/user.dart';
 import '../../domain/repositories/user_repository.dart';
+import '../../utils/user_type.dart';
 
 class UsersController extends GetxController with StateMixin {
   final UserRepository _userRepository;

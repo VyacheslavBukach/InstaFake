@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:insta_fake/utils/user_type.dart';
 
 import '../../utils/app_navigation.dart';
+import '../../utils/user_type.dart';
 import '../controllers/users_controller.dart';
 import '../widgets/avatar_widget.dart';
 

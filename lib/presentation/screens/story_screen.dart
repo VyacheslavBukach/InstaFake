@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:story/story_page_view/story_page_view.dart';
+import 'package:story/story.dart';
 
 import '../../domain/models/user.dart';
 

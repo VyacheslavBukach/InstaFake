@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:insta_fake/utils/user_type.dart';
 
 import './users_controller.dart';
 import '../../domain/models/user.dart';
+import '../../utils/user_type.dart';
 
 class StoriesFeedController extends GetxController {
   final usersWithStories = <User>[].obs;

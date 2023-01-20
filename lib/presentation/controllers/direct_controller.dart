@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
+import './users_controller.dart';
 import '../../domain/models/user.dart';
 import '../../utils/user_type.dart';
-import 'users_controller.dart';
 
 class DirectController extends GetxController {
   final usersWithOnlineStatus = <User>[].obs;

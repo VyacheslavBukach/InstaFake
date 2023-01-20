@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:insta_fake/presentation/controllers/stories_feed_controller.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../data/entities/user_entity.dart';
@@ -10,6 +9,7 @@ import '../../data/repositories/hive_user_repository.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../controllers/navigation_controller.dart';
 import '../controllers/profile_controller.dart';
+import '../controllers/stories_feed_controller.dart';
 import '../controllers/users_controller.dart';
 
 class MainBinding extends Bindings {

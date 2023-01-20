@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:insta_fake/presentation/screens/home_screen.dart';
 
+import './home_screen.dart';
 import './profile_screen.dart';
 import '../controllers/navigation_controller.dart';
 import '../widgets/bottom_bar.dart';
