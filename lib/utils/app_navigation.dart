@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../presentation/bindings/direct_binding.dart';
 import '../presentation/bindings/edit_profile_binding.dart';
 import '../presentation/bindings/main_binding.dart';
 import '../presentation/bindings/story_editor_binding.dart';
@@ -46,6 +47,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.direct,
       page: () => const DirectScreen(),
+      binding: DirectBinding(),
     ),
   ];
 }

@@ -2,17 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/users_controller.dart';
+import '../controllers/direct_controller.dart';
 import '../widgets/avatar_widget.dart';
 
-class DirectScreen extends GetView<UsersController> {
+class DirectScreen extends GetView<DirectController> {
   const DirectScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(controller.adminUser().username),
+        title: Text(controller.fetchAdminUsername()),
         actions: [
           IconButton(
             onPressed: () {},
@@ -27,46 +27,84 @@ class DirectScreen extends GetView<UsersController> {
       body: Container(
         padding: const EdgeInsets.only(
           top: 16,
-          left: 16,
-          right: 16,
+          // left: 16,
+          // right: 16,
         ),
         child: Column(
           children: [
-            const CupertinoSearchTextField(enabled: false),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: CupertinoSearchTextField(enabled: false),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
+              child: SizedBox(
+                height: 100,
+                child: ListView.builder(
+                  itemBuilder: (ctx, i) => i == 0
+                      ? Row(
+                          children: [
+                            const SizedBox(width: 16),
+                            AvatarWidget(
+                              avatar:
+                                  controller.usersWithOnlineStatus()[i].avatar,
+                              hasStory: controller
+                                  .usersWithOnlineStatus()[i]
+                                  .storyList
+                                  .isNotEmpty,
+                              radius: 38,
+                            ),
+                            const SizedBox(width: 16),
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            AvatarWidget(
+                              avatar:
+                                  controller.usersWithOnlineStatus()[i].avatar,
+                              hasStory: controller
+                                  .usersWithOnlineStatus()[i]
+                                  .storyList
+                                  .isNotEmpty,
+                              radius: 38,
+                            ),
+                            const SizedBox(width: 16),
+                          ],
+                        ),
+                  itemCount: controller.usersWithOnlineStatus().length,
+                  scrollDirection: Axis.horizontal,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CircleAvatar(radius: 38),
-                  CircleAvatar(radius: 38),
+                  Text(
+                    'Messages',
+                    style: Get.textTheme.bodyLarge,
+                  ),
+                  Text(
+                    'Requests',
+                    style: TextStyle(
+                      color: Get.theme.colorScheme.primary,
+                    ),
+                  ),
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Messages',
-                  style: Get.textTheme.bodyLarge,
-                ),
-                Text(
-                  'Requests',
-                  style: TextStyle(
-                    color: Get.theme.colorScheme.primary,
-                  ),
-                ),
-              ],
-            ),
             Expanded(
               child: ListView.builder(
-                itemCount: controller.users().length,
+                itemCount: controller.usersWithOnlineStatus.length,
                 itemBuilder: (ctx, i) => ListTile(
                   leading: AvatarWidget(
-                    avatar: controller.users()[i].avatar,
-                    hasStory: controller.users()[i].storyList.isNotEmpty,
+                    avatar: controller.usersWithOnlineStatus[i].avatar,
+                    hasStory: controller
+                        .usersWithOnlineStatus[i].storyList.isNotEmpty,
                     radius: 20,
                   ),
-                  title: Text(controller.users()[i].name),
+                  title: Text(controller.usersWithOnlineStatus[i].name),
                   subtitle: Text('message'),
                   trailing: const Icon(Icons.photo_camera_outlined),
                 ),

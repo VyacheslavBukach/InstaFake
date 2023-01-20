@@ -50,6 +50,7 @@ class EditProfileController extends GetxController {
   }
 
   void changeConfirmedStatus() {
+    // isConfirmedProfile.toggle(); //TODO
     isConfirmedProfile(!isConfirmedProfile.value);
   }
 

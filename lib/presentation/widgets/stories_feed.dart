@@ -18,7 +18,7 @@ class StoriesFeed extends GetView<StoriesFeedController> {
           itemCount: controller.usersWithStories.length,
           itemBuilder: (ctx, i) {
             return SizedBox(
-              width: 70,
+              width: 30 * 2 + 10,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
