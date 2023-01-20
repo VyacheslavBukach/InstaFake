@@ -49,15 +49,6 @@ class EditProfileController extends GetxController {
     return edittedUser.storyList.isNotEmpty;
   }
 
-  void changeConfirmedStatus() {
-    // isConfirmedProfile.toggle(); //TODO
-    isConfirmedProfile(!isConfirmedProfile.value);
-  }
-
-  void changeOnlineStatus() {
-    isProfileOnline(!isProfileOnline.value);
-  }
-
   void saveProfile() {
     var updatedUser = edittedUser
       ..posts = int.parse(postsTextEditingController.text)

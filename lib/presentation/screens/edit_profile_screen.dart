@@ -96,8 +96,8 @@ class EditProfileScreen extends GetView<EditProfileController> {
                     ),
                     controlAffinity: ListTileControlAffinity.leading,
                     value: controller.isConfirmedProfile.value,
-                    onChanged: (isChecked) {
-                      controller.changeConfirmedStatus();
+                    onChanged: (_) {
+                      controller.isConfirmedProfile.toggle();
                     },
                   ),
                 ),
@@ -112,8 +112,8 @@ class EditProfileScreen extends GetView<EditProfileController> {
                     ),
                     controlAffinity: ListTileControlAffinity.leading,
                     value: controller.isProfileOnline.value,
-                    onChanged: (isOnline) {
-                      controller.changeOnlineStatus();
+                    onChanged: (_) {
+                      controller.isProfileOnline.toggle();
                     },
                   ),
                 ),
