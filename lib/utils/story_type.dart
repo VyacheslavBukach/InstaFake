@@ -1,4 +1,0 @@
-enum StoryType {
-  myStory,
-  story,
-}
