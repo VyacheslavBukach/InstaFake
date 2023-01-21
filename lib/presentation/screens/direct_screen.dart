@@ -81,7 +81,7 @@ class DirectScreen extends GetView<DirectController> {
                                 ),
                               ],
                             ),
-                            // SizedBox(width: 16),
+                            const SizedBox(width: 8),
                           ],
                         ),
                       );
