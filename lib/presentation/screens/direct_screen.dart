@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../controllers/direct_controller.dart';
@@ -46,15 +47,29 @@ class DirectScreen extends GetView<DirectController> {
                             // SizedBox(width: 16),
                             Column(
                               children: [
-                                AvatarWidget(
-                                  avatar: controller
-                                      .usersWithOnlineStatus()[i]
-                                      .avatar,
-                                  hasStory: controller
-                                      .usersWithOnlineStatus()[i]
-                                      .storyList
-                                      .isNotEmpty,
-                                  radius: 38,
+                                Stack(
+                                  children: [
+                                    AvatarWidget(
+                                      avatar: controller
+                                          .usersWithOnlineStatus()[i]
+                                          .avatar,
+                                      hasStory: controller
+                                          .usersWithOnlineStatus()[i]
+                                          .storyList
+                                          .isNotEmpty,
+                                      radius: 38,
+                                    ),
+                                    Visibility(
+                                      visible: i != 0,
+                                      child: Positioned(
+                                        right: 4,
+                                        bottom: 4,
+                                        child: SvgPicture.asset(
+                                          'assets/online_icon.svg',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 Text(
                                   controller
