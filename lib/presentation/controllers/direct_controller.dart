@@ -4,19 +4,21 @@ import './users_controller.dart';
 import '../../domain/models/user.dart';
 
 class DirectController extends GetxController {
-  final usersWithOnlineStatus = <User>[].obs;
+  late final RxList<User> users;
+  final RxList<User> usersWithOnlineStatus = <User>[].obs;
   final _usersController = Get.find<UsersController>();
 
   @override
   void onInit() {
     super.onInit();
-    _setUsers(_usersController.users());
-    ever(_usersController.users, (users) {
-      _setUsers(users);
+    users = _usersController.users;
+    _setUsers();
+    ever(users, (_) {
+      _setUsers();
     });
   }
 
-  void _setUsers(List<User> users) {
+  void _setUsers() {
     var usersWithStoriesList = [
       _usersController.adminUser(),
       ...users.where((user) => user.isOnline).toList(),

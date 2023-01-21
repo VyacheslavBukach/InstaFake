@@ -112,15 +112,14 @@ class DirectScreen extends GetView<DirectController> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: controller.usersWithOnlineStatus.length,
+                itemCount: controller.users.length,
                 itemBuilder: (ctx, i) => ListTile(
                   leading: AvatarWidget(
-                    avatar: controller.usersWithOnlineStatus[i].avatar,
-                    hasStory: controller
-                        .usersWithOnlineStatus[i].storyList.isNotEmpty,
+                    avatar: controller.users[i].avatar,
+                    hasStory: controller.users[i].storyList.isNotEmpty,
                     radius: 20,
                   ),
-                  title: Text(controller.usersWithOnlineStatus[i].name),
+                  title: Text(controller.users[i].name),
                   subtitle: Text('message'),
                   trailing: const Icon(Icons.photo_camera_outlined),
                 ),
