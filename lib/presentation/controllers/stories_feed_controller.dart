@@ -9,11 +9,11 @@ class StoriesFeedController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
     _setUsers(_usersController.users());
     ever(_usersController.users, (users) {
       _setUsers(users);
     });
-    super.onInit();
   }
 
   void _setUsers(List<User> users) {
