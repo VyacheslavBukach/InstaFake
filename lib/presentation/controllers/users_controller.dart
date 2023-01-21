@@ -2,28 +2,25 @@ import 'package:get/get.dart';
 
 import '../../domain/models/user.dart';
 import '../../domain/repositories/user_repository.dart';
-import '../../utils/user_type.dart';
 
-class UsersController extends GetxController with StateMixin {
+class UsersController extends GetxController {
   final UserRepository _userRepository;
   final users = <User>[].obs;
   final adminUser = User.admin(uuid: '').obs;
-  final currentUser = User.user(uuid: '').obs;
 
   UsersController(this._userRepository);
 
-  Future<void> _createAdminProfile() async {
-    await _userRepository.createAdminProfile();
+  Future<void> _setAdmin() async {
+    var admin = await _userRepository.createOrFetchAdminProfile();
+    adminUser(admin);
   }
 
-  void _setAdmin() {
-    var user = users().firstWhere((user) => user.userType == UserType.admin);
-    adminUser(user);
-  }
+  User fetchUser(String userUuid) {
+    if (adminUser().uuid == userUuid) {
+      return adminUser();
+    }
 
-  void setCurrentUser(String userUuid) {
-    var user = users().firstWhere((user) => user.uuid == userUuid);
-    currentUser(user);
+    return users.firstWhere((user) => user.uuid == userUuid);
   }
 
   User createNewUserProfile() {
@@ -31,9 +28,9 @@ class UsersController extends GetxController with StateMixin {
   }
 
   Future<void> _fetchUsers() async {
-    var usersFromDb = await _userRepository.fetchAllUsers();
-    users.assignAll(usersFromDb);
     _setAdmin();
+    var usersFromDb = await _userRepository.fetchAllUsersWithoutAdmin();
+    users.assignAll(usersFromDb);
   }
 
   Future<void> saveUser(User user) async {
@@ -49,7 +46,6 @@ class UsersController extends GetxController with StateMixin {
   @override
   void onInit() async {
     super.onInit();
-    await _createAdminProfile();
     await _fetchUsers();
   }
 }

@@ -43,26 +43,23 @@ class BottomBar extends GetView<NavigationController> {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: _usersController.users().isEmpty
-                ? const CircularProgressIndicator()
-                : CircleAvatar(
-                    radius: 14,
-                    backgroundColor: controller.pageIndex.value == 4
-                        ? Colors.black
-                        : Colors.white,
-                    child: _usersController.adminUser().avatar != null
-                        ? CircleAvatar(
-                            radius: 12,
-                            backgroundImage: FileImage(
-                              _usersController.adminUser().avatar ?? File(''),
-                            ),
-                          )
-                        : SvgPicture.asset(
-                            'assets/empty_avatar.svg',
-                            height: 24,
-                            width: 24,
-                          ),
-                  ),
+            icon: CircleAvatar(
+              radius: 14,
+              backgroundColor:
+                  controller.pageIndex.value == 4 ? Colors.black : Colors.white,
+              child: _usersController.adminUser().avatar != null
+                  ? CircleAvatar(
+                      radius: 12,
+                      backgroundImage: FileImage(
+                        _usersController.adminUser().avatar ?? File(''),
+                      ),
+                    )
+                  : SvgPicture.asset(
+                      'assets/empty_avatar.svg',
+                      height: 24,
+                      width: 24,
+                    ),
+            ),
             label: '',
           ),
         ],

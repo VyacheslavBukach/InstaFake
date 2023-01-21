@@ -25,11 +25,7 @@ class DirectScreen extends GetView<DirectController> {
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.only(
-          top: 16,
-          // left: 16,
-          // right: 16,
-        ),
+        padding: const EdgeInsets.only(top: 16),
         child: Column(
           children: [
             const Padding(
@@ -38,41 +34,46 @@ class DirectScreen extends GetView<DirectController> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
-              child: SizedBox(
-                height: 100,
-                child: ListView.builder(
-                  itemBuilder: (ctx, i) => i == 0
-                      ? Row(
+              child: Obx(
+                () => SizedBox(
+                  height: 100,
+                  child: ListView.builder(
+                    itemBuilder: (ctx, i) {
+                      return SizedBox(
+                        // width: 120,
+                        child: Row(
                           children: [
-                            const SizedBox(width: 16),
-                            AvatarWidget(
-                              avatar:
-                                  controller.usersWithOnlineStatus()[i].avatar,
-                              hasStory: controller
-                                  .usersWithOnlineStatus()[i]
-                                  .storyList
-                                  .isNotEmpty,
-                              radius: 38,
+                            // SizedBox(width: 16),
+                            Column(
+                              children: [
+                                AvatarWidget(
+                                  avatar: controller
+                                      .usersWithOnlineStatus()[i]
+                                      .avatar,
+                                  hasStory: controller
+                                      .usersWithOnlineStatus()[i]
+                                      .storyList
+                                      .isNotEmpty,
+                                  radius: 38,
+                                ),
+                                Text(
+                                  controller
+                                      .usersWithOnlineStatus()[i]
+                                      .username,
+                                  style: Get.textTheme.labelMedium,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
                             ),
-                            const SizedBox(width: 16),
-                          ],
-                        )
-                      : Row(
-                          children: [
-                            AvatarWidget(
-                              avatar:
-                                  controller.usersWithOnlineStatus()[i].avatar,
-                              hasStory: controller
-                                  .usersWithOnlineStatus()[i]
-                                  .storyList
-                                  .isNotEmpty,
-                              radius: 38,
-                            ),
-                            const SizedBox(width: 16),
+                            // SizedBox(width: 16),
                           ],
                         ),
-                  itemCount: controller.usersWithOnlineStatus().length,
-                  scrollDirection: Axis.horizontal,
+                      );
+                    },
+                    itemCount: controller.usersWithOnlineStatus().length,
+                    scrollDirection: Axis.horizontal,
+                  ),
                 ),
               ),
             ),

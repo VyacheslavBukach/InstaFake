@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 
 import './users_controller.dart';
 import '../../domain/models/user.dart';
-import '../../utils/user_type.dart';
 
 class StoriesFeedController extends GetxController {
   final usersWithStories = <User>[].obs;
@@ -20,10 +19,7 @@ class StoriesFeedController extends GetxController {
   void _setUsers(List<User> users) {
     var usersWithStoriesList = [
       _usersController.adminUser(),
-      ...users
-          .where((user) =>
-              user.storyList.isNotEmpty && user.userType != UserType.admin)
-          .toList(),
+      ...users.where((user) => user.storyList.isNotEmpty).toList(),
     ];
     usersWithStories(usersWithStoriesList);
   }

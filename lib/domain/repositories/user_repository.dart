@@ -1,7 +1,7 @@
 import '../models/user.dart';
 
 abstract class UserRepository {
-  Future<void> createAdminProfile();
+  Future<User> createOrFetchAdminProfile();
 
   User createNewUserProfile();
 
@@ -9,5 +9,5 @@ abstract class UserRepository {
 
   Future<void> deleteUserByUuid(String uuid);
 
-  Future<List<User>> fetchAllUsers();
+  Future<List<User>> fetchAllUsersWithoutAdmin();
 }

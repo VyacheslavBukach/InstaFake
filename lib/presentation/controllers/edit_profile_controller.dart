@@ -39,8 +39,7 @@ class EditProfileController extends GetxController {
     if (userUuid == null) {
       edittedUser = _usersController.createNewUserProfile();
     } else {
-      _usersController.setCurrentUser(userUuid ?? '');
-      edittedUser = _usersController.currentUser();
+      edittedUser = _usersController.fetchUser(userUuid ?? '');
     }
     print('edit user with uuid = ${edittedUser.uuid}');
   }

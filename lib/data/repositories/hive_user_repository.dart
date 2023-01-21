@@ -3,6 +3,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../domain/models/user.dart';
 import '../../domain/repositories/user_repository.dart';
+import '../../utils/user_type.dart';
 import '../entities/user_entity.dart';
 import '../mappers/user_mapper.dart';
 
@@ -18,16 +19,22 @@ class HiveUserRepository implements UserRepository {
   );
 
   @override
-  Future<void> createAdminProfile() async {
+  Future<User> createOrFetchAdminProfile() async {
     var isBoxEmpty = _box.isEmpty;
     if (isBoxEmpty) {
       var userUuid = _uuid.v4();
       var newAdminProfile = User.admin(uuid: userUuid);
       var newAdminEntity = _userMapper.toUserEntity(newAdminProfile);
       await _box.put(userUuid, newAdminEntity);
-      print('create admin profile with uuid = $userUuid');
+      print('create and return admin profile with uuid = $userUuid');
+
+      return newAdminProfile;
     } else {
-      print('admin profile has been already created');
+      var admin = _box.values
+          .firstWhere((element) => element.userType == UserType.admin);
+      print('return admin profile with uuid = ${admin.uuid}');
+
+      return _userMapper.toUser(admin);
     }
   }
 
@@ -47,8 +54,13 @@ class HiveUserRepository implements UserRepository {
   }
 
   @override
-  Future<List<User>> fetchAllUsers() async {
-    return _box.values.map((entity) => _userMapper.toUser(entity)).toList();
+  Future<List<User>> fetchAllUsersWithoutAdmin() async {
+    var users = _box.values
+        .where((userEntity) => userEntity.userType == UserType.user)
+        .map((userEntity) => _userMapper.toUser(userEntity))
+        .toList();
+
+    return users;
   }
 
   @override
