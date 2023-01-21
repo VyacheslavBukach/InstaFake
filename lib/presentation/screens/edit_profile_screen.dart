@@ -89,10 +89,13 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   () => CheckboxListTile(
                     title: Text('verified'.tr),
                     subtitle: Text('verified_desc'.tr),
-                    secondary: SvgPicture.asset(
-                      'assets/verified_icon.svg',
-                      width: 32,
-                      height: 32,
+                    secondary: Visibility(
+                      visible: controller.isConfirmedProfile(),
+                      child: SvgPicture.asset(
+                        'assets/verified_icon.svg',
+                        width: 32,
+                        height: 32,
+                      ),
                     ),
                     controlAffinity: ListTileControlAffinity.leading,
                     value: controller.isConfirmedProfile.value,
@@ -105,11 +108,6 @@ class EditProfileScreen extends GetView<EditProfileController> {
                   () => CheckboxListTile(
                     title: Text('active_now'.tr),
                     subtitle: Text('active_desc'.tr),
-                    secondary: SvgPicture.asset(
-                      'assets/online_icon.svg',
-                      width: 32,
-                      height: 32,
-                    ),
                     controlAffinity: ListTileControlAffinity.leading,
                     value: controller.isProfileOnline.value,
                     onChanged: (_) {
