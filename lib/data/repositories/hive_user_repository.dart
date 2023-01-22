@@ -59,7 +59,7 @@ class HiveUserRepository implements UserRepository {
         .where((userEntity) => userEntity.userType == UserType.user)
         .map((userEntity) => _userMapper.toUser(userEntity))
         .toList();
-
+    print('fetch users');
     return users;
   }
 

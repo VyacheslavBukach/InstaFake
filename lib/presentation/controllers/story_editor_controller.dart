@@ -8,7 +8,7 @@ import '../../domain/models/user.dart';
 class StoryEditorController extends GetxController {
   final UsersController _usersController;
   final ImagePicker _imagePicker;
-  final users = <User>[].obs; // TODO another variable
+  final users = <User>[].obs;
 
   StoryEditorController(
     this._usersController,
@@ -18,7 +18,11 @@ class StoryEditorController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    users(_usersController.users);
+    List<User> usersWithAdmin = [
+      _usersController.adminUser(),
+      ..._usersController.users(),
+    ];
+    users(usersWithAdmin);
   }
 
   Future<void> takePhotoFromGallery(User user) async {
@@ -40,7 +44,7 @@ class StoryEditorController extends GetxController {
 
   void deleteStory(User user, String storyPath) {
     var updatedUser = user
-      ..storyList.removeWhere((element) => element == storyPath);
+      ..storyList.removeWhere((story) => story == storyPath);
     _usersController.saveUser(updatedUser);
   }
 }
