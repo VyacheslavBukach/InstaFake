@@ -110,7 +110,7 @@ class StoryScreen extends StatelessWidget {
             right: 8,
           ),
           onPageLimitReached: () {
-            Get.back();
+            // Get.back();
           },
         ),
       ),
