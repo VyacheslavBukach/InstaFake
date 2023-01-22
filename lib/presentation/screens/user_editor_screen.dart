@@ -13,7 +13,7 @@ class UserEditorScreen extends GetView<UsersController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('users'.tr),
+        title: Text('users_editor'.tr),
         actions: [
           IconButton(
             onPressed: () {

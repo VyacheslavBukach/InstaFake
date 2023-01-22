@@ -194,7 +194,7 @@ final _menuTiles = [
   ),
   ListTile(
     leading: const Icon(Icons.supervised_user_circle),
-    title: Text('users'.tr),
+    title: Text('users_editor'.tr),
     onTap: () {
       Get.back();
       Get.toNamed(AppRoutes.userEditor);
