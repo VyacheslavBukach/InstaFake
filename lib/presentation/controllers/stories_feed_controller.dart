@@ -10,14 +10,12 @@ class StoriesFeedController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _setUsers(_usersController.users());
-    ever(_usersController.users, (users) {
-      _setUsers(users);
-    });
+    _setUsersWithStories(_usersController.users());
+    ever(_usersController.users, (users) => _setUsersWithStories(users));
   }
 
-  void _setUsers(List<User> users) {
-    var usersWithStoriesList = [
+  void _setUsersWithStories(List<User> users) {
+    List<User> usersWithStoriesList = [
       _usersController.adminUser(),
       ...users.where((user) => user.storyList.isNotEmpty).toList(),
     ];
