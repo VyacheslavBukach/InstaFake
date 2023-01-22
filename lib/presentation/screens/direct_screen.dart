@@ -62,10 +62,11 @@ class DirectScreen extends GetView<DirectController> {
                                     Visibility(
                                       visible: i != 0,
                                       child: Positioned(
-                                        right: 4,
-                                        bottom: 4,
+                                        right: 8,
+                                        bottom: 6,
                                         child: SvgPicture.asset(
                                           'assets/online_icon.svg',
+                                          height: 18,
                                         ),
                                       ),
                                     ),
