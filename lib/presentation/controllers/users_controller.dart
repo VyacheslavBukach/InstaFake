@@ -35,12 +35,17 @@ class UsersController extends GetxController {
 
   Future<void> saveUser(User user) async {
     await _userRepository.saveUser(user);
-    await _fetchUsers();
+    if (adminUser().uuid == user.uuid) {
+      _setAdmin();
+    } else {
+      users.removeWhere((element) => element.uuid == user.uuid);
+      users.add(user);
+    }
   }
 
   Future<void> deleteUser(String userUuid) async {
     await _userRepository.deleteUserByUuid(userUuid);
-    await _fetchUsers();
+    users.removeWhere((element) => element.uuid == userUuid);
   }
 
   @override
