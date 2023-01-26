@@ -13,15 +13,16 @@ class DirectController extends GetxController {
     super.onInit();
     users = _usersController.users;
     _setUsers();
-    ever(users, (_) {
-      _setUsers();
-    });
+    everAll([
+      _usersController.adminUser,
+      _usersController.users,
+    ], (_) => _setUsers());
   }
 
   void _setUsers() {
     var usersWithStoriesList = [
       _usersController.adminUser(),
-      ...users.where((user) => user.isOnline).toList(),
+      ..._usersController.users.where((user) => user.isOnline).toList(),
     ];
     usersWithOnlineStatus(usersWithStoriesList);
   }

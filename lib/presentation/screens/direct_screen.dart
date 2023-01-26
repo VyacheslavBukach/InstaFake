@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../utils/app_navigation.dart';
 import '../controllers/direct_controller.dart';
 import '../widgets/avatar_widget.dart';
 
@@ -50,6 +51,14 @@ class DirectScreen extends GetView<DirectController> {
                                 Stack(
                                   children: [
                                     AvatarWidget(
+                                      onTap: () {
+                                        Get.toNamed(
+                                          AppRoutes.editProfile,
+                                          arguments: controller
+                                              .usersWithOnlineStatus()[i]
+                                              .uuid,
+                                        );
+                                      },
                                       avatar: controller
                                           .usersWithOnlineStatus()[i]
                                           .avatar,
