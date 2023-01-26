@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../../domain/models/user.dart';
 import '../../domain/repositories/user_repository.dart';
+import '../../utils/user_type.dart';
 
 class UsersController extends GetxController {
   final UserRepository _userRepository;
@@ -35,10 +36,14 @@ class UsersController extends GetxController {
 
   Future<void> saveUser(User user) async {
     await _userRepository.saveUser(user);
-    if (adminUser().uuid == user.uuid) {
-      _setAdmin();
+
+    var existingIndex =
+        users.indexWhere((element) => element.uuid == user.uuid);
+    if (user.userType == UserType.admin) {
+      adminUser(user);
+    } else if (existingIndex != -1) {
+      users[existingIndex] = user;
     } else {
-      users.removeWhere((element) => element.uuid == user.uuid);
       users.add(user);
     }
   }

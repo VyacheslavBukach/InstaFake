@@ -32,7 +32,7 @@ class HiveUserRepository implements UserRepository {
     } else {
       var admin = _box.values
           .firstWhere((element) => element.userType == UserType.admin);
-      print('return admin profile with uuid = ${admin.uuid}');
+      print('fetch an already created admin profile with uuid = ${admin.uuid}');
 
       return _userMapper.toUser(admin);
     }

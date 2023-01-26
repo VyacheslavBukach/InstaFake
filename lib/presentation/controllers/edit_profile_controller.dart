@@ -49,16 +49,20 @@ class EditProfileController extends GetxController {
   }
 
   void saveProfile() {
-    var updatedUser = edittedUser
-      ..posts = int.parse(postsTextEditingController.text)
-      ..followers = int.parse(followersTextEditingController.text)
-      ..followings = int.parse(followingsTextEditingController.text)
-      ..name = nameTextEditingController.text
-      ..username = userNameTextEditingController.text
-      ..bio = bioTextEditingController.text
-      ..isVerified = isConfirmedProfile.value
-      ..avatar = avatarPath.value
-      ..isOnline = isProfileOnline.value;
+    var updatedUser = User(
+      uuid: edittedUser.uuid,
+      userType: edittedUser.userType,
+      posts: int.parse(postsTextEditingController.text),
+      followers: int.parse(followersTextEditingController.text),
+      followings: int.parse(followingsTextEditingController.text),
+      name: nameTextEditingController.text,
+      username: userNameTextEditingController.text,
+      bio: bioTextEditingController.text,
+      isVerified: isConfirmedProfile.value,
+      avatar: avatarPath.value,
+      storyList: edittedUser.storyList,
+      isOnline: isProfileOnline.value,
+    );
 
     _usersController.saveUser(updatedUser);
   }

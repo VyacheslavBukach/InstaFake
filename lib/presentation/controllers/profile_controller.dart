@@ -13,22 +13,26 @@ class ProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchUser();
-    everAll([
-      _usersController.adminUser,
-      _usersController.users,
-    ], (_) {
-      fetchUser();
+    _fetchUser(_usersController.adminUser());
+    ever(_usersController.adminUser, (admin) {
+      _fetchUser(admin);
     });
+    // TODO
+    // ever(_usersController.users, (users) {
+    //   var user =
+    //       _usersController.users.firstWhere((user) => user.uuid == _userUuid);
+    //   _fetchUser(user);
+    // });
   }
 
-  fetchUser() {
+  void _fetchUser(User newUser) {
     if (_userUuid == null) {
-      user(_usersController.adminUser());
-      print('open admin profile with uuid = ${user().uuid}');
-    } else {
-      user(_usersController.fetchUser(_userUuid ?? ''));
-      print('open user profile with uuid = ${user().uuid}');
+      user(newUser);
+      print('fetch profile(ADMIN) with uuid = ${user().uuid}');
     }
+    // else {
+    //   user(newUser);
+    //   print('fetch profile(USER) with uuid = ${user().uuid}');
+    // }
   }
 }
