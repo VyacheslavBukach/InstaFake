@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../utils/app_navigation.dart';
-import '../../utils/user_type.dart';
 import '../controllers/users_controller.dart';
 import '../widgets/avatar_widget.dart';
 
@@ -50,14 +49,6 @@ class UserEditorScreen extends GetView<UsersController> {
               subtitle: Text(
                 controller.adminUser().name,
               ),
-              trailing: controller.adminUser().userType == UserType.user
-                  ? IconButton(
-                      onPressed: () {
-                        controller.deleteUser(controller.adminUser().uuid);
-                      },
-                      icon: const Icon(Icons.delete),
-                    )
-                  : null,
             ),
           ),
           Padding(
