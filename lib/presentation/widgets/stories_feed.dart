@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:insta_fake/utils/user_type.dart';
 
 import './avatar_widget.dart';
 import '../../utils/app_navigation.dart';
@@ -31,10 +32,8 @@ class StoriesFeed extends GetView<StoriesFeedController> {
                               .isNotEmpty,
                           radius: 30,
                           onTap: () {
-                            if (controller
-                                .usersWithStories()[i]
-                                .storyList
-                                .isNotEmpty) {
+                            if (controller.usersWithStories()[i].userType ==
+                                UserType.user) {
                               Get.to(
                                 StoryScreen(
                                   user: controller.usersWithStories()[i],
