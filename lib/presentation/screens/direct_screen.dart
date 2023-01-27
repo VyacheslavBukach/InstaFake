@@ -46,50 +46,53 @@ class DirectScreen extends GetView<DirectController> {
                         child: Row(
                           children: [
                             // SizedBox(width: 16),
-                            Column(
-                              children: [
-                                Stack(
-                                  children: [
-                                    AvatarWidget(
-                                      onTap: () {
-                                        Get.toNamed(
-                                          AppRoutes.profile,
-                                          arguments: controller
-                                              .usersWithOnlineStatus()[i]
-                                              .uuid,
-                                        );
-                                      },
-                                      avatar: controller
-                                          .usersWithOnlineStatus()[i]
-                                          .avatar,
-                                      hasStory: controller
-                                          .usersWithOnlineStatus()[i]
-                                          .storyList
-                                          .isNotEmpty,
-                                      radius: 38,
-                                    ),
-                                    Visibility(
-                                      visible: i != 0,
-                                      child: Positioned(
-                                        right: 8,
-                                        bottom: 6,
-                                        child: SvgPicture.asset(
-                                          'assets/online_icon.svg',
-                                          height: 18,
+                            SizedBox(
+                              width: 38 * 2 + 10,
+                              child: Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      AvatarWidget(
+                                        onTap: () {
+                                          Get.toNamed(
+                                            AppRoutes.profile,
+                                            arguments: controller
+                                                .usersWithOnlineStatus()[i]
+                                                .uuid,
+                                          );
+                                        },
+                                        avatar: controller
+                                            .usersWithOnlineStatus()[i]
+                                            .avatar,
+                                        hasStory: controller
+                                            .usersWithOnlineStatus()[i]
+                                            .storyList
+                                            .isNotEmpty,
+                                        radius: 38,
+                                      ),
+                                      Visibility(
+                                        visible: i != 0,
+                                        child: Positioned(
+                                          right: 8,
+                                          bottom: 6,
+                                          child: SvgPicture.asset(
+                                            'assets/online_icon.svg',
+                                            height: 18,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  controller
-                                      .usersWithOnlineStatus()[i]
-                                      .username,
-                                  style: Get.textTheme.labelMedium,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                  Text(
+                                    controller
+                                        .usersWithOnlineStatus()[i]
+                                        .username,
+                                    style: Get.textTheme.labelMedium,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
                             ),
                             const SizedBox(width: 8),
                           ],
@@ -129,8 +132,14 @@ class DirectScreen extends GetView<DirectController> {
                     hasStory: controller.users[i].storyList.isNotEmpty,
                     radius: 20,
                   ),
-                  title: Text(controller.users[i].name),
-                  subtitle: Text('message'),
+                  title: Text(
+                    controller.users[i].name,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  subtitle: Text(
+                    'message',
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   trailing: const Icon(Icons.photo_camera_outlined),
                   onTap: () {
                     Get.toNamed(
