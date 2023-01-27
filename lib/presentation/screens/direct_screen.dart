@@ -132,6 +132,12 @@ class DirectScreen extends GetView<DirectController> {
                   title: Text(controller.users[i].name),
                   subtitle: Text('message'),
                   trailing: const Icon(Icons.photo_camera_outlined),
+                  onTap: () {
+                    Get.toNamed(
+                      AppRoutes.dialogue,
+                      arguments: controller.users[i].uuid,
+                    );
+                  },
                 ),
               ),
             ),

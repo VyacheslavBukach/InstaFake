@@ -21,6 +21,7 @@ dependencies:
   video_player: ^2.4.7
   story: ^0.8.0
   uuid: ^3.0.7
+  chat_bubbles: ^1.4.1
 
 dev_dependencies:
   flutter_test:

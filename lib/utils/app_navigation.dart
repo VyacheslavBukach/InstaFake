@@ -4,6 +4,7 @@ import '../presentation/bindings/direct_binding.dart';
 import '../presentation/bindings/edit_profile_binding.dart';
 import '../presentation/bindings/main_binding.dart';
 import '../presentation/bindings/story_editor_binding.dart';
+import '../presentation/screens/dialogue_screen.dart';
 import '../presentation/screens/direct_screen.dart';
 import '../presentation/screens/edit_profile_screen.dart';
 import '../presentation/screens/main_screen.dart';
@@ -20,6 +21,7 @@ class AppRoutes {
   static const userEditor = '/user-editor';
   static const direct = '/direct';
   static const profile = '/profile';
+  static const dialogue = '/dialogue';
 }
 
 class AppPages {
@@ -54,6 +56,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.profile,
       page: () => const ProfileScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.dialogue,
+      page: () => const DialogueScreen(),
     ),
   ];
 }
