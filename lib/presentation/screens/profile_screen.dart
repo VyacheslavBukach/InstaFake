@@ -29,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         title: Row(
           children: [
             Container(
-              constraints: BoxConstraints(maxWidth: Get.width * 0.6),
+              constraints: BoxConstraints(maxWidth: Get.width * 0.4),
               child: Obx(
                 () => Text(
                   _profileController.user().username,
@@ -119,13 +119,16 @@ class _ProfileScreenState extends State<ProfileScreen>
             Obx(
               () => Text(
                 _profileController.user().name,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
                 style: const TextStyle(fontSize: 15),
               ),
             ),
             Obx(
-              () => _profileController.user().bio.isNotEmpty
-                  ? Text(_profileController.user().bio)
-                  : const SizedBox.shrink(),
+              () => Visibility(
+                visible: _profileController.user().bio.isNotEmpty,
+                child: Text(_profileController.user().bio),
+              ),
             ),
             const SizedBox(height: 16),
             TextButton(
