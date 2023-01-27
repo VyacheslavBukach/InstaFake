@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../presentation/bindings/dialogue_binding.dart';
 import '../presentation/bindings/direct_binding.dart';
 import '../presentation/bindings/edit_profile_binding.dart';
 import '../presentation/bindings/main_binding.dart';
@@ -60,6 +61,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.dialogue,
       page: () => const DialogueScreen(),
+      binding: DialogueBinding(),
     ),
   ];
 }

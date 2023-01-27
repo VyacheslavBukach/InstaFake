@@ -1,23 +1,41 @@
 import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class DialogueScreen extends StatelessWidget {
+import '../controllers/dialogue_controller.dart';
+import '../widgets/avatar_widget.dart';
+
+class DialogueScreen extends GetView<DialogueController> {
   const DialogueScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            CircleAvatar(),
-            Column(
-              children: [
-                Text('title'),
-                Text('subtitle'),
-              ],
-            ),
-          ],
+        title: Obx(
+          () => Row(
+            children: [
+              AvatarWidget(
+                avatar: controller.user.avatar,
+                hasStory: controller.user.storyList.isNotEmpty,
+                radius: 16,
+              ),
+              const SizedBox(width: 8),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    controller.user.name,
+                    style: Get.textTheme.bodyLarge,
+                  ),
+                  Text(
+                    controller.user.username,
+                    style: Get.textTheme.bodySmall,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.phone)),
