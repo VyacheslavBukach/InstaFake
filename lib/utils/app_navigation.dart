@@ -7,6 +7,7 @@ import '../presentation/bindings/story_editor_binding.dart';
 import '../presentation/screens/direct_screen.dart';
 import '../presentation/screens/edit_profile_screen.dart';
 import '../presentation/screens/main_screen.dart';
+import '../presentation/screens/profile_screen.dart';
 import '../presentation/screens/story_editor_screen.dart';
 import '../presentation/screens/user_editor_screen.dart';
 
@@ -18,6 +19,7 @@ class AppRoutes {
   static const storyEditor = '/story-editor';
   static const userEditor = '/user-editor';
   static const direct = '/direct';
+  static const profile = '/profile';
 }
 
 class AppPages {
@@ -48,6 +50,10 @@ class AppPages {
       name: AppRoutes.direct,
       page: () => const DirectScreen(),
       binding: DirectBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.profile,
+      page: () => const ProfileScreen(),
     ),
   ];
 }

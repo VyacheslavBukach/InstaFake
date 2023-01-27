@@ -43,7 +43,7 @@ class MainBinding extends Bindings {
       ),
     );
 
-    Get.lazyPut<ProfileController>(
+    Get.create<ProfileController>(
       () => ProfileController(
         Get.find<UsersController>(),
       ),

@@ -53,7 +53,7 @@ class DirectScreen extends GetView<DirectController> {
                                     AvatarWidget(
                                       onTap: () {
                                         Get.toNamed(
-                                          AppRoutes.editProfile,
+                                          AppRoutes.profile,
                                           arguments: controller
                                               .usersWithOnlineStatus()[i]
                                               .uuid,
