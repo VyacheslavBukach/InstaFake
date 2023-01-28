@@ -62,6 +62,7 @@ class EditProfileController extends GetxController {
       avatar: avatarPath.value,
       storyList: edittedUser.storyList,
       isOnline: isProfileOnline.value,
+      videoList: edittedUser.videoList,
     );
 
     _usersController.saveUser(updatedUser);

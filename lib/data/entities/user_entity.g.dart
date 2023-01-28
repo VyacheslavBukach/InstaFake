@@ -29,13 +29,14 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       storyList: (fields[9] as List).cast<String>(),
       userType: fields[10] as UserType,
       isOnline: fields[11] as bool,
+      videoList: (fields[12] as List).cast<String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, UserEntity obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.uuid)
       ..writeByte(1)
@@ -59,7 +60,9 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       ..writeByte(10)
       ..write(obj.userType)
       ..writeByte(11)
-      ..write(obj.isOnline);
+      ..write(obj.isOnline)
+      ..writeByte(12)
+      ..write(obj.videoList);
   }
 
   @override

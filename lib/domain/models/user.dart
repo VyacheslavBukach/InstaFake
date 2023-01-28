@@ -14,6 +14,7 @@ class User {
   bool isVerified;
   File? avatar;
   List<String> storyList;
+  List<String> videoList;
   bool isOnline;
 
   User({
@@ -28,6 +29,7 @@ class User {
     required this.isVerified,
     required this.avatar,
     required this.storyList,
+    required this.videoList,
     required this.isOnline,
   });
 
@@ -44,6 +46,7 @@ class User {
           isVerified: false,
           avatar: null,
           storyList: [],
+          videoList: [],
           isOnline: true,
         );
 
@@ -60,6 +63,7 @@ class User {
           isVerified: true,
           avatar: null,
           storyList: [],
+          videoList: [],
           isOnline: true,
         );
 }

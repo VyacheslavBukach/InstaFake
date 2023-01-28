@@ -18,6 +18,7 @@ class UserMapper {
         storyList: userEntity.storyList,
         userType: userEntity.userType,
         isOnline: userEntity.isOnline,
+        videoList: userEntity.videoList,
       );
 
   UserEntity toUserEntity(User user) => UserEntity(
@@ -33,5 +34,6 @@ class UserMapper {
         storyList: user.storyList,
         userType: user.userType,
         isOnline: user.isOnline,
+        videoList: user.videoList,
       );
 }

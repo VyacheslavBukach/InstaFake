@@ -42,6 +42,9 @@ class UserEntity extends HiveObject {
   @HiveField(11)
   final bool isOnline;
 
+  @HiveField(12)
+  final List<String> videoList;
+
   UserEntity({
     required this.uuid,
     required this.posts,
@@ -55,5 +58,6 @@ class UserEntity extends HiveObject {
     required this.storyList,
     required this.userType,
     required this.isOnline,
+    required this.videoList,
   });
 }
