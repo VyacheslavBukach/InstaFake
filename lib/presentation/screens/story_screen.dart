@@ -37,7 +37,7 @@ class StoryScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 44, left: 8),
+                padding: const EdgeInsets.only(top: 44, left: 8, right: 8),
                 child: Row(
                   children: [
                     CircleAvatar(
@@ -51,12 +51,15 @@ class StoryScreen extends StatelessWidget {
                           : SvgPicture.asset('assets/empty_avatar.svg'),
                     ),
                     const SizedBox(width: 8),
-                    Text(
-                      user.username,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        user.username,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 17,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

@@ -13,28 +13,24 @@ class DialogueScreen extends GetView<DialogueController> {
     return Scaffold(
       appBar: AppBar(
         title: Obx(
-          () => Row(
-            children: [
-              AvatarWidget(
-                avatar: controller.user.avatar,
-                hasStory: controller.user.storyList.isNotEmpty,
-                radius: 16,
-              ),
-              const SizedBox(width: 8),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    controller.user.name,
-                    style: Get.textTheme.bodyLarge,
-                  ),
-                  Text(
-                    controller.user.username,
-                    style: Get.textTheme.bodySmall,
-                  ),
-                ],
-              ),
-            ],
+          () => ListTile(
+            leading: AvatarWidget(
+              avatar: controller.user.avatar,
+              hasStory: controller.user.storyList.isNotEmpty,
+              radius: 16,
+            ),
+            title: Text(
+              controller.user.name,
+              overflow: TextOverflow.ellipsis,
+              style: Get.textTheme.bodyLarge,
+            ),
+            subtitle: Text(
+              controller.user.username,
+              overflow: TextOverflow.ellipsis,
+              style: Get.textTheme.bodySmall,
+            ),
+            contentPadding: const EdgeInsets.all(0),
+            visualDensity: VisualDensity.compact,
           ),
         ),
         actions: [

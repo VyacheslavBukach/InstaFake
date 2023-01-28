@@ -24,7 +24,10 @@ class StoryEditorScreen extends GetView<StoryEditorController> {
               hasStory: controller.users()[listIndex].storyList.isNotEmpty,
               radius: 20,
             ),
-            title: Text(controller.users()[listIndex].username),
+            title: Text(
+              controller.users()[listIndex].username,
+              overflow: TextOverflow.ellipsis,
+            ),
             subtitle: Text(
               '${controller.users()[listIndex].storyList.length} stories added',
             ),

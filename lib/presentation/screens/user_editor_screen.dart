@@ -45,9 +45,13 @@ class UserEditorScreen extends GetView<UsersController> {
                 hasStory: controller.adminUser().storyList.isNotEmpty,
                 radius: 20,
               ),
-              title: Text(controller.adminUser().username),
+              title: Text(
+                controller.adminUser().username,
+                overflow: TextOverflow.ellipsis,
+              ),
               subtitle: Text(
                 controller.adminUser().name,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
@@ -75,9 +79,13 @@ class UserEditorScreen extends GetView<UsersController> {
                         controller.users()[listIndex].storyList.isNotEmpty,
                     radius: 20,
                   ),
-                  title: Text(controller.users()[listIndex].username),
+                  title: Text(
+                    controller.users()[listIndex].username,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   subtitle: Text(
                     controller.users()[listIndex].name,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   trailing: IconButton(
                     onPressed: () {
