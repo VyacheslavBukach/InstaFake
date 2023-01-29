@@ -12,7 +12,7 @@ import '../presentation/screens/edit_profile_screen.dart';
 import '../presentation/screens/main_screen.dart';
 import '../presentation/screens/profile_screen.dart';
 import '../presentation/screens/story_editor_screen.dart';
-import '../presentation/screens/user_editor_screen.dart';
+import '../presentation/screens/users_editor_screen.dart';
 import '../presentation/screens/video_picker_screen.dart';
 
 class AppRoutes {
@@ -50,7 +50,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.userEditor,
-      page: () => const UserEditorScreen(),
+      page: () => const UsersEditorScreen(),
     ),
     GetPage(
       name: AppRoutes.direct,

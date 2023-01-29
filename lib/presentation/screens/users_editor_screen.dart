@@ -5,8 +5,8 @@ import '../../utils/app_navigation.dart';
 import '../controllers/users_controller.dart';
 import '../widgets/avatar_widget.dart';
 
-class UserEditorScreen extends GetView<UsersController> {
-  const UserEditorScreen({Key? key}) : super(key: key);
+class UsersEditorScreen extends GetView<UsersController> {
+  const UsersEditorScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
