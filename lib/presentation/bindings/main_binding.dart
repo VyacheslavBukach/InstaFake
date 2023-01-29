@@ -50,7 +50,9 @@ class MainBinding extends Bindings {
     );
 
     Get.lazyPut<StoriesFeedController>(
-      () => StoriesFeedController(),
+      () => StoriesFeedController(
+        Get.find<UsersController>(),
+      ),
     );
 
     // Bottom Navigation Controllers

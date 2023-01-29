@@ -4,9 +4,11 @@ import './users_controller.dart';
 import '../../domain/models/user.dart';
 
 class DirectController extends GetxController {
+  final UsersController _usersController;
   late final RxList<User> users;
   final RxList<User> usersWithOnlineStatus = <User>[].obs;
-  final _usersController = Get.find<UsersController>();
+
+  DirectController(this._usersController);
 
   @override
   void onInit() {

@@ -4,8 +4,10 @@ import './users_controller.dart';
 import '../../domain/models/user.dart';
 
 class StoriesFeedController extends GetxController {
+  final UsersController _usersController;
   final usersWithStories = <User>[].obs;
-  final _usersController = Get.find<UsersController>();
+
+  StoriesFeedController(this._usersController);
 
   @override
   void onInit() {
