@@ -62,39 +62,46 @@ class UsersEditorScreen extends GetView<UsersController> {
               style: Get.textTheme.bodyLarge,
             ),
           ),
-          Expanded(
-            child: Obx(
-              () => ListView.builder(
-                itemCount: controller.users().length,
-                itemBuilder: (ctx, listIndex) => ListTile(
-                  onTap: () {
-                    Get.toNamed(
-                      AppRoutes.editProfile,
-                      arguments: controller.users()[listIndex].uuid,
-                    );
-                  },
-                  leading: AvatarWidget(
-                    avatar: controller.users()[listIndex].avatar,
-                    hasStory:
-                        controller.users()[listIndex].storyList.isNotEmpty,
-                    radius: 20,
-                  ),
-                  title: Text(
-                    controller.users()[listIndex].username,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    controller.users()[listIndex].name,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {
-                      controller.deleteUser(controller.users()[listIndex].uuid);
-                    },
-                    icon: const Icon(Icons.delete),
-                  ),
-                ),
-              ),
+          Obx(
+            () => Expanded(
+              child: controller.users().isEmpty
+                  ? Center(
+                      child: Text('no_users_added'.tr),
+                    )
+                  : ListView.builder(
+                      itemCount: controller.users().length,
+                      itemBuilder: (ctx, listIndex) => ListTile(
+                        onTap: () {
+                          Get.toNamed(
+                            AppRoutes.editProfile,
+                            arguments: controller.users()[listIndex].uuid,
+                          );
+                        },
+                        leading: AvatarWidget(
+                          avatar: controller.users()[listIndex].avatar,
+                          hasStory: controller
+                              .users()[listIndex]
+                              .storyList
+                              .isNotEmpty,
+                          radius: 20,
+                        ),
+                        title: Text(
+                          controller.users()[listIndex].username,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        subtitle: Text(
+                          controller.users()[listIndex].name,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        trailing: IconButton(
+                          onPressed: () {
+                            controller
+                                .deleteUser(controller.users()[listIndex].uuid);
+                          },
+                          icon: const Icon(Icons.delete),
+                        ),
+                      ),
+                    ),
             ),
           ),
         ],

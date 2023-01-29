@@ -34,6 +34,7 @@ class AppTranslation extends Translations {
           'active_desc': 'Change profile status to online',
           'my_profile': 'My profile',
           'users_editor': 'Users editor',
+          'no_users_added': 'No users added',
         },
         'ru_RU': {
           'app_name': 'ИнстаФэйк',
@@ -66,6 +67,7 @@ class AppTranslation extends Translations {
           'active_desc': 'Изменить статус профиля на онлайн',
           'my_profile': 'Мой профиль',
           'users_editor': 'Редактор пользователей',
+          'no_users_added': 'Пользователи не добавлены',
         }
       };
 }
