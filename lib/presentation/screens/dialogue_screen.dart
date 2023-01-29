@@ -2,6 +2,7 @@ import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../utils/app_navigation.dart';
 import '../controllers/dialogue_controller.dart';
 import '../widgets/avatar_widget.dart';
 
@@ -34,8 +35,33 @@ class DialogueScreen extends GetView<DialogueController> {
           ),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.phone)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.videocam_outlined)),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.phone),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.videocam_outlined),
+          ),
+          PopupMenuButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            onSelected: (id) {
+              if (id == 1) {
+                Get.toNamed(
+                  AppRoutes.videoEditor,
+                  arguments: controller.user.uuid,
+                );
+              }
+            },
+            itemBuilder: (_) => [
+              PopupMenuItem(
+                value: 1,
+                child: Text('Choose video'),
+              ),
+            ],
+          ),
         ],
       ),
       body: Column(

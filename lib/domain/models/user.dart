@@ -1,23 +1,25 @@
 import 'dart:io';
 
+import 'package:equatable/equatable.dart';
+
 import '../../utils/user_type.dart';
 
-class User {
+class User extends Equatable {
   final String uuid;
-  UserType userType;
-  int posts;
-  int followers;
-  int followings;
-  String name;
-  String username;
-  String bio;
-  bool isVerified;
-  File? avatar;
-  List<String> storyList;
-  List<String> videoList;
-  bool isOnline;
+  final UserType userType;
+  final int posts;
+  final int followers;
+  final int followings;
+  final String name;
+  final String username;
+  final String bio;
+  final bool isVerified;
+  final File? avatar;
+  final List<String> storyList;
+  final List<String> videoList;
+  final bool isOnline;
 
-  User({
+  const User({
     required this.uuid,
     required this.userType,
     required this.posts,
@@ -66,4 +68,24 @@ class User {
           videoList: [],
           isOnline: true,
         );
+
+  @override
+  List<Object?> get props => [
+        uuid,
+        userType,
+        posts,
+        followers,
+        followings,
+        name,
+        username,
+        bio,
+        isVerified,
+        avatar,
+        storyList,
+        videoList,
+        isOnline,
+      ];
+
+  @override
+  bool get stringify => true;
 }
