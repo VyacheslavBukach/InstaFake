@@ -84,9 +84,7 @@ class DirectScreen extends GetView<DirectController> {
                                     ],
                                   ),
                                   Text(
-                                    controller
-                                        .usersWithOnlineStatus()[i]
-                                        .username,
+                                    controller.usersWithOnlineStatus()[i].name,
                                     style: Get.textTheme.labelMedium,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
