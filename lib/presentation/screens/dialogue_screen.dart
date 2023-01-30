@@ -50,7 +50,7 @@ class DialogueScreen extends GetView<DialogueController> {
             onSelected: (id) {
               if (id == 1) {
                 Get.toNamed(
-                  AppRoutes.videoEditor,
+                  AppRoutes.videoPicker,
                   arguments: controller.user().uuid,
                 );
               }

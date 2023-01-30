@@ -8,10 +8,10 @@ import 'package:story/story.dart';
 
 import '../../domain/models/user.dart';
 
-class StoryScreen extends StatelessWidget {
+class StoryOverviewScreen extends StatelessWidget {
   final User user;
 
-  const StoryScreen({
+  const StoryOverviewScreen({
     Key? key,
     required this.user,
   }) : super(key: key);

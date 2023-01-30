@@ -12,7 +12,7 @@ import '../presentation/screens/direct_screen.dart';
 import '../presentation/screens/edit_profile_screen.dart';
 import '../presentation/screens/main_screen.dart';
 import '../presentation/screens/profile_screen.dart';
-import '../presentation/screens/story_editor_screen.dart';
+import '../presentation/screens/story_picker_screen.dart';
 import '../presentation/screens/users_editor_screen.dart';
 import '../presentation/screens/video_picker_screen.dart';
 
@@ -21,12 +21,12 @@ class AppRoutes {
 
   static const main = '/';
   static const editProfile = '/edit-profile';
-  static const storyEditor = '/story-editor';
-  static const userEditor = '/user-editor';
+  static const storyPicker = '/story-picker';
+  static const usersEditor = '/users-editor';
   static const direct = '/direct';
   static const profile = '/profile';
   static const dialogue = '/dialogue';
-  static const videoEditor = '/video-editor';
+  static const videoPicker = '/video-picker';
 }
 
 class AppPages {
@@ -45,12 +45,12 @@ class AppPages {
       fullscreenDialog: true,
     ),
     GetPage(
-      name: AppRoutes.storyEditor,
-      page: () => const StoryEditorScreen(),
+      name: AppRoutes.storyPicker,
+      page: () => const StoryPickerScreen(),
       binding: StoryEditorBinding(),
     ),
     GetPage(
-      name: AppRoutes.userEditor,
+      name: AppRoutes.usersEditor,
       page: () => const UsersEditorScreen(),
     ),
     GetPage(
@@ -69,7 +69,7 @@ class AppPages {
       binding: DialogueBinding(),
     ),
     GetPage(
-      name: AppRoutes.videoEditor,
+      name: AppRoutes.videoPicker,
       page: () => const VideoPickerScreen(),
       binding: VideoPickerBinding(),
     ),

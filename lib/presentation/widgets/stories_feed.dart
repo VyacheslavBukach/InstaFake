@@ -5,7 +5,7 @@ import 'package:insta_fake/utils/user_type.dart';
 import './avatar_widget.dart';
 import '../../utils/app_navigation.dart';
 import '../controllers/stories_feed_controller.dart';
-import '../screens/story_screen.dart';
+import '../screens/story_overview_screen.dart';
 
 class StoriesFeed extends GetView<StoriesFeedController> {
   const StoriesFeed({Key? key}) : super(key: key);
@@ -35,12 +35,12 @@ class StoriesFeed extends GetView<StoriesFeedController> {
                             if (controller.usersWithStories()[i].userType ==
                                 UserType.user) {
                               Get.to(
-                                StoryScreen(
+                                StoryOverviewScreen(
                                   user: controller.usersWithStories()[i],
                                 ),
                               );
                             } else {
-                              Get.toNamed(AppRoutes.storyEditor);
+                              Get.toNamed(AppRoutes.storyPicker);
                             }
                           },
                         )
@@ -53,7 +53,7 @@ class StoriesFeed extends GetView<StoriesFeedController> {
                           radius: 30,
                           onTap: () {
                             Get.to(
-                              StoryScreen(
+                              StoryOverviewScreen(
                                 user: controller.usersWithStories()[i],
                               ),
                             );

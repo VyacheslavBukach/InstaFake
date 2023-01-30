@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import './story_screen.dart';
+import 'story_overview_screen.dart';
 import '../../utils/app_navigation.dart';
 import '../controllers/profile_controller.dart';
 import '../widgets/avatar_widget.dart';
@@ -94,7 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     onTap: () {
                       if (_profileController.user().storyList.isNotEmpty) {
                         Get.to(
-                          StoryScreen(user: _profileController.user()),
+                          StoryOverviewScreen(user: _profileController.user()),
                         );
                       }
                     },
@@ -180,7 +180,7 @@ final _userTiles = [
     title: Text('story'.tr),
     onTap: () {
       Get.back(); // Close bottomsheet
-      Get.toNamed(AppRoutes.storyEditor);
+      Get.toNamed(AppRoutes.storyPicker);
     },
   ),
   ListTile(
@@ -201,7 +201,7 @@ final _menuTiles = [
     title: Text('users_editor'.tr),
     onTap: () {
       Get.back();
-      Get.toNamed(AppRoutes.userEditor);
+      Get.toNamed(AppRoutes.usersEditor);
     },
   ),
 ];
