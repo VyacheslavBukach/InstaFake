@@ -11,8 +11,14 @@ class UsersController extends GetxController {
 
   UsersController(this._userRepository);
 
+  @override
+  void onInit() async {
+    super.onInit();
+    await _fetchUsers();
+  }
+
   Future<void> _setAdmin() async {
-    var admin = await _userRepository.createOrFetchAdminProfile();
+    var admin = await _userRepository.fetchAdminProfile();
     adminUser(admin);
   }
 
@@ -24,8 +30,8 @@ class UsersController extends GetxController {
     return users.firstWhere((user) => user.uuid == userUuid);
   }
 
-  User createNewUserProfile() {
-    return _userRepository.createNewUserProfile();
+  User createNewUserModel() {
+    return _userRepository.createNewUserModel();
   }
 
   Future<void> _fetchUsers() async {
@@ -49,13 +55,7 @@ class UsersController extends GetxController {
   }
 
   Future<void> deleteUser(String userUuid) async {
-    await _userRepository.deleteUserByUuid(userUuid);
+    await _userRepository.deleteUser(userUuid);
     users.removeWhere((element) => element.uuid == userUuid);
-  }
-
-  @override
-  void onInit() async {
-    super.onInit();
-    await _fetchUsers();
   }
 }

@@ -7,7 +7,7 @@ import '../controllers/users_controller.dart';
 class EditProfileBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<EditProfileController>(
+    Get.lazyPut(
       () => EditProfileController(
         Get.find<UsersController>(),
         Get.find<ImagePicker>(),

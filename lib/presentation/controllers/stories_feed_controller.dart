@@ -17,7 +17,7 @@ class StoriesFeedController extends GetxController {
   }
 
   void _setUsersWithStories(List<User> users) {
-    List<User> usersWithStoriesList = [
+    var usersWithStoriesList = [
       _usersController.adminUser(),
       ...users.where((user) => user.storyList.isNotEmpty).toList(),
     ];

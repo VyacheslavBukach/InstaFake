@@ -19,7 +19,7 @@ class HiveUserRepository implements UserRepository {
   );
 
   @override
-  Future<User> createOrFetchAdminProfile() async {
+  Future<User> fetchAdminProfile() async {
     var isBoxEmpty = _box.isEmpty;
     if (isBoxEmpty) {
       var userUuid = _uuid.v4();
@@ -39,7 +39,7 @@ class HiveUserRepository implements UserRepository {
   }
 
   @override
-  User createNewUserProfile() {
+  User createNewUserModel() {
     var userUuid = _uuid.v4();
     print('return new user profile with uuid = $userUuid');
 
@@ -60,11 +60,12 @@ class HiveUserRepository implements UserRepository {
         .map((userEntity) => _userMapper.toUser(userEntity))
         .toList();
     print('fetch users');
+
     return users;
   }
 
   @override
-  Future<void> deleteUserByUuid(String userUuid) async {
+  Future<void> deleteUser(String userUuid) async {
     await _box.delete(userUuid);
     print('delete user with uuid = $userUuid');
   }

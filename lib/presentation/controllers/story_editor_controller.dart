@@ -18,7 +18,7 @@ class StoryEditorController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    List<User> usersWithAdmin = [
+    var usersWithAdmin = [
       _usersController.adminUser(),
       ..._usersController.users(),
     ];

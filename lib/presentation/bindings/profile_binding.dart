@@ -1,15 +1,16 @@
 import 'package:get/get.dart';
 
-import '../controllers/direct_controller.dart';
+import '../controllers/profile_controller.dart';
 import '../controllers/users_controller.dart';
 
-class DirectBinding extends Bindings {
+class ProfileBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => DirectController(
+      () => ProfileController(
         Get.find<UsersController>(),
       ),
+      tag: 'user',
     );
   }
 }

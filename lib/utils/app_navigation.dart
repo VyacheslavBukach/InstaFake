@@ -4,6 +4,7 @@ import '../presentation/bindings/dialogue_binding.dart';
 import '../presentation/bindings/direct_binding.dart';
 import '../presentation/bindings/edit_profile_binding.dart';
 import '../presentation/bindings/main_binding.dart';
+import '../presentation/bindings/profile_binding.dart';
 import '../presentation/bindings/story_editor_binding.dart';
 import '../presentation/bindings/video_picker_binding.dart';
 import '../presentation/screens/dialogue_screen.dart';
@@ -60,6 +61,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.profile,
       page: () => const ProfileScreen(),
+      binding: ProfileBinding(),
     ),
     GetPage(
       name: AppRoutes.dialogue,

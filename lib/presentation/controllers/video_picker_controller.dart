@@ -10,6 +10,7 @@ class VideoPickerController extends GetxController {
   final ImagePicker _imagePicker;
   final user = User.user(uuid: '').obs;
   final _userUuid = Get.arguments;
+  late final Worker _ever;
 
   VideoPickerController(
     this._usersController,
@@ -20,13 +21,16 @@ class VideoPickerController extends GetxController {
   void onInit() {
     super.onInit();
     user(_usersController.fetchUser(_userUuid));
-    everAll([
-      _usersController.adminUser,
-      _usersController.users,
-    ], (_) {
+    _ever = ever(_usersController.users, (_) {
       user(_usersController.fetchUser(_userUuid));
       user.refresh();
     });
+  }
+
+  @override
+  void onClose() {
+    _ever.dispose();
+    super.onClose();
   }
 
   Future<void> takeVideoFromGallery() async {

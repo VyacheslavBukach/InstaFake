@@ -15,17 +15,23 @@ import '../controllers/users_controller.dart';
 class MainBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put<NavigationController>(NavigationController());
+    Get.put(
+      NavigationController(),
+    );
 
-    Get.put<Uuid>(const Uuid());
+    Get.put(
+      const Uuid(),
+    );
 
-    Get.lazyPut<ImagePicker>(
+    Get.lazyPut(
       () => ImagePicker(),
       fenix: true,
     );
 
     // Mappers
-    Get.put<UserMapper>(UserMapper());
+    Get.put(
+      UserMapper(),
+    );
 
     // Repositories
     Get.put<UserRepository>(
@@ -37,24 +43,23 @@ class MainBinding extends Bindings {
     );
 
     // Controllers
-    Get.put<UsersController>(
+    Get.put(
       UsersController(
         Get.find<UserRepository>(),
       ),
     );
 
-    Get.create<ProfileController>(
+    Get.lazyPut(
       () => ProfileController(
         Get.find<UsersController>(),
       ),
+      tag: 'admin',
     );
 
-    Get.lazyPut<StoriesFeedController>(
+    Get.lazyPut(
       () => StoriesFeedController(
         Get.find<UsersController>(),
       ),
     );
-
-    // Bottom Navigation Controllers
   }
 }

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class NavigationController extends GetxController {
   final pageIndex = 0.obs;
-  late PageController pageController;
+  late final PageController pageController;
 
   void goToPage(int index) {
     pageIndex(index);
@@ -13,8 +13,8 @@ class NavigationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    ever(pageIndex, (_) => print('Page changed to ${pageIndex.value}'));
     pageController = PageController(initialPage: pageIndex.value);
+    ever(pageIndex, (index) => print('Page changed to $index'));
   }
 
   @override

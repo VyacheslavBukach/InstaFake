@@ -6,13 +6,13 @@ import '../../domain/models/user.dart';
 class DialogueController extends GetxController {
   final UsersController _usersController;
   final String _userUuid = Get.arguments;
-  User user = User.user(uuid: '');
+  final Rx<User> user = User.user(uuid: '').obs;
 
   DialogueController(this._usersController);
 
   @override
   void onInit() {
     super.onInit();
-    user = _usersController.fetchUser(_userUuid);
+    user(_usersController.fetchUser(_userUuid));
   }
 }

@@ -35,9 +35,30 @@ class EditProfileController extends GetxController {
     this._imagePicker,
   );
 
+  @override
+  void onInit() {
+    super.onInit();
+    _setUser();
+    _initTextEditingControllers();
+    avatarPath(edittedUser.avatar);
+    isConfirmedProfile(edittedUser.isVerified);
+    isProfileOnline(edittedUser.isOnline);
+  }
+
+  @override
+  void onClose() {
+    nameTextEditingController.dispose();
+    userNameTextEditingController.dispose();
+    postsTextEditingController.dispose();
+    followersTextEditingController.dispose();
+    bioTextEditingController.dispose();
+    followingsTextEditingController.dispose();
+    super.onClose();
+  }
+
   void _setUser() {
     if (userUuid == null) {
-      edittedUser = _usersController.createNewUserProfile();
+      edittedUser = _usersController.createNewUserModel();
     } else {
       edittedUser = _usersController.fetchUser(userUuid ?? '');
     }
@@ -96,26 +117,5 @@ class EditProfileController extends GetxController {
     followersTextEditingController.text = edittedUser.followers.toString();
     followingsTextEditingController.text = edittedUser.followings.toString();
     bioTextEditingController.text = edittedUser.bio;
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    _setUser();
-    _initTextEditingControllers();
-    avatarPath(edittedUser.avatar);
-    isConfirmedProfile(edittedUser.isVerified);
-    isProfileOnline(edittedUser.isOnline);
-  }
-
-  @override
-  void onClose() {
-    nameTextEditingController.dispose();
-    userNameTextEditingController.dispose();
-    postsTextEditingController.dispose();
-    followersTextEditingController.dispose();
-    bioTextEditingController.dispose();
-    followingsTextEditingController.dispose();
-    super.onClose();
   }
 }

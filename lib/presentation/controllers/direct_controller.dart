@@ -7,6 +7,7 @@ class DirectController extends GetxController {
   final UsersController _usersController;
   late final RxList<User> users;
   final RxList<User> usersWithOnlineStatus = <User>[].obs;
+  late final Worker _everAll;
 
   DirectController(this._usersController);
 
@@ -15,16 +16,22 @@ class DirectController extends GetxController {
     super.onInit();
     users = _usersController.users;
     _setUsers();
-    everAll([
+    _everAll = everAll([
       _usersController.adminUser,
-      _usersController.users,
+      users,
     ], (_) => _setUsers());
+  }
+
+  @override
+  void onClose() {
+    _everAll.dispose();
+    super.onClose();
   }
 
   void _setUsers() {
     var usersWithStoriesList = [
       _usersController.adminUser(),
-      ..._usersController.users.where((user) => user.isOnline).toList(),
+      ...users.where((user) => user.isOnline).toList(),
     ];
     usersWithOnlineStatus(usersWithStoriesList);
   }

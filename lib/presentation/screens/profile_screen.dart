@@ -18,7 +18,8 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen>
     with AutomaticKeepAliveClientMixin {
-  final _profileController = Get.find<ProfileController>();
+  final tag = Get.arguments == null ? 'admin' : 'user';
+  late final _profileController = Get.find<ProfileController>(tag: tag);
 
   @override
   Widget build(BuildContext context) {

@@ -16,17 +16,17 @@ class DialogueScreen extends GetView<DialogueController> {
         title: Obx(
           () => ListTile(
             leading: AvatarWidget(
-              avatar: controller.user.avatar,
-              hasStory: controller.user.storyList.isNotEmpty,
+              avatar: controller.user().avatar,
+              hasStory: controller.user().storyList.isNotEmpty,
               radius: 16,
             ),
             title: Text(
-              controller.user.name,
+              controller.user().name,
               overflow: TextOverflow.ellipsis,
               style: Get.textTheme.bodyLarge,
             ),
             subtitle: Text(
-              controller.user.username,
+              controller.user().username,
               overflow: TextOverflow.ellipsis,
               style: Get.textTheme.bodySmall,
             ),
@@ -51,14 +51,14 @@ class DialogueScreen extends GetView<DialogueController> {
               if (id == 1) {
                 Get.toNamed(
                   AppRoutes.videoEditor,
-                  arguments: controller.user.uuid,
+                  arguments: controller.user().uuid,
                 );
               }
             },
             itemBuilder: (_) => [
               PopupMenuItem(
                 value: 1,
-                child: Text('Choose video'),
+                child: Text('choose_a_video'.tr),
               ),
             ],
           ),
