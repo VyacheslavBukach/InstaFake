@@ -41,7 +41,17 @@ class DialogueScreen extends GetView<DialogueController> {
           ),
           IconButton(
             onPressed: () {
-              Get.toNamed(AppRoutes.videoCall);
+              if (controller.user().videoList.isNotEmpty) {
+                Get.toNamed(
+                  AppRoutes.videoCall,
+                  arguments: controller.user().videoList.first,
+                );
+              } else {
+                Get.toNamed(
+                  AppRoutes.videoPicker,
+                  arguments: controller.user().uuid,
+                );
+              }
             },
             icon: const Icon(Icons.videocam_outlined),
           ),

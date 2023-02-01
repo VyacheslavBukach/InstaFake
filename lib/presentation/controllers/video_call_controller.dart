@@ -7,8 +7,8 @@ import 'package:video_player/video_player.dart';
 class VideoCallController extends GetxController {
   late VideoPlayerController videoPlayerController;
   ChewieController? chewieController;
-
   final isInit = false.obs;
+  final videoPath = Get.arguments;
 
   @override
   void onInit() {
@@ -24,10 +24,7 @@ class VideoCallController extends GetxController {
   }
 
   Future<void> _initializePlayer() async {
-    videoPlayerController = VideoPlayerController.file(
-      File(
-          '/data/user/0/com.example.insta_fake/cache/image_picker3639902068334637670.mp4'),
-    );
+    videoPlayerController = VideoPlayerController.file(File(videoPath));
 
     await videoPlayerController.initialize();
 
