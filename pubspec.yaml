@@ -19,6 +19,7 @@ dependencies:
   flutter_svg: ^1.1.5
   image_picker: ^0.8.6
   video_player: ^2.4.7
+  chewie: ^1.4.0
   story: ^0.8.0
   uuid: ^3.0.7
   chat_bubbles: ^1.4.1

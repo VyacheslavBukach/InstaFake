@@ -6,6 +6,7 @@ import '../presentation/bindings/edit_profile_binding.dart';
 import '../presentation/bindings/main_binding.dart';
 import '../presentation/bindings/profile_binding.dart';
 import '../presentation/bindings/story_editor_binding.dart';
+import '../presentation/bindings/video_call_binding.dart';
 import '../presentation/bindings/video_picker_binding.dart';
 import '../presentation/screens/dialogue_screen.dart';
 import '../presentation/screens/direct_screen.dart';
@@ -14,6 +15,7 @@ import '../presentation/screens/main_screen.dart';
 import '../presentation/screens/profile_screen.dart';
 import '../presentation/screens/story_picker_screen.dart';
 import '../presentation/screens/users_editor_screen.dart';
+import '../presentation/screens/video_call_screen.dart';
 import '../presentation/screens/video_picker_screen.dart';
 
 class AppRoutes {
@@ -27,6 +29,7 @@ class AppRoutes {
   static const profile = '/profile';
   static const dialogue = '/dialogue';
   static const videoPicker = '/video-picker';
+  static const videoCall = '/video-call';
 }
 
 class AppPages {
@@ -72,6 +75,11 @@ class AppPages {
       name: AppRoutes.videoPicker,
       page: () => const VideoPickerScreen(),
       binding: VideoPickerBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.videoCall,
+      page: () => const VideoCallScreen(),
+      binding: VideoCallBinding(),
     ),
   ];
 }

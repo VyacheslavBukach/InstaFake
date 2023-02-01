@@ -35,6 +35,9 @@ class VideoPickerScreen extends GetView<VideoPickerController> {
               () => ListView.builder(
                 itemCount: controller.user().videoList.length,
                 itemBuilder: (ctx, listIndex) => ListTile(
+                  onTap: () {
+                    print(controller.user().videoList[listIndex]);
+                  },
                   title: Text(
                     controller.user().videoList[listIndex],
                     overflow: TextOverflow.ellipsis,

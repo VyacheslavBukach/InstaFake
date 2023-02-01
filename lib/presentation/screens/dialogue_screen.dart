@@ -40,7 +40,9 @@ class DialogueScreen extends GetView<DialogueController> {
             icon: const Icon(Icons.phone),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(AppRoutes.videoCall);
+            },
             icon: const Icon(Icons.videocam_outlined),
           ),
           PopupMenuButton(
