@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/app_navigation.dart';
 import '../controllers/users_controller.dart';
 import '../widgets/avatar_widget.dart';
 
@@ -15,9 +14,7 @@ class UsersEditorScreen extends GetView<UsersController> {
         title: Text('users_editor'.tr),
         actions: [
           IconButton(
-            onPressed: () {
-              Get.toNamed(AppRoutes.editProfile);
-            },
+            onPressed: () => controller.openEditProfile(),
             icon: const Icon(Icons.add_reaction_outlined),
           ),
         ],
@@ -34,12 +31,8 @@ class UsersEditorScreen extends GetView<UsersController> {
           ),
           Obx(
             () => ListTile(
-              onTap: () {
-                Get.toNamed(
-                  AppRoutes.editProfile,
-                  arguments: controller.adminUser().uuid,
-                );
-              },
+              onTap: () => controller.openEditProfile(
+                  userUuid: controller.adminUser().uuid),
               leading: AvatarWidget(
                 avatar: controller.adminUser().avatar,
                 hasStory: controller.adminUser().storyList.isNotEmpty,
@@ -70,33 +63,27 @@ class UsersEditorScreen extends GetView<UsersController> {
                     )
                   : ListView.builder(
                       itemCount: controller.users().length,
-                      itemBuilder: (ctx, listIndex) => ListTile(
-                        onTap: () {
-                          Get.toNamed(
-                            AppRoutes.editProfile,
-                            arguments: controller.users()[listIndex].uuid,
-                          );
-                        },
+                      itemBuilder: (_, listIndex) => ListTile(
+                        onTap: () => controller.openEditProfile(
+                            userUuid: controller.users[listIndex].uuid),
                         leading: AvatarWidget(
-                          avatar: controller.users()[listIndex].avatar,
-                          hasStory: controller
-                              .users()[listIndex]
-                              .storyList
-                              .isNotEmpty,
+                          avatar: controller.users[listIndex].avatar,
+                          hasStory:
+                              controller.users[listIndex].storyList.isNotEmpty,
                           radius: 20,
                         ),
                         title: Text(
-                          controller.users()[listIndex].username,
+                          controller.users[listIndex].username,
                           overflow: TextOverflow.ellipsis,
                         ),
                         subtitle: Text(
-                          controller.users()[listIndex].name,
+                          controller.users[listIndex].name,
                           overflow: TextOverflow.ellipsis,
                         ),
                         trailing: IconButton(
                           onPressed: () {
                             controller
-                                .deleteUser(controller.users()[listIndex].uuid);
+                                .deleteUser(controller.users[listIndex].uuid);
                           },
                           icon: const Icon(Icons.delete),
                         ),

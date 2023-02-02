@@ -12,24 +12,21 @@ class EditProfileScreen extends GetView<EditProfileController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.back();
+        controller.getBack;
         return true;
       },
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.close),
-            onPressed: Get.back,
+            onPressed: controller.getBack,
           ),
           title: controller.userUuid == null
               ? Text('create_user'.tr)
               : Text('edit_profile'.tr),
           actions: [
             IconButton(
-              onPressed: () {
-                controller.saveProfile();
-                Get.back();
-              },
+              onPressed: controller.saveProfileAndGetBack,
               icon: Icon(
                 Icons.done,
                 color: Get.theme.colorScheme.primary,

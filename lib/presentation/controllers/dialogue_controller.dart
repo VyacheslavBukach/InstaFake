@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import './users_controller.dart';
 import '../../domain/models/user.dart';
+import '../../utils/app_navigation.dart';
 
 class DialogueController extends GetxController {
   final UsersController _usersController;
@@ -14,5 +15,23 @@ class DialogueController extends GetxController {
   void onInit() {
     super.onInit();
     user(_usersController.fetchUser(_userUuid));
+  }
+
+  void videoCallToUser() {
+    if (user().videoList.isNotEmpty) {
+      Get.toNamed(
+        AppRoutes.videoCall,
+        arguments: user().videoList.first,
+      );
+    } else {
+      navigateToVideoPicker();
+    }
+  }
+
+  void navigateToVideoPicker() {
+    Get.toNamed(
+      AppRoutes.videoPicker,
+      arguments: user().uuid,
+    );
   }
 }

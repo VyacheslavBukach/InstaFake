@@ -26,7 +26,7 @@ class VideoPickerScreen extends GetView<VideoPickerController> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Videos'.tr,
+              'videos'.tr,
               style: Get.textTheme.bodyLarge,
             ),
           ),
@@ -35,9 +35,7 @@ class VideoPickerScreen extends GetView<VideoPickerController> {
               () => ListView.builder(
                 itemCount: controller.user().videoList.length,
                 itemBuilder: (ctx, listIndex) => ListTile(
-                  onTap: () {
-                    print(controller.user().videoList[listIndex]);
-                  },
+                  onTap: () {},
                   title: Text(
                     controller.user().videoList[listIndex],
                     overflow: TextOverflow.ellipsis,

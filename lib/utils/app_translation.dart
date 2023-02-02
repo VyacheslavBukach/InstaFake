@@ -36,6 +36,7 @@ class AppTranslation extends Translations {
           'users_editor': 'Users editor',
           'no_users_added': 'No users added',
           'choose_a_video': 'Choose a video',
+          'videos': 'Videos',
         },
         'ru_RU': {
           'app_name': 'ИнстаФэйк',
@@ -70,6 +71,7 @@ class AppTranslation extends Translations {
           'users_editor': 'Редактор пользователей',
           'no_users_added': 'Пользователи не добавлены',
           'choose_a_video': 'Выберите видео',
+          'videos': 'Видео',
         }
       };
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import 'story_overview_screen.dart';
 import '../../utils/app_navigation.dart';
 import '../controllers/profile_controller.dart';
 import '../widgets/avatar_widget.dart';
@@ -91,13 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     avatar: _profileController.user().avatar,
                     hasStory: _profileController.user().storyList.isNotEmpty,
                     radius: 40,
-                    onTap: () {
-                      if (_profileController.user().storyList.isNotEmpty) {
-                        Get.to(
-                          StoryOverviewScreen(user: _profileController.user()),
-                        );
-                      }
-                    },
+                    onTap: _profileController.openStoryOverview,
                   ),
                 ),
                 Obx(
@@ -143,12 +136,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 ),
                 splashFactory: NoSplash.splashFactory,
               ),
-              onPressed: () {
-                Get.toNamed(
-                  AppRoutes.editProfile,
-                  arguments: _profileController.user().uuid,
-                );
-              },
+              onPressed: _profileController.openEditProfile,
               child: Text(
                 'edit_profile'.tr,
                 style: Get.textTheme.titleMedium,

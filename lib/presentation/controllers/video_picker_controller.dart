@@ -20,9 +20,9 @@ class VideoPickerController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    user(_usersController.fetchUser(_userUuid));
+    _fetchUser();
     _ever = ever(_usersController.users, (_) {
-      user(_usersController.fetchUser(_userUuid));
+      _fetchUser();
       user.refresh();
     });
   }
@@ -31,6 +31,10 @@ class VideoPickerController extends GetxController {
   void onClose() {
     _ever.dispose();
     super.onClose();
+  }
+
+  void _fetchUser() {
+    user(_usersController.fetchUser(_userUuid));
   }
 
   Future<void> takeVideoFromGallery() async {

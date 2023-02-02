@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../utils/app_navigation.dart';
 import '../controllers/direct_controller.dart';
 import '../widgets/avatar_widget.dart';
 
@@ -40,7 +39,7 @@ class DirectScreen extends GetView<DirectController> {
                 () => SizedBox(
                   height: 100,
                   child: ListView.builder(
-                    itemBuilder: (ctx, i) {
+                    itemBuilder: (_, listIndex) {
                       return SizedBox(
                         // width: 120,
                         child: Row(
@@ -54,24 +53,19 @@ class DirectScreen extends GetView<DirectController> {
                                     children: [
                                       AvatarWidget(
                                         onTap: () {
-                                          Get.toNamed(
-                                            AppRoutes.profile,
-                                            arguments: controller
-                                                .usersWithOnlineStatus()[i]
-                                                .uuid,
-                                          );
+                                          controller.openUserProfile(listIndex);
                                         },
                                         avatar: controller
-                                            .usersWithOnlineStatus()[i]
+                                            .usersWithOnlineStatus[listIndex]
                                             .avatar,
                                         hasStory: controller
-                                            .usersWithOnlineStatus()[i]
+                                            .usersWithOnlineStatus[listIndex]
                                             .storyList
                                             .isNotEmpty,
                                         radius: 38,
                                       ),
                                       Visibility(
-                                        visible: i != 0,
+                                        visible: listIndex != 0,
                                         child: Positioned(
                                           right: 8,
                                           bottom: 6,
@@ -84,7 +78,8 @@ class DirectScreen extends GetView<DirectController> {
                                     ],
                                   ),
                                   Text(
-                                    controller.usersWithOnlineStatus()[i].name,
+                                    controller
+                                        .usersWithOnlineStatus[listIndex].name,
                                     style: Get.textTheme.labelMedium,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -140,10 +135,7 @@ class DirectScreen extends GetView<DirectController> {
                   ),
                   trailing: const Icon(Icons.photo_camera_outlined),
                   onTap: () {
-                    Get.toNamed(
-                      AppRoutes.dialogue,
-                      arguments: controller.users[i].uuid,
-                    );
+                    controller.openDialogueWithUser(i);
                   },
                 ),
               ),

@@ -69,7 +69,7 @@ class EditProfileController extends GetxController {
     return edittedUser.storyList.isNotEmpty;
   }
 
-  void saveProfile() {
+  void saveProfileAndGetBack() {
     var updatedUser = User(
       uuid: edittedUser.uuid,
       userType: edittedUser.userType,
@@ -85,8 +85,8 @@ class EditProfileController extends GetxController {
       isOnline: isProfileOnline.value,
       videoList: edittedUser.videoList,
     );
-
     _usersController.saveUser(updatedUser);
+    getBack();
   }
 
   Future<void> pickImageFromGallery() async {
@@ -117,5 +117,9 @@ class EditProfileController extends GetxController {
     followersTextEditingController.text = edittedUser.followers.toString();
     followingsTextEditingController.text = edittedUser.followings.toString();
     bioTextEditingController.text = edittedUser.bio;
+  }
+
+  void getBack() {
+    Get.back();
   }
 }

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../../domain/models/user.dart';
 import '../../domain/repositories/user_repository.dart';
+import '../../utils/app_navigation.dart';
 import '../../utils/user_type.dart';
 
 class UsersController extends GetxController {
@@ -47,6 +48,7 @@ class UsersController extends GetxController {
         users.indexWhere((element) => element.uuid == user.uuid);
     if (user.userType == UserType.admin) {
       adminUser(user);
+      adminUser.refresh();
     } else if (existingIndex != -1) {
       users[existingIndex] = user;
     } else {
@@ -57,5 +59,12 @@ class UsersController extends GetxController {
   Future<void> deleteUser(String userUuid) async {
     await _userRepository.deleteUser(userUuid);
     users.removeWhere((element) => element.uuid == userUuid);
+  }
+
+  void openEditProfile({String? userUuid}) {
+    Get.toNamed(
+      AppRoutes.editProfile,
+      arguments: userUuid,
+    );
   }
 }

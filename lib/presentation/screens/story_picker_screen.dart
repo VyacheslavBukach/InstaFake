@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/story_editor_controller.dart';
+import '../controllers/story_picker_controller.dart';
 import '../widgets/avatar_widget.dart';
 
-class StoryPickerScreen extends GetView<StoryEditorController> {
+class StoryPickerScreen extends GetView<StoryPickerController> {
   const StoryPickerScreen({Key? key}) : super(key: key);
 
   @override
@@ -18,18 +18,18 @@ class StoryPickerScreen extends GetView<StoryEditorController> {
       body: Obx(
         () => ListView.builder(
           itemCount: controller.users().length,
-          itemBuilder: (ctx, listIndex) => ExpansionTile(
+          itemBuilder: (_, listIndex) => ExpansionTile(
             leading: AvatarWidget(
-              avatar: controller.users()[listIndex].avatar,
-              hasStory: controller.users()[listIndex].storyList.isNotEmpty,
+              avatar: controller.users[listIndex].avatar,
+              hasStory: controller.users[listIndex].storyList.isNotEmpty,
               radius: 20,
             ),
             title: Text(
-              controller.users()[listIndex].username,
+              controller.users[listIndex].username,
               overflow: TextOverflow.ellipsis,
             ),
             subtitle: Text(
-              '${controller.users()[listIndex].storyList.length} stories added',
+              '${controller.users[listIndex].storyList.length} stories added',
             ),
             children: [
               ListTile(
@@ -45,12 +45,9 @@ class StoryPickerScreen extends GetView<StoryEditorController> {
                           child: ClipOval(
                             child: Material(
                               child: InkWell(
-                                onTap: () {
-                                  Get.back(); // Close dialog
-                                  controller.takePhotoFromGallery(
-                                    controller.users()[listIndex],
-                                  );
-                                },
+                                onTap: () => controller.takePhotoFromGallery(
+                                  controller.users[listIndex],
+                                ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -67,9 +64,7 @@ class StoryPickerScreen extends GetView<StoryEditorController> {
                   );
                 },
               ),
-              ...controller
-                  .users()[listIndex]
-                  .storyList
+              ...controller.users[listIndex].storyList
                   .map((storyPath) => ListTile(
                         leading: CircleAvatar(
                           radius: 20,
@@ -79,7 +74,7 @@ class StoryPickerScreen extends GetView<StoryEditorController> {
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
                           onPressed: () => controller.deleteStory(
-                            controller.users()[listIndex],
+                            controller.users[listIndex],
                             storyPath,
                           ),
                         ),

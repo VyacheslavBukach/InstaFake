@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import './users_controller.dart';
 import '../../domain/models/user.dart';
+import '../../utils/app_navigation.dart';
+import '../screens/story_overview_screen.dart';
 
 class ProfileController extends GetxController {
   final UsersController _usersController;
@@ -14,7 +16,7 @@ class ProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    if (_userUuid == null) {
+    if (_userUuid == null || _userUuid == _usersController.adminUser().uuid) {
       _fetchAdmin();
       _ever = ever(_usersController.adminUser, (_) => _fetchAdmin());
     } else {
@@ -38,5 +40,20 @@ class ProfileController extends GetxController {
   void _fetchAdmin() {
     user(_usersController.adminUser());
     print('fetch profile(ADMIN) with uuid = ${user().uuid}');
+  }
+
+  void openStoryOverview() {
+    if (user().storyList.isNotEmpty) {
+      Get.to(
+        StoryOverviewScreen(user: user()),
+      );
+    }
+  }
+
+  void openEditProfile() {
+    Get.toNamed(
+      AppRoutes.editProfile,
+      arguments: user().uuid,
+    );
   }
 }

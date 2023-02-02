@@ -31,7 +31,7 @@ class ModalBottomSheet extends StatelessWidget {
                       child: Center(
                         child: Text(
                           title,
-                          style: Get.textTheme.headline5,
+                          style: Get.textTheme.headlineSmall,
                         ),
                       ),
                     ),

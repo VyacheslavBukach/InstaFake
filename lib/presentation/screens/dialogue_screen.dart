@@ -2,7 +2,6 @@ import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/app_navigation.dart';
 import '../controllers/dialogue_controller.dart';
 import '../widgets/avatar_widget.dart';
 
@@ -40,19 +39,7 @@ class DialogueScreen extends GetView<DialogueController> {
             icon: const Icon(Icons.phone),
           ),
           IconButton(
-            onPressed: () {
-              if (controller.user().videoList.isNotEmpty) {
-                Get.toNamed(
-                  AppRoutes.videoCall,
-                  arguments: controller.user().videoList.first,
-                );
-              } else {
-                Get.toNamed(
-                  AppRoutes.videoPicker,
-                  arguments: controller.user().uuid,
-                );
-              }
-            },
+            onPressed: controller.videoCallToUser,
             icon: const Icon(Icons.videocam_outlined),
           ),
           PopupMenuButton(
@@ -61,10 +48,7 @@ class DialogueScreen extends GetView<DialogueController> {
             ),
             onSelected: (id) {
               if (id == 1) {
-                Get.toNamed(
-                  AppRoutes.videoPicker,
-                  arguments: controller.user().uuid,
-                );
+                controller.navigateToVideoPicker();
               }
             },
             itemBuilder: (_) => [
