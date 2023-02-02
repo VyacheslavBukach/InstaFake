@@ -21,7 +21,7 @@ class DialogueController extends GetxController {
     if (user().videoList.isNotEmpty) {
       Get.toNamed(
         AppRoutes.videoCall,
-        arguments: user().videoList.first,
+        arguments: user().uuid,
       );
     } else {
       navigateToVideoPicker();
