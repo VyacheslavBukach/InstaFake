@@ -117,26 +117,28 @@ class DirectScreen extends GetView<DirectController> {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: controller.users.length,
-                itemBuilder: (ctx, i) => ListTile(
-                  leading: AvatarWidget(
-                    avatar: controller.users[i].avatar,
-                    hasStory: controller.users[i].storyList.isNotEmpty,
-                    radius: 20,
+              child: Obx(
+                () => ListView.builder(
+                  itemCount: controller.users.length,
+                  itemBuilder: (ctx, i) => ListTile(
+                    leading: AvatarWidget(
+                      avatar: controller.users[i].avatar,
+                      hasStory: controller.users[i].storyList.isNotEmpty,
+                      radius: 20,
+                    ),
+                    title: Text(
+                      controller.users[i].name,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text(
+                      'message',
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    trailing: const Icon(Icons.photo_camera_outlined),
+                    onTap: () {
+                      controller.openDialogueWithUser(i);
+                    },
                   ),
-                  title: Text(
-                    controller.users[i].name,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    'message',
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  trailing: const Icon(Icons.photo_camera_outlined),
-                  onTap: () {
-                    controller.openDialogueWithUser(i);
-                  },
                 ),
               ),
             ),

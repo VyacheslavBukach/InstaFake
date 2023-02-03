@@ -6,7 +6,7 @@ import '../../utils/app_navigation.dart';
 
 class DirectController extends GetxController {
   final UsersController _usersController;
-  late final RxList<User> users;
+  final RxList<User> users = <User>[].obs;
   final RxList<User> usersWithOnlineStatus = <User>[].obs;
   late final Worker _everAll;
 
@@ -15,11 +15,10 @@ class DirectController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    users = _usersController.users;
     _setUsers();
     _everAll = everAll([
       _usersController.adminUser,
-      users,
+      _usersController.users,
     ], (_) => _setUsers());
   }
 
@@ -30,6 +29,7 @@ class DirectController extends GetxController {
   }
 
   void _setUsers() {
+    users(_usersController.users);
     var usersWithStoriesList = [
       _usersController.adminUser(),
       ...users.where((user) => user.isOnline).toList(),
