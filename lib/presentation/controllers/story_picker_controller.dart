@@ -29,29 +29,28 @@ class StoryPickerController extends GetxController {
     users(usersWithAdmin);
   }
 
-  Future<void> takePhotoFromGallery(User user) async {
+  Future<void> takePhotoFromGallery(int userIndex) async {
     Get.back(); // Close dialog
     try {
-      final imageFile =
-          await _imagePicker.pickImage(source: ImageSource.gallery);
-
+      final imageFile = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+      );
       if (imageFile == null) {
         return;
       }
-
       final imageTemporary = imageFile.path;
-      var updatedUser = user..storyList.add(imageTemporary);
+      var updatedUser = users[userIndex]..storyList.add(imageTemporary);
+      users[userIndex] = updatedUser;
       _usersController.saveUser(updatedUser);
-      _fetchUsersWithStories();
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
   }
 
-  void deleteStory(User user, String storyPath) {
-    var updatedUser = user
+  void deleteStory(int userIndex, String storyPath) {
+    var updatedUser = users[userIndex]
       ..storyList.removeWhere((story) => story == storyPath);
+    users[userIndex] = updatedUser;
     _usersController.saveUser(updatedUser);
-    _fetchUsersWithStories();
   }
 }
