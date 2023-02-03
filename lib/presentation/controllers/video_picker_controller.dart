@@ -8,9 +8,8 @@ import '../../domain/models/user.dart';
 class VideoPickerController extends GetxController {
   final UsersController _usersController;
   final ImagePicker _imagePicker;
-  final user = User.user(uuid: '').obs;
-  final _userUuid = Get.arguments;
-  late final Worker _ever;
+  final Rx<User> user = User.user(uuid: '').obs;
+  final String _userUuid = Get.arguments;
 
   VideoPickerController(
     this._usersController,
@@ -21,16 +20,6 @@ class VideoPickerController extends GetxController {
   void onInit() {
     super.onInit();
     _fetchUser();
-    _ever = ever(_usersController.users, (_) {
-      _fetchUser();
-      user.refresh();
-    });
-  }
-
-  @override
-  void onClose() {
-    _ever.dispose();
-    super.onClose();
   }
 
   void _fetchUser() {
@@ -39,25 +28,26 @@ class VideoPickerController extends GetxController {
 
   Future<void> takeVideoFromGallery() async {
     try {
-      final videoFile =
-          await _imagePicker.pickVideo(source: ImageSource.gallery);
-
+      final videoFile = await _imagePicker.pickVideo(
+        source: ImageSource.gallery,
+      );
       if (videoFile == null) {
         return;
       }
-
       final videoTemporary = videoFile.path;
-
-      var updatedUser = user()..videoList.add(videoTemporary);
-      _usersController.saveUser(updatedUser);
+      user.update((user) {
+        user?.videoList.add(videoTemporary);
+      });
+      _usersController.saveUser(user());
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
   }
 
   void deleteVideo(String videoPath) {
-    var updatedUser = user()
-      ..videoList.removeWhere((video) => video == videoPath);
-    _usersController.saveUser(updatedUser);
+    user.update((user) {
+      user?.videoList.removeWhere((video) => video == videoPath);
+    });
+    _usersController.saveUser(user());
   }
 }
