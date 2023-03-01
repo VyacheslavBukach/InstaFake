@@ -45,8 +45,9 @@ class StoryPickerScreen extends GetView<StoryPickerController> {
                           child: ClipOval(
                             child: Material(
                               child: InkWell(
-                                onTap: () =>
-                                    controller.takePhotoFromGallery(listIndex),
+                                onTap: () => controller.takePhotoFromGallery(
+                                  controller.users[listIndex].uuid,
+                                ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -73,7 +74,7 @@ class StoryPickerScreen extends GetView<StoryPickerController> {
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
                           onPressed: () => controller.deleteStory(
-                            listIndex,
+                            controller.users[listIndex].uuid,
                             storyPath,
                           ),
                         ),

@@ -29,7 +29,7 @@ class StoryPickerController extends GetxController {
     users(usersWithAdmin);
   }
 
-  Future<void> takePhotoFromGallery(int userIndex) async {
+  Future<void> takePhotoFromGallery(String userUuid) async {
     Get.back(); // Close dialog
     try {
       final imageFile = await _imagePicker.pickImage(
@@ -39,6 +39,7 @@ class StoryPickerController extends GetxController {
         return;
       }
       final imageTemporary = imageFile.path;
+      var userIndex = users.indexWhere((user) => user.uuid == userUuid);
       var updatedUser = users[userIndex]..storyList.add(imageTemporary);
       users[userIndex] = updatedUser;
       _usersController.saveUser(updatedUser);
@@ -47,7 +48,8 @@ class StoryPickerController extends GetxController {
     }
   }
 
-  void deleteStory(int userIndex, String storyPath) {
+  void deleteStory(String userUuid, String storyPath) {
+    var userIndex = users.indexWhere((user) => user.uuid == userUuid);
     var updatedUser = users[userIndex]
       ..storyList.removeWhere((story) => story == storyPath);
     users[userIndex] = updatedUser;
